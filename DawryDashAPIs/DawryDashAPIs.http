@@ -1,0 +1,6 @@
+@DawryDashAPIs_HostAddress = http://localhost:5122
+
+GET {{DawryDashAPIs_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
