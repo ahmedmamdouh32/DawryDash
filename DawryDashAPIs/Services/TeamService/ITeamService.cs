@@ -9,5 +9,7 @@ namespace DawryDashAPIs.Services.TeamService
         List<DisplayTeamDTO> GetAll();
         Team Add(AddTeamDTO team);
         DisplayTeamDTO GetById(int id);
+        bool DeleteById(int id);
+        bool Update(UpdateTeamDTO teamDTO, int id);
     }
 }

@@ -1,5 +1,80 @@
 [
   {
+    "ContainingType": "DawryDashAPIs.Controllers.MatchController",
+    "Method": "Add",
+    "RelativePath": "api/Match",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "matchDTO",
+        "Type": "DawryDashAPIs.DTOs.MatchDTOs.AddMatchDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DawryDashAPIs.Controllers.MatchController",
+    "Method": "GetById",
+    "RelativePath": "api/Match/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [],
+    "Summary": "Get Match by Id"
+  },
+  {
+    "ContainingType": "DawryDashAPIs.Controllers.MatchController",
+    "Method": "SetMatchScore",
+    "RelativePath": "api/Match/updateScore/{matchId}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "matchId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "matchDTO",
+        "Type": "DawryDashAPIs.DTOs.MatchDTOs.MatchScoreDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DawryDashAPIs.Controllers.MatchController",
+    "Method": "SetMatchTeams",
+    "RelativePath": "api/Match/updateTeams/{matchId}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "matchId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "matchDTO",
+        "Type": "DawryDashAPIs.DTOs.MatchDTOs.MatchTeamsDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "DawryDashAPIs.Controllers.TeamController",
     "Method": "GetAll",
     "RelativePath": "api/Team",
@@ -17,7 +92,8 @@
         ],
         "StatusCode": 200
       }
-    ]
+    ],
+    "Summary": "Return All Teams"
   },
   {
     "ContainingType": "DawryDashAPIs.Controllers.TeamController",
@@ -33,7 +109,8 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [],
+    "Summary": "Adding a new Team"
   },
   {
     "ContainingType": "DawryDashAPIs.Controllers.TeamController",
@@ -49,6 +126,46 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [],
+    "Summary": "Get By Id"
+  },
+  {
+    "ContainingType": "DawryDashAPIs.Controllers.TeamController",
+    "Method": "DeleteById",
+    "RelativePath": "api/Team/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [],
+    "Summary": "delet a Team by its Id"
+  },
+  {
+    "ContainingType": "DawryDashAPIs.Controllers.TeamController",
+    "Method": "Update",
+    "RelativePath": "api/Team/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "teamDTO",
+        "Type": "DawryDashAPIs.DTOs.TeamsDTOs.UpdateTeamDTO",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [],
+    "Summary": "Update Team"
   }
 ]

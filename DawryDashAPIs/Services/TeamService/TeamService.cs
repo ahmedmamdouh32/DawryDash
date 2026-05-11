@@ -1,4 +1,5 @@
-﻿using DawryDashAPIs.DTOs.TeamDTOs;
+﻿using AutoMapper;
+using DawryDashAPIs.DTOs.TeamDTOs;
 using DawryDashAPIs.DTOs.TeamsDTOs;
 using DawryDashAPIs.Entities;
 using DawryDashAPIs.Repositories;
@@ -9,22 +10,18 @@ namespace DawryDashAPIs.Services.TeamsServices
     public class TeamService : ITeamService
     {
         GenericRepo<Team> repo;
-        public TeamService(GenericRepo<Team> _repo)
-        {
+        IMapper map;
+        public TeamService(GenericRepo<Team> _repo, IMapper _map)
+        {            
             repo = _repo;
+            map = _map;
         }
 
         public List<DisplayTeamDTO> GetAll()
         {
             List<Team> teams = repo.GetAll();
-            return teams.Select(t => new DisplayTeamDTO
-            {
-                Name = t.Name,
-                Id = t.Id,
-                ImgUrl = t.ImgUrl ?? "not found"
-            }).ToList();
+            return teams.Select(t => map.Map<DisplayTeamDTO>(t)).ToList();
         }
-
 
         public Team Add(AddTeamDTO teamDTO)
         {
@@ -32,10 +29,7 @@ namespace DawryDashAPIs.Services.TeamsServices
                 return null;
             else
             {
-                Team team = new();
-                team.Name = teamDTO.Name;
-                team.ImgUrl = teamDTO.ImgUrl ?? "not found";
-                team.TournamentId = teamDTO.TournamentID;
+                Team team = map.Map<Team>(teamDTO);
                 repo.Add(team);
                 repo.Save();
                 return team;
@@ -45,18 +39,41 @@ namespace DawryDashAPIs.Services.TeamsServices
         public DisplayTeamDTO GetById(int id)
         {
             Team team = repo.GetById(id);
+            if(team != null)
+            {
+                return map.Map<DisplayTeamDTO>(team);
+            }
+            return null;
+        }
+
+        public bool DeleteById(int id) 
+        {
+            Team team = repo.GetById(id);
             if(team == null)
             {
-                return null;
+                return false;
             }
-
-            return new DisplayTeamDTO
+            else
             {
-                Id = team.Id,
-                Name = team.Name,
-                TournamentId = team.TournamentId,
-                ImgUrl = team.ImgUrl ?? "not found"
-            };
+                repo.Delete(team);
+                repo.Save();
+            }
+            return true;
         }
+
+        public bool Update(UpdateTeamDTO teamDTO, int id)
+        {
+            Team team = repo.GetById(id);
+            if (team == null)
+                return false;
+            map.Map(teamDTO, team);
+            repo.Update(team);
+            repo.Save();
+            return true;
+        }
+
+
+
+
     }
 }

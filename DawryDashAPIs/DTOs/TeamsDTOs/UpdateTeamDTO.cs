@@ -2,14 +2,12 @@
 
 namespace DawryDashAPIs.DTOs.TeamsDTOs
 {
-    public class AddTeamDTO
+    public class UpdateTeamDTO
     {
-        [MaxLength(100, ErrorMessage ="Team Name Must be less than 100 letters")]
+        [MaxLength(100, ErrorMessage = "Team Name Must be less than 100 letters")]
         public string Name { set; get; }
 
         [MaxLength(200, ErrorMessage = "Image Url is very long, Choose shorter one")]
-        public string ImgUrl{ set; get; }
-
-        public int TournamentID { set; get; }
+        public string ImgUrl { set; get; }
     }
 }

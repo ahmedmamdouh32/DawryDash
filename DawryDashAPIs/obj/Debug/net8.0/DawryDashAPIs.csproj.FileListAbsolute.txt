@@ -138,3 +138,10 @@ C:\Users\adminstrator\Documents\Dawry Dash\DawryDashAPIs\obj\Debug\net8.0\refint
 C:\Users\adminstrator\Documents\Dawry Dash\DawryDashAPIs\obj\Debug\net8.0\DawryDashAPIs.pdb
 C:\Users\adminstrator\Documents\Dawry Dash\DawryDashAPIs\obj\Debug\net8.0\DawryDashAPIs.genruntimeconfig.cache
 C:\Users\adminstrator\Documents\Dawry Dash\DawryDashAPIs\obj\Debug\net8.0\ref\DawryDashAPIs.dll
+C:\Users\adminstrator\Documents\Dawry Dash\DawryDashAPIs\obj\Debug\net8.0\DawryDashAPIs.sourcelink.json
+C:\Users\adminstrator\Documents\Dawry Dash\DawryDashAPIs\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\adminstrator\Documents\Dawry Dash\DawryDashAPIs\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\adminstrator\Documents\Dawry Dash\DawryDashAPIs\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\adminstrator\Documents\Dawry Dash\DawryDashAPIs\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\adminstrator\Documents\Dawry Dash\DawryDashAPIs\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+C:\Users\adminstrator\Documents\Dawry Dash\DawryDashAPIs\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll

@@ -32,9 +32,9 @@ namespace DawryDashAPIs.Repositories
             _dbContext.Entry(obj).State = EntityState.Modified;
         }
 
-        public void Delete(int id)
+        public void Delete(TEntity obj)
         {
-            TEntity obj = _dbContext.Set<TEntity>().Find(id);
+            //TEntity obj = _dbContext.Set<TEntity>().Find(id);
             _dbContext.Set<TEntity>().Remove(obj);
         }
 
