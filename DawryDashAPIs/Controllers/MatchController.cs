@@ -37,15 +37,15 @@ namespace DawryDashAPIs.Controllers
         }
 
         [EndpointSummary("Update Match Score & Winner Team")]
-        [HttpPatch("updateScore/{matchId:int}")]
+        [HttpPatch("updateMatchScore/{matchId:int}")]
         public IActionResult SetMatchScore([FromRoute]int matchId, [FromBody]MatchScoreDTO matchDTO)
         {
-            bool updated = matchService.UpdateMatchScore( matchDTO, matchId);
+            bool updated = matchService.UpdateMatchScore(matchDTO, matchId);
             return updated ? NoContent() : NotFound();
         }
 
         [EndpointSummary("Set Match's Teams")]
-        [HttpPatch("updateTeams/{matchId:int}")]
+        [HttpPatch("updateMatchTeams/{matchId:int}")]
         public IActionResult SetMatchTeams(int matchId, MatchTeamsDTO matchDTO)
         {
             bool updated = matchService.UpdateMatchTeams(matchDTO, matchId);

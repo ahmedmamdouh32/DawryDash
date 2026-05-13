@@ -13,7 +13,8 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [],
+    "Summary": "Adding a new Match"
   },
   {
     "ContainingType": "DawryDashAPIs.Controllers.MatchController",
@@ -35,7 +36,7 @@
   {
     "ContainingType": "DawryDashAPIs.Controllers.MatchController",
     "Method": "SetMatchScore",
-    "RelativePath": "api/Match/updateScore/{matchId}",
+    "RelativePath": "api/Match/updateMatchScore/{matchId}",
     "HttpMethod": "PATCH",
     "IsController": true,
     "Order": 0,
@@ -51,12 +52,13 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [],
+    "Summary": "Update Match Score \u0026 Winner Team"
   },
   {
     "ContainingType": "DawryDashAPIs.Controllers.MatchController",
     "Method": "SetMatchTeams",
-    "RelativePath": "api/Match/updateTeams/{matchId}",
+    "RelativePath": "api/Match/updateMatchTeams/{matchId}",
     "HttpMethod": "PATCH",
     "IsController": true,
     "Order": 0,
@@ -72,7 +74,8 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [],
+    "Summary": "Set Match\u0027s Teams"
   },
   {
     "ContainingType": "DawryDashAPIs.Controllers.TeamController",
@@ -167,5 +170,38 @@
     ],
     "ReturnTypes": [],
     "Summary": "Update Team"
+  },
+  {
+    "ContainingType": "DawryDashAPIs.Controllers.TournamentController",
+    "Method": "Add",
+    "RelativePath": "api/Tournament",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "DTO",
+        "Type": "DawryDashAPIs.DTOs.TournamentDTOs.AddTournamentDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DawryDashAPIs.Controllers.TournamentController",
+    "Method": "GetById",
+    "RelativePath": "api/Tournament/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [],
+    "Summary": "Get By Id"
   }
 ]

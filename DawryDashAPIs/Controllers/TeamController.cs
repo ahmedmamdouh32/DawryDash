@@ -33,12 +33,19 @@ namespace DawryDashAPIs.Controllers
         [HttpPost]
         public IActionResult Add(AddTeamDTO teamDTO)
         {
-            Team createdTeam = teamService.Add(teamDTO);
-            return CreatedAtAction(
-                   nameof(GetById),
-                   new { id = createdTeam.Id },
-                   map.Map<DisplayTeamDTO>(createdTeam)
-            );
+            var result = teamService.Add(teamDTO);
+            if (result.Success)
+            {
+                return CreatedAtAction(
+                       nameof(GetById),
+                       new { id = result.Data.Id },
+                       map.Map<DisplayTeamDTO>(result.Data)
+                );
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
         }
 
         [EndpointSummary("Get By Id")]

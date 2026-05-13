@@ -34,6 +34,7 @@
         "tags": [
           "Match"
         ],
+        "summary": "Adding a new Match",
         "requestBody": {
           "content": {
             "application/json": {
@@ -60,11 +61,12 @@
         }
       }
     },
-    "/api/Match/updateScore/{matchId}": {
+    "/api/Match/updateMatchScore/{matchId}": {
       "patch": {
         "tags": [
           "Match"
         ],
+        "summary": "Update Match Score & Winner Team",
         "parameters": [
           {
             "name": "matchId",
@@ -102,11 +104,12 @@
         }
       }
     },
-    "/api/Match/updateTeams/{matchId}": {
+    "/api/Match/updateMatchTeams/{matchId}": {
       "patch": {
         "tags": [
           "Match"
         ],
+        "summary": "Set Match's Teams",
         "parameters": [
           {
             "name": "matchId",
@@ -299,6 +302,61 @@
           }
         }
       }
+    },
+    "/api/Tournament/{id}": {
+      "get": {
+        "tags": [
+          "Tournament"
+        ],
+        "summary": "Get By Id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Tournament": {
+      "post": {
+        "tags": [
+          "Tournament"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddTournamentDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddTournamentDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddTournamentDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -335,6 +393,53 @@
             "nullable": true
           },
           "tournamentID": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddTournamentDTO": {
+        "required": [
+          "maxTeams"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 50,
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "maxLength": 300,
+            "type": "string",
+            "nullable": true
+          },
+          "imgUrl": {
+            "maxLength": 200,
+            "type": "string",
+            "nullable": true
+          },
+          "maxTeams": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "address": {
+            "maxLength": 200,
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "mathcDurationMinutes": {
             "type": "integer",
             "format": "int32"
           }

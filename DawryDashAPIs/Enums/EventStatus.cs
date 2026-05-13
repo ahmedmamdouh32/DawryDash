@@ -2,10 +2,10 @@
 {
     public enum EventStatus
     {
-        Started,
+        Live,
         Preparing,
         Finished,
         Cancelled,
-        Waiting
+        Ready
     }
 }

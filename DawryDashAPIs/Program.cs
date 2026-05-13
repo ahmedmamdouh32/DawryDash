@@ -4,6 +4,7 @@ using DawryDashAPIs.Repositories;
 using DawryDashAPIs.Services.MatchService;
 using DawryDashAPIs.Services.TeamService;
 using DawryDashAPIs.Services.TeamsServices;
+using DawryDashAPIs.Services.TournamentService;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System.Text.Json.Serialization;
@@ -35,6 +36,8 @@ namespace DawryDashAPIs
             builder.Services.AddScoped<IMatchService, MatchService>();
             builder.Services.AddScoped<GenericRepo<Team>>();
             builder.Services.AddScoped<GenericRepo<Match>>();
+            builder.Services.AddScoped<GenericRepo<Tournament>>();
+            builder.Services.AddScoped<ITournanemtService, TournamentService>();
             builder.Services.AddAutoMapper(op => op.AddProfile<MappingConfig>());
 
             var app = builder.Build();

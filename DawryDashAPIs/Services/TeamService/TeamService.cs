@@ -10,10 +10,12 @@ namespace DawryDashAPIs.Services.TeamsServices
     public class TeamService : ITeamService
     {
         GenericRepo<Team> repo;
+        GenericRepo<Tournament> tournamentRepo;
         IMapper map;
-        public TeamService(GenericRepo<Team> _repo, IMapper _map)
+        public TeamService(GenericRepo<Team> _repo, GenericRepo<Tournament> _tournamentRepo, IMapper _map)
         {            
             repo = _repo;
+            tournamentRepo = _tournamentRepo;
             map = _map;
         }
 
@@ -23,17 +25,47 @@ namespace DawryDashAPIs.Services.TeamsServices
             return teams.Select(t => map.Map<DisplayTeamDTO>(t)).ToList();
         }
 
-        public Team Add(AddTeamDTO teamDTO)
+        public ServiceResult<Team> Add(AddTeamDTO teamDTO)
         {
             if (teamDTO == null)
-                return null;
-            else
             {
-                Team team = map.Map<Team>(teamDTO);
-                repo.Add(team);
-                repo.Save();
-                return team;
+                return new ServiceResult<Team>
+                {
+                    Success = false,
+                    Message = "Team data is required."
+                };
             }
+            
+            Tournament tournament = tournamentRepo.GetById(teamDTO.TournamentID);
+
+            if(tournament == null)
+            {
+                return new ServiceResult<Team>
+                {
+                    Success = false,
+                    Message = "Tournament not found."
+                };
+            }
+            
+            if(tournament.TeamsEntered >= tournament.MaxTeams)
+            {
+                return new ServiceResult<Team>
+                {
+                    Success = false,
+                    Message = "Tournament is already full."
+                };
+            }
+
+            Team team = map.Map<Team>(teamDTO);
+            repo.Add(team);
+            tournament.TeamsEntered++;
+            repo.Save();
+            return new ServiceResult<Team>
+            {
+                Success = true,
+                Message = "Team added successfully.",
+                Data = team
+            };
         }
 
         public DisplayTeamDTO GetById(int id)

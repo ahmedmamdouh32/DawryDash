@@ -27,6 +27,7 @@ namespace DawryDashAPIs.Entities
 
 
         public int MaxTeams { set; get; }
+        public int TeamsEntered { set; get; } = 0;
 
         public virtual ICollection<Team> Teams { set; get; } = new List<Team>();
         public virtual ICollection<Match> Matches { set; get; } = new List<Match>();
