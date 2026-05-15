@@ -1,0 +1,6 @@
+.footerStyle {
+    background-color: rgba(34, 34, 34, 1);
+}
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}

@@ -1,0 +1,33 @@
+.navbarStyle {
+background-color: #2d2d2d; 
+}
+
+.border-success{
+    border-color: color-mix(in oklab, #89e900 15%, transparent) !important;
+}
+
+.btn-color {
+    color: color-mix(in oklab, #fff 95%, transparent);
+    background-color: #474747;
+    backdrop-filter: blur(8px);
+    border: 1px solid;
+    border-color: color-mix(in oklab, #89e900 15%, transparent);
+    transition: all 0.3s ease;
+}
+
+.btn-color:hover {
+    color: color-mix(in oklab, #fff 95%, transparent);
+    border-color: #89e900;
+}
+
+ul li a {
+    color: #d5d5d5;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+ul li a:hover {
+    color: #89e900;
+    transform: scale(1.1);
+}
