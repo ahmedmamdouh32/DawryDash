@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { GreenButton } from '../green-button/green-button';
+import { Button } from '../button/button';
 
 @Component({
   selector: 'app-navbar',
-  imports: [GreenButton],
+  imports: [Button],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })

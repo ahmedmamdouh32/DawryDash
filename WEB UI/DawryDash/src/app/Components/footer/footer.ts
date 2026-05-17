@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { GreenButton } from '../green-button/green-button';
+import { Button } from '../button/button';
 
 @Component({
   selector: 'app-footer',
-  imports: [GreenButton],
+  imports: [Button],
   templateUrl: './footer.html',
   styleUrl: './footer.css',
 })

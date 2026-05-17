@@ -1,0 +1,55 @@
+/* =========================
+   GREEN VARIANT
+========================= */
+
+.green {
+    color: #89e900;
+    background-color: color-mix(in oklab, #89e900 20%, transparent);
+    backdrop-filter: blur(12px);
+    border: 1px solid;
+    border-color: color-mix(in oklab, #89e900 40%, transparent);
+    transition: all 0.3s ease;
+}
+
+.green:hover {
+    background-color: #89e900;
+    color: #000;
+    border-color: #89e900;
+}
+
+/* =========================
+   GRAY VARIANT
+========================= */
+
+.gray {
+    color: color-mix(in oklab, #fff 95%, transparent);
+    background-color: #474747;
+    backdrop-filter: blur(8px);
+    border: 1px solid;
+    border-color: color-mix(in oklab, #89e900 15%, transparent);
+    transition: all 0.3s ease;
+}
+
+.gray:hover {
+    color: white;
+    border-color: #89e900;
+}
+
+/* =========================
+   SIZES
+========================= */
+
+.small {
+    padding: 6px 14px;
+    font-size: 14px;
+}
+
+.medium {
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+.large {
+    padding: 14px 28px;
+    font-size: 18px;
+}

@@ -2,3 +2,10 @@
 html,body{
 background: rgba(34, 34, 34, 1)
 }
+
+:root {
+  --bg-primary: # rgba(34, 34, 34, 1);
+  --bg-surface: #2b2b2b;
+  --accent: #89e900;
+  --text-primary: #ffffff;
+}
