@@ -5,8 +5,13 @@ using DawryDashAPIs.Services.MatchService;
 using DawryDashAPIs.Services.TeamService;
 using DawryDashAPIs.Services.TeamsServices;
 using DawryDashAPIs.Services.TournamentService;
+using DawryDashAPIs.Services.UserService;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using System.Text.Json.Serialization;
 
 namespace DawryDashAPIs
@@ -28,6 +33,16 @@ namespace DawryDashAPIs
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(
+               op =>
+               {
+                   op.Password.RequireNonAlphanumeric = false;
+               }
+           )
+           .AddEntityFrameworkStores<dbContext>()
+           .AddDefaultTokenProviders();
+
+
             builder.Services.AddDbContext<dbContext>(optionBuilder =>
             {
                 optionBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DawryDash"));
@@ -38,7 +53,30 @@ namespace DawryDashAPIs
             builder.Services.AddScoped<GenericRepo<Match>>();
             builder.Services.AddScoped<GenericRepo<Tournament>>();
             builder.Services.AddScoped<ITournanemtService, TournamentService>();
+            builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddAutoMapper(op => op.AddProfile<MappingConfig>());
+
+
+            builder.Services.AddAuthentication(
+            op =>
+            {
+                op.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(
+                op =>
+                {
+                    //secret key 
+                    string key = "this is a secret key whose length should be greater than 256/8";
+                    var secretKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key));
+                    op.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateAudience = false,
+                        ValidateIssuer = false,
+                        IssuerSigningKey = secretKey,
+                        ValidateLifetime = true
+                    };
+                }
+            );
+           
 
             var app = builder.Build();
 
@@ -51,6 +89,7 @@ namespace DawryDashAPIs
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

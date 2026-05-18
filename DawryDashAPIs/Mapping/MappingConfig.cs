@@ -3,6 +3,7 @@ using DawryDashAPIs.DTOs.MatchDTOs;
 using DawryDashAPIs.DTOs.TeamDTOs;
 using DawryDashAPIs.DTOs.TeamsDTOs;
 using DawryDashAPIs.DTOs.TournamentDTOs;
+using DawryDashAPIs.DTOs.UserDTOs;
 using DawryDashAPIs.Entities;
 
 namespace DawryDashAPIs.Mapping
@@ -24,6 +25,9 @@ namespace DawryDashAPIs.Mapping
             //Tournament Mapping
             CreateMap<AddTournamentDTO, Tournament>();
             CreateMap<Tournament, DisplayTournamentDTO>();
+
+            //User Mapping
+            CreateMap<AddUserDTO, ApplicationUser>();
 
         }
     }

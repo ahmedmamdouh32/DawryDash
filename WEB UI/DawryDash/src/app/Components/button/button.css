@@ -12,9 +12,11 @@
 }
 
 .green:hover {
-    background-color: #89e900;
-    color: #000;
+    /* background-color: #89e900; */
+    /* color: #000; */
     border-color: #89e900;
+    box-shadow: 0 0 10px rgba(137, 233, 0, 0.5);
+
 }
 
 /* =========================
@@ -33,6 +35,9 @@
 .gray:hover {
     color: white;
     border-color: #89e900;
+    box-shadow: 0 0 10px rgba(137, 233, 0, 0.5);
+
+
 }
 
 /* =========================

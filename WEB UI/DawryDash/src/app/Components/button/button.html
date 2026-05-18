@@ -1,7 +1,17 @@
-<button class="btn rounded-3 transition-all" [class]="
+<!-- <button class="btn rounded-3 transition-all" [class]="
     variant + ' ' +
     size + ' ' +
     customClass
   ">
-    {{ innerText }}
+  {{ innerText }}
+</button> -->
+
+
+<!-- <button class="btn rounded-3 transition-all" [ngClass]="[variant, size, customClass]">
+  {{ innerText }}
+</button> -->
+
+
+<button class="btn rounded-3 transition-all" [ngClass]="[variant, size, customClass]">
+  <ng-content></ng-content>
 </button>

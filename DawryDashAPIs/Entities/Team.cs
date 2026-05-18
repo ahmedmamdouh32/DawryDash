@@ -13,7 +13,13 @@ namespace DawryDashAPIs.Entities
         [MaxLength(200)]
         public string? ImgUrl { set; get; }
 
-        public int TournamentId { set; get; }
-        public virtual Tournament Tournament { set; get; }
+        public string CaptainId { get; set; }
+
+        public ApplicationUser Captain { get; set; }
+
+        public virtual ICollection<TeamUser> TeamUsers { set; get; } = new List<TeamUser>();
+
+        public virtual ICollection<TournamentTeam> TournamentTeams { get; set; } = new List<TournamentTeam>();
+
     }
 }
