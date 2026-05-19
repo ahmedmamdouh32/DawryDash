@@ -4,7 +4,12 @@
         <div class="d-flex align-items-center gap-3">
 
             <!-- <span class="fw-bold fs-4 text-white">Dawry Dash</span> -->
-            <img src="BrandImage.png" style="width: 160px;">
+            <!-- <img src="BrandImage.png" style="width: 160px;"> -->
+            <a routerLink="/" class="text-decoration-none">
+
+                <img src="BrandImage.png" style="width: 160px;">
+
+            </a>
         </div>
 
         <!-- toggler for mobile -->
@@ -25,8 +30,8 @@
                 <li class="nav-item"><a class="nav-link" href="#">About</a></li>
             </ul>
             <div class="d-flex gap-3">
-                <app-button variant="gray" size="medium">Login</app-button>
-                <app-button variant="green" size="medium">SignUp</app-button>
+                <app-button variant="gray" size="medium" routerLink="/login">Login</app-button>
+                <app-button variant="green" size="medium" routerLink="/signup">SignUp</app-button>
             </div>
         </div>
     </div>

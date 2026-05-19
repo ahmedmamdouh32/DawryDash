@@ -12,6 +12,23 @@
 </button> -->
 
 
-<button class="btn rounded-3 transition-all" [ngClass]="[variant, size, customClass]">
+<button class="btn rounded-3 " [ngClass]="[variant, size, customClass]" (click)=" onBtnPress()">
   <ng-content></ng-content>
 </button>
+
+
+<!-- @if(routerLink === null){
+
+<a [routerLink]="routerLink" class="btn rounded-3 text-decoration-none" [ngClass]="[variant, size, customClass]">
+  <ng-content></ng-content>
+</a>
+
+}
+
+@else {
+
+<button class="btn rounded-3" [ngClass]="[variant, size, customClass]">
+  <ng-content></ng-content>
+</button>
+
+} -->

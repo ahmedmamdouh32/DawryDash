@@ -1,15 +1,34 @@
 import { NgClass } from '@angular/common';
 import { Component, input, Input } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-button',
-  imports: [NgClass],
+  imports: [NgClass, RouterLink],
   templateUrl: './button.html',
   styleUrl: './button.css',
 })
 export class Button {
+
+  constructor(private router: Router) { }
+
+  @Input() routerLink: string | null = null;
+
   @Input() variant: 'green' | 'gray' = 'green';
 
   @Input() size: 'small' | 'medium' | 'large' = 'medium';
 
   @Input() customClass: string = '';
+
+  onBtnPress() {
+
+    if (this.routerLink) {
+
+      this.router.navigate([this.routerLink]);
+
+    }
+    //write the remaining logic of the button press here
+
+  }
+
+
 }
