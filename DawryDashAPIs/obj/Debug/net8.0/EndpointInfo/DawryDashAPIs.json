@@ -419,6 +419,41 @@
           }
         }
       }
+    },
+    "/api/User/message": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/User/Pmessage/{number}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "name": "number",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -511,15 +546,13 @@
       "AddUserDTO": {
         "type": "object",
         "properties": {
-          "username": {
-            "type": "string",
-            "nullable": true
-          },
           "email": {
+            "maxLength": 256,
             "type": "string",
             "nullable": true
           },
           "fullname": {
+            "maxLength": 50,
             "type": "string",
             "nullable": true
           },

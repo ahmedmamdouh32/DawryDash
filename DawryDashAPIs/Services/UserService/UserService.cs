@@ -23,6 +23,20 @@ namespace DawryDashAPIs.Services.UserService
         public ServiceResult<ApplicationUser> Register(AddUserDTO DTO)
         {
             ApplicationUser user = map.Map<ApplicationUser>(DTO);
+
+            string userName;
+
+            string baseUserName = DTO.fullname.Replace(" ", "").ToLower();
+
+            do
+            {
+                string suffix = Guid.NewGuid().ToString("N").Substring(0, 6);
+                userName = $"{baseUserName}_{suffix}";
+            }
+            while (userManager.FindByNameAsync(userName).Result != null);
+
+            user.UserName = userName;
+
             var result =  userManager.CreateAsync(user, DTO.password).Result;
 
             if (result.Succeeded)

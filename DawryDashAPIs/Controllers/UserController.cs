@@ -31,11 +31,11 @@ namespace DawryDashAPIs.Controllers
                 var result = userService.Register(DTO);
                 if (result.Success)
                 {
-                    return BadRequest(result.Message);
+                    return Ok(new { success = result.Success, message = result.Message });
                 }
                 else
                 {
-                    return Ok(result.Message);
+                    return BadRequest(new { success = result.Success, message = result.Message });
                 }
             }
             else
@@ -80,6 +80,22 @@ namespace DawryDashAPIs.Controllers
             {
                 return BadRequest(result.Message);
             }
+        }
+
+
+
+        [HttpGet("message")]
+        
+        
+        public IActionResult getData()
+        {
+            return Ok(new {message= "Data Received Successfully" });
+        }
+
+        [HttpGet("Pmessage/{number:int}")]
+        public IActionResult getDataT([FromRoute]int number)
+        {
+            return Ok(number % 2 ==0 ? "even" : "odd");
         }
 
     }

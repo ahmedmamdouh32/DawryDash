@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Button } from '../../../button/button';
 
 @Component({
@@ -7,4 +7,4 @@ import { Button } from '../../../button/button';
   templateUrl: './hero-section.html',
   styleUrl: './hero-section.css',
 })
-export class HeroSection { }
+export class HeroSection {}

@@ -222,6 +222,32 @@
   },
   {
     "ContainingType": "DawryDashAPIs.Controllers.UserController",
+    "Method": "getData",
+    "RelativePath": "api/User/message",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DawryDashAPIs.Controllers.UserController",
+    "Method": "getDataT",
+    "RelativePath": "api/User/Pmessage/{number}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "number",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DawryDashAPIs.Controllers.UserController",
     "Method": "Register",
     "RelativePath": "api/User/Register",
     "HttpMethod": "POST",
