@@ -10,6 +10,7 @@ import { Router, RouterLink } from '@angular/router';
 export class Button {
 
   constructor(private router: Router) { }
+  @Input() type: 'button' | 'submit' = 'button';
 
   @Input() routerLink: string | null = null;
 

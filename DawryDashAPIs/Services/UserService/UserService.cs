@@ -20,53 +20,131 @@ namespace DawryDashAPIs.Services.UserService
             userManager = _userManager;
         }
 
-        public ServiceResult<ApplicationUser> Register(AddUserDTO DTO)
+        //public ServiceResult<ApplicationUser> Register(AddUserDTO DTO)
+        //{
+        //    ApplicationUser user = map.Map<ApplicationUser>(DTO);
+
+        //    string userName;
+
+        //    string baseUserName = DTO.fullname.Replace(" ", "").ToLower();
+
+        //    do
+        //    {
+        //        string suffix = Guid.NewGuid().ToString("N").Substring(0, 6);
+        //        userName = $"{baseUserName}_{suffix}";
+        //    }
+        //    while (userManager.FindByNameAsync(userName).Result != null);
+
+        //    user.UserName = userName;
+
+        //    var result =  userManager.CreateAsync(user, DTO.password).Result;
+
+        //    if (result.Succeeded)
+        //    {
+        //        result = userManager.AddToRoleAsync(user, "user").Result;
+        //        if (result.Succeeded)
+        //        {
+        //            return new ServiceResult<ApplicationUser> { 
+        //                Success = true,
+        //                Message = "User Added Successfully", 
+        //                Data = user };
+        //        }
+        //        else
+        //        {
+        //            return new ServiceResult<ApplicationUser>
+        //            {
+        //                Success = false,
+        //                Message = string.Join(", ", result.Errors.Select(e => e.Description))
+        //            };
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return new ServiceResult<ApplicationUser>
+        //        {
+        //            Success = false,
+        //            Message = string.Join(", ", result.Errors.Select(e => e.Description))
+        //        };
+        //    }
+        //}
+        public async Task<ServiceResult<ApplicationUser>> Register(AddUserDTO DTO)
         {
             ApplicationUser user = map.Map<ApplicationUser>(DTO);
 
-            string userName;
+            string baseUserName =
+                DTO.fullname.Replace(" ", "").ToLower();
 
-            string baseUserName = DTO.fullname.Replace(" ", "").ToLower();
+            IdentityResult result;
+
+            int retryCount = 0;
 
             do
             {
-                string suffix = Guid.NewGuid().ToString("N").Substring(0, 6);
-                userName = $"{baseUserName}_{suffix}";
-            }
-            while (userManager.FindByNameAsync(userName).Result != null);
+                string suffix = Guid.NewGuid()
+                    .ToString("N")
+                    .Substring(0, 6);
 
-            user.UserName = userName;
+                user.UserName = $"{baseUserName}_{suffix}";
 
-            var result =  userManager.CreateAsync(user, DTO.password).Result;
+                result = await userManager.CreateAsync(user, DTO.password);
 
-            if (result.Succeeded)
-            {
-                result = userManager.AddToRoleAsync(user, "user").Result;
+                // success
                 if (result.Succeeded)
-                {
-                    return new ServiceResult<ApplicationUser> { 
-                        Success = true,
-                        Message = "User Added Successfully", 
-                        Data = user };
-                }
-                else
+                    break;
+
+                // stop retrying if problem is NOT duplicate username
+                bool duplicateUserName = result.Errors.Any(e =>
+                    e.Code.Contains("DuplicateUserName"));
+
+                if (!duplicateUserName)
                 {
                     return new ServiceResult<ApplicationUser>
                     {
                         Success = false,
-                        Message = string.Join(", ", result.Errors.Select(e => e.Description))
+                        Message = string.Join(
+                            ", ",
+                            result.Errors.Select(e => e.Description))
                     };
                 }
-            }
-            else
+
+                retryCount++;
+
+            } while (retryCount < 5);
+
+            // failed after retries
+            if (!result.Succeeded)
             {
                 return new ServiceResult<ApplicationUser>
                 {
                     Success = false,
-                    Message = string.Join(", ", result.Errors.Select(e => e.Description))
+                    Message = "Could not create email now, try again later."
                 };
             }
+
+            // add default role
+            var roleResult =
+                await userManager.AddToRoleAsync(user, "user");
+
+            if (!roleResult.Succeeded)
+            {
+                return new ServiceResult<ApplicationUser>
+                {
+                    Success = false,
+                    Message = string.Join(
+                        ", ",
+                        roleResult.Errors.Select(e => e.Description))
+                };
+            }
+
+            return new ServiceResult<ApplicationUser>
+            {
+                Success = true,
+                Message = "User Added Successfully",
+                Data = user
+            };
         }
+
+
 
 
         public ServiceResult<ApplicationUser> AuthenticateUser(LoginUserDTO DTO)

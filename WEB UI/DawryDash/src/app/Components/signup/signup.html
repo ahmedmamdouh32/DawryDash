@@ -19,23 +19,29 @@
                     <!-- Name -->
                     <label class=" text-white-50 mt-3 mb-1" style="font-size: 16px;">Name</label>
                     <input class="form-control bg-white-black text-white-50 green-border" style="height:3rem"
-                        type="text" placeholder="Enter Your Name" formControlName="name">
-                    @if(name?.touched && name?.invalid){
+                        type="text" placeholder="Enter Your Name" formControlName="fullname">
+                    @if(fullname?.touched && fullname?.invalid){
 
-                    @if(name?.errors?.['required']){
+                    @if(fullname?.errors?.['required']){
                     <span class="font-style">Name is required</span>
                     }
                     @else{
-                    @if(name?.errors?.['maxlength']){
+                    @if(fullname?.errors?.['maxlength']){
                     <span class="font-style">Maximum length is 50 characters</span>
                     }
                     @else{
-                    @if(name?.errors?.['minlength']){
+                    @if(fullname?.errors?.['minlength']){
                     <span class="font-style">Minimum length is 3 characters</span>
                     }
+                    @else{
+                    @if(fullname?.errors?.['serverError']){
+                    <span class="font-style">{{fullname?.errors?.['serverError']}}</span>
                     }
                     }
                     }
+                    }
+                    }
+
                     <!-- email -->
                     <label class=" text-white-50 mt-3 mb-1" style="font-size: 16px;">Email</label>
                     <input class="form-control bg-white-black text-white-50 green-border" style="height:3rem"
@@ -52,10 +58,17 @@
                     @else{
                     @if(email?.errors?.['email']){
                     <span class="font-style">Invalid email format</span>
+
+                    }
+                    @else{
+                    @if(email?.errors?.['serverError']){
+                    <span class="font-style">{{email?.errors?.['serverError']}}</span>
                     }
                     }
                     }
                     }
+                    }
+
                     <!-- password -->
                     <label class="text-white-50 mt-3 mb-1" style="font-size: 16px;">Password</label>
                     <input type="password" class="form-control text-white-50 bg-white-black green-border"
@@ -92,10 +105,10 @@
                     <span class="font-style">password mismatch</span>
                     }
 
+                    <div class="mt-4 mb-2 d-flex row justify-content-center">
+                        <span class="font-style text-center mb-3">{{signupErrorMessage()}}</span>
 
-                    <div class="mt-4 mb-2">
-                        <!-- <span class="text-danger">{{message()}}</span> -->
-                        <app-button size="medium" customClass="w-100">Login</app-button>
+                        <app-button size="medium" type="submit" customClass="w-100">Login</app-button>
                     </div>
                 </form>
             </div>
@@ -109,7 +122,6 @@
                 <div class="green-border-top col-4">
                 </div>
             </div>
-
 
             <div class="row justify-content-between">
                 <div class="col col-6">
@@ -135,10 +147,6 @@
                 <span class="text-white-50">Already have an account?<a routerLink="/signup" class="ms-2"
                         style="font-weight: bold; color: var(--accent);">Sign In</a> </span>
             </div>
-
         </div>
-
     </div>
-
-
 </section>

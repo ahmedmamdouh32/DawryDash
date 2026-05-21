@@ -48,6 +48,8 @@ namespace DawryDashAPIs
                op =>
                {
                    op.Password.RequireNonAlphanumeric = false;
+                   op.User.RequireUniqueEmail = true;
+
                }
            )
            .AddEntityFrameworkStores<dbContext>()

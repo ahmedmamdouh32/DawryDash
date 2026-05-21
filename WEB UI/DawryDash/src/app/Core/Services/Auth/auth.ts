@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { RegisterRequest } from './register-request';
+// import { RegisterRequest } from './register-request';
 import { Observable } from 'rxjs';
+import { RegisterDTO } from './register-request';
+import { LoginDTO } from './login-dto';
 // import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({
@@ -24,7 +26,15 @@ export class Auth {
   //     }
   //   );
 
-  Register(registerDTO: RegisterRequest): Observable<any> {
-    return this.http.post(`${this.baseUrl}/Register`,registerDTO, { responseType: 'text'}, );
+  Register(registerDTO: RegisterDTO): Observable<any> {
+    return this.http.post(`${this.baseUrl}/Register`, registerDTO);
   }
+
+  Login(loginDTO: LoginDTO): Observable<any> {
+    return this.http.post(`${this.baseUrl}/Login`, loginDTO);
+  }
+
+
+
+
 }

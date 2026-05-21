@@ -544,21 +544,26 @@
         "additionalProperties": false
       },
       "AddUserDTO": {
+        "required": [
+          "email",
+          "fullname",
+          "password"
+        ],
         "type": "object",
         "properties": {
           "email": {
             "maxLength": 256,
-            "type": "string",
-            "nullable": true
+            "minLength": 1,
+            "type": "string"
           },
           "fullname": {
             "maxLength": 50,
-            "type": "string",
-            "nullable": true
+            "minLength": 1,
+            "type": "string"
           },
           "password": {
-            "type": "string",
-            "nullable": true
+            "minLength": 1,
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -586,15 +591,20 @@
         "additionalProperties": false
       },
       "LoginUserDTO": {
+        "required": [
+          "email",
+          "password"
+        ],
         "type": "object",
         "properties": {
           "email": {
-            "type": "string",
-            "nullable": true
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
           },
           "password": {
-            "type": "string",
-            "nullable": true
+            "minLength": 1,
+            "type": "string"
           }
         },
         "additionalProperties": false

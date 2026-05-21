@@ -3,6 +3,7 @@ using DawryDashAPIs.Services.UserService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -49,36 +50,50 @@ namespace DawryDashAPIs.Controllers
         [HttpPost("Login")]
         public IActionResult Login(LoginUserDTO DTO)
         {
-            var result = userService.AuthenticateUser(DTO);
-            if (result.Success)
+            if (ModelState.IsValid)
             {
-                List<Claim> userClaims = new();
-                userClaims.Add(new Claim("fullname", result.Data.FullName));
-                userClaims.Add(new Claim("imgUrl", result.Data.ImgUrl?? "not found"));
+                var result = userService.AuthenticateUser(DTO);
+                if (result.Success)
+                {
+                    List<Claim> userClaims = new();
+                    userClaims.Add(new Claim("fullname", result.Data.FullName));
+                    userClaims.Add(new Claim("imgUrl", result.Data.ImgUrl ?? "not found"));
 
-                //secret key generation
-                string key = "this is a secret key whose length should be greater than 256/8";
-                var secretKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key));
-                var signCredits = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+                    //secret key generation
+                    string key = "this is a secret key whose length should be greater than 256/8";
+                    var secretKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key));
+                    var signCredits = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
-                //token generation
-                var token = new JwtSecurityToken(
-                    claims: userClaims,
-                    expires: DateTime.Now.AddMonths(1),
-                    signingCredentials: signCredits
-                    );
-                var encodedToken = new JwtSecurityTokenHandler().WriteToken(token);
-                return Ok(
-                    new {
-                        token = encodedToken, 
-                        fullname = result.Data.FullName, 
-                        username = result.Data.UserName,
-                        imgUrl = result.Data.ImgUrl
-                    });
+                    //token generation
+                    var token = new JwtSecurityToken(
+                        claims: userClaims,
+                        expires: DateTime.Now.AddMonths(1),
+                        signingCredentials: signCredits
+                        );
+                    var encodedToken = new JwtSecurityTokenHandler().WriteToken(token);
+                    return Ok(
+                        new
+                        {
+                            success = true,
+                            token = encodedToken,
+                            fullname = result.Data.FullName,
+                            username = result.Data.UserName,
+                            imgUrl = result.Data.ImgUrl
+                        });
+                }
+                else
+                {
+                    return BadRequest(
+                        new 
+                        {
+                            success = false,
+                            message = result.Message
+                        });
+                }
             }
             else
             {
-                return BadRequest(result.Message);
+                return BadRequest(ModelState);
             }
         }
 

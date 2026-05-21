@@ -30,6 +30,11 @@ input::placeholder {
     font-size: 14px;
 }
 
+.font-style{
+    font-size: 14px;
+    color:var(--accent);
+    display: block;
+}
 
 .custom-checkbox {
     appearance: none;

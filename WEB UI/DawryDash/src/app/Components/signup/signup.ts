@@ -2,11 +2,12 @@ import { Component, inject, signal } from '@angular/core';
 import { Button } from '../button/button';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Auth } from '../../Core/Services/Auth/auth';
-import { RegisterRequest } from '../../Core/Services/Auth/register-request';
+import { RegisterDTO } from '../../Core/Services/Auth/register-request';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
-  imports: [Button, ReactiveFormsModule],
+  imports: [Button, ReactiveFormsModule, RouterLink],
   templateUrl: './signup.html',
   styleUrl: './signup.css',
 })
@@ -14,8 +15,11 @@ export class Signup {
 
   authService = inject(Auth);
 
+  signupErrorMessage = signal<string>('');
+
+
   userForm = new FormGroup({
-    name: new FormControl('',
+    fullname: new FormControl('',
       [
         Validators.required,
         Validators.minLength(3),
@@ -41,8 +45,8 @@ export class Signup {
       ])
   });
 
-  get name() {
-    return this.userForm.get('name');
+  get fullname() {
+    return this.userForm.get('fullname');
   }
 
   get email() {
@@ -57,21 +61,15 @@ export class Signup {
     return this.userForm.get('confirmPassword');
   }
 
-
-  message = signal<string>('');
-  isSuccess = signal<boolean | null>(null);
-
-
   onSubmit() {
     if (this.userForm.invalid) {
       this.userForm.markAllAsTouched();
     }
     else {
-
       //Preparing the body 
-      const body: RegisterRequest = {
+      const body: RegisterDTO = {
         email: this.userForm.value.email!,
-        fullname: this.userForm.value.name!,
+        fullname: this.userForm.value.fullname!,
         password: this.userForm.value.password!
       }
 
@@ -79,20 +77,33 @@ export class Signup {
         {
           next: (res) => {
             console.log(res)
+            this.userForm.reset();
           },
 
           error: (err) => {
-            console.log(err)
-            this.message.set(err.error?.message ?? 'Something went wrong');
-            console.log(err.message);
-            this.isSuccess.set(false);
+            console.log(err.error)
+            if (err.status === 400) {
+              if (err.error?.errors) {
+                const validationErrors = err.error.errors;
+                Object.keys(validationErrors).forEach(key => {
+                  const control = this.userForm.get(key);
+                  if (control) {
+                    control.setErrors({
+                      serverError: validationErrors[key][0]
+                    });
+                  }
+                });
+              }
+              else if (err.error.success === false) {
+                this.signupErrorMessage.set(err.error.message);
+              }
+              else {
+                this.signupErrorMessage.set('');
+              }
+            }
           }
         }
       )
     }
   }
-
-
-
 }
-
