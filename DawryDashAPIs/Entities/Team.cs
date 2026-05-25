@@ -13,6 +13,20 @@ namespace DawryDashAPIs.Entities
         [MaxLength(200)]
         public string? ImgUrl { set; get; }
 
+        [MaxLength(100)]
+        public string? Slogan { set; get; }
+
+        [MaxLength(20)]
+        public string PrimaryColor { set; get; }
+
+        [MaxLength(20)]
+        public string SecondaryColor { set; get; }
+
+        [MaxLength(500)]
+        public string? Description { set; get; }
+
+        public int MembersCount { set; get; } = 1;
+
         public string CaptainId { get; set; }
 
         public ApplicationUser Captain { get; set; }

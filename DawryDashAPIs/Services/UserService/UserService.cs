@@ -67,12 +67,11 @@ namespace DawryDashAPIs.Services.UserService
         //        };
         //    }
         //}
-        public async Task<ServiceResult<ApplicationUser>> Register(AddUserDTO DTO)
+        public ServiceResult<ApplicationUser> Register(AddUserDTO DTO)
         {
             ApplicationUser user = map.Map<ApplicationUser>(DTO);
 
-            string baseUserName =
-                DTO.fullname.Replace(" ", "").ToLower();
+            string baseUserName = DTO.fullname.Replace(" ", "").ToLower();
 
             IdentityResult result;
 
@@ -86,7 +85,7 @@ namespace DawryDashAPIs.Services.UserService
 
                 user.UserName = $"{baseUserName}_{suffix}";
 
-                result = await userManager.CreateAsync(user, DTO.password);
+                result = userManager.CreateAsync(user, DTO.password).Result;
 
                 // success
                 if (result.Succeeded)
@@ -122,8 +121,7 @@ namespace DawryDashAPIs.Services.UserService
             }
 
             // add default role
-            var roleResult =
-                await userManager.AddToRoleAsync(user, "user");
+            var roleResult = userManager.AddToRoleAsync(user, "user").Result;
 
             if (!roleResult.Succeeded)
             {
@@ -170,5 +168,11 @@ namespace DawryDashAPIs.Services.UserService
                 Message = "Invalid Email or Password",
             };
         }
+
+        public ApplicationUser GetUserData(string userId)
+        {
+            return userManager.FindByIdAsync(userId).Result;
+        }
+       
     }
 }

@@ -29,7 +29,7 @@ namespace DawryDashAPIs.Controllers
 
             if (ModelState.IsValid)
             {
-                var result = userService.Register(DTO);
+                var result =  userService.Register(DTO);
                 if (result.Success)
                 {
                     return Ok(new { success = result.Success, message = result.Message });

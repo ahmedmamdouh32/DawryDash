@@ -10,18 +10,23 @@ namespace DawryDashAPIs.Services.TeamsServices
     public class TeamService : ITeamService
     {
         GenericRepo<Team> repo;
+        
         GenericRepo<Tournament> tournamentRepo;
+
+        UserTeamRepo userTeamRepo;
+
         IMapper map;
-        public TeamService(GenericRepo<Team> _repo, GenericRepo<Tournament> _tournamentRepo, IMapper _map)
+        public TeamService(GenericRepo<Team> _repo, GenericRepo<Tournament> _tournamentRepo, IMapper _map, UserTeamRepo _userTeamRepo)
         {            
             repo = _repo;
             tournamentRepo = _tournamentRepo;
             map = _map;
+            userTeamRepo = _userTeamRepo;
         }
 
         public List<DisplayTeamDTO> GetAll()
         {
-            List<Team> teams = repo.GetAll();
+            List<Team> teams = repo.GetAll().ToList();
             return teams.Select(t => map.Map<DisplayTeamDTO>(t)).ToList();
         }
 
@@ -102,6 +107,11 @@ namespace DawryDashAPIs.Services.TeamsServices
             repo.Update(team);
             repo.Save();
             return true;
+        }
+
+        public List<Team> getTeamsByUserId(string userId)
+        {
+            return userTeamRepo.GetTeamsByUserId(userId)?.ToList();
         }
 
 

@@ -1,0 +1,65 @@
+.background-color{
+    background: rgba(34, 34, 34, 1) 
+}
+
+
+.bg-grey{
+    background-color: #474747;
+    backdrop-filter: blur(8px);
+}
+
+.bg-green{
+    background-color: color-mix(in oklab, #89e900 20%, transparent);
+    backdrop-filter: blur(12px);
+}
+
+.green-border{
+    
+    border: 3px solid;
+    border-radius: 1rem;
+    border-color: color-mix(in oklab, #89e900 15%, transparent);
+}
+.bg-white-black{
+    background-color : color-mix(in oklab, #fff 8%, transparent);;
+}
+
+input::placeholder {
+    color: #a3a3a3;
+    font-size: 14px;
+}
+
+.font-style{
+    font-size: 14px;
+    color:var(--accent);
+    display: block;
+}
+
+.custom-checkbox {
+    appearance: none;
+
+    width: 18px;
+    height: 18px;
+
+    border: 2px solid #89e900;
+    background-color: transparent;
+
+    border-radius: 4px;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.custom-checkbox:checked {
+
+    background-color: #89e900;
+}
+
+.custom-checkbox:hover {
+    box-shadow: 0 0 8px rgba(137, 233, 0, 0.5);
+}
+
+.green-border-top{
+    border-top: 1px solid;
+    border-color: color-mix(in oklab, #89e900 15%, transparent);
+}

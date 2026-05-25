@@ -12,9 +12,9 @@ namespace DawryDashAPIs.Repositories
             this._dbContext = _dbcontext;
         }
 
-        public List<TEntity> GetAll()
+        public IQueryable<TEntity> GetAll()
         {
-            return _dbContext.Set<TEntity>().ToList();
+            return _dbContext.Set<TEntity>();
         }
 
         public TEntity GetById(int id)

@@ -11,5 +11,7 @@ namespace DawryDashAPIs.Services.TeamService
         DisplayTeamDTO GetById(int id);
         bool DeleteById(int id);
         bool Update(UpdateTeamDTO teamDTO, int id);
+        List<Team> getTeamsByUserId(string userId);
+
     }
 }

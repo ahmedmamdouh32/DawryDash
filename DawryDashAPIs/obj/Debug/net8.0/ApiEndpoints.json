@@ -1,5 +1,21 @@
 [
   {
+    "ContainingType": "DawryDashAPIs.Controllers.DashboardController",
+    "Method": "GetDashboardHomeDetails",
+    "RelativePath": "api/Dashboard/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "DawryDashAPIs.Controllers.MatchController",
     "Method": "Add",
     "RelativePath": "api/Match",

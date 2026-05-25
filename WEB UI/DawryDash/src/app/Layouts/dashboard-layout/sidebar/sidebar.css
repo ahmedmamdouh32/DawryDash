@@ -1,0 +1,37 @@
+.border-right-side{
+    border-right-width: 1px;
+    border-right-color: black;
+    border-right-style: solid;
+}
+
+.border-bottom-side{
+    border-bottom-width: 1px;
+    border-bottom-color: black;
+    border-bottom-style: solid;
+}
+
+
+.border-top-side{
+    border-top-width: 1px;
+    border-top-color: black;
+    border-top-style: solid;
+}
+
+
+a {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.grey-anchor {
+    color: color-mix(in oklab, #fff 95%, transparent);
+    backdrop-filter: blur(8px);
+}
+
+
+.green-anchor {
+    color: #89e900;
+    background-color: color-mix(in oklab, #89e900 20%, transparent);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 10px rgba(137, 233, 0, 0.5);
+}

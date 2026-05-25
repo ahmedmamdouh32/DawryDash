@@ -1,0 +1,112 @@
+<!-- Mobile Navbar (visible only on mobile) -->
+<nav class="navbar navbar-dark bg-dark border-bottom border-success border-opacity-25 d-md-none fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+            <span class="fw-bold text-white">Dawry Dash</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+
+
+
+<!-- Mobile Offcanvas Sidebar -->
+<div class="offcanvas offcanvas-start bg-dark" tabindex="-1" id="mobileSidebar">
+    <div class="offcanvas-header border-bottom border-success border-opacity-25">
+        <h5 class="offcanvas-title text-white">Menu</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body p-0">
+        <div class="p-3 border-bottom border-success border-opacity-25">
+            <div class="d-flex align-items-center gap-3">
+                <img src="https://ui-avatars.com/api/?name=Ahmed+Hassan&background=89e900&color=222222&size=128"
+                    class="rounded-circle border border-success border-2" width="48" height="48">
+                <div>
+                    <div class="text-white fw-semibold">Ahmed Hassan</div>
+                    <div class="text-white-50 small">@ahmed_hassan</div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex flex-column p-3 gap-2">
+            <a href="#"
+                class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 bg-success bg-opacity-25 text-success text-decoration-none">
+                Dashboard
+            </a>
+            <a href="#" class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 text-white-50 text-decoration-none">
+                Tournaments
+            </a>
+            <a href="#" class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 text-white-50 text-decoration-none">
+                Teams
+            </a>
+            <a href="#" class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 text-white-50 text-decoration-none">
+                Matches
+            </a>
+            <a href="#" class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 text-white-50 text-decoration-none">
+                Settings
+            </a>
+            <hr class="border-success border-opacity-25">
+            <a href="#" class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 text-white-50 text-decoration-none">
+                Help & Support
+            </a>
+            <a href="#" class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 text-white-50 text-decoration-none">
+                Logout
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Desktop Sidebar (visible on md+) -->
+<div class="d-none d-md-flex flex-column vh-100 position-fixed start-0 top-0 border-right-side"
+    style="width: 260px; z-index: 1000; background-color: var(--bg-grey); ">
+    <div class="p-3 border-bottom-side">
+        <div class="d-flex align-items-center gap-3">
+            <img src="https://ui-avatars.com/api/?name=Ahmed+Hassan&background=89e900&color=222222&size=128"
+                class="rounded-circle border border-success border-2" width="48" height="48">
+            <div>
+                <div class="text-white fw-semibold">Ahmed Hassan</div>
+                <div class="text-white-50" style="font-size: 12px;">ahmed_hassan</div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="flex-grow-1 p-3">
+        <div class="d-flex flex-column gap-2">
+            <a href="#" class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 green-anchor">
+                <!-- <iconify-icon icon="lucide:home"></iconify-icon>  -->
+                Dashboard
+            </a>
+            <a href="#" class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 text-white-50 grey-anchor">
+                <!-- <iconify-icon icon="lucide:trophy"></iconify-icon> -->
+                Tournaments
+            </a>
+            <a href="#" class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 text-white-50 grey-anchor">
+                <!-- <iconify-icon icon="lucide:users"></iconify-icon>  -->
+                Teams
+            </a>
+            <a href="#" class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 text-white-50 grey-anchor">
+                <!-- <iconify-icon icon="lucide:circle-dot"></iconify-icon>  -->
+                Matches
+            </a>
+            <a href="#" class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 text-white-50 grey-anchor">
+                <!-- <iconify-icon icon="lucide:settings"></iconify-icon>  -->
+                Settings
+            </a>
+        </div>
+    </nav>
+
+    <div class="p-3 border-top-side">
+        <a href="#" class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 text-white-50 grey-anchor">
+            <!-- <iconify-icon icon="lucide:help-circle"></iconify-icon> -->
+            Help & Support
+        </a>
+        <a href="#" class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 text-white-50 grey-anchor">
+            <!-- <iconify-icon icon="lucide:log-out"></iconify-icon>  -->
+            Logout
+        </a>
+    </div>
+</div>

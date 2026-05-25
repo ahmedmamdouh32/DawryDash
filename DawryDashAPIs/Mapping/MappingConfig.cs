@@ -15,6 +15,8 @@ namespace DawryDashAPIs.Mapping
             CreateMap<Team, DisplayTeamDTO>();
             CreateMap<AddTeamDTO, Team>();
             CreateMap<UpdateTeamDTO, Team>();
+            CreateMap<Team, TeamCardDTO>();
+            
 
             //Match Mapping
             CreateMap<AddMatchDTO, Match>();
@@ -25,9 +27,18 @@ namespace DawryDashAPIs.Mapping
             //Tournament Mapping
             CreateMap<AddTournamentDTO, Tournament>();
             CreateMap<Tournament, DisplayTournamentDTO>();
-
+            CreateMap<Tournament, TournamentCardDTO>()
+                .ForMember(
+                    dest => dest.startDate,
+                    opt => opt.MapFrom(src =>
+                        src.StartDate.HasValue
+                            ? src.StartDate.Value.ToString("MMMM dd")
+                            : null
+                    )
+                );
             //User Mapping
             CreateMap<AddUserDTO, ApplicationUser>();
+            CreateMap<ApplicationUser, UserDashboardDTO>();
 
         }
     }

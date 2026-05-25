@@ -7,5 +7,7 @@ namespace DawryDashAPIs.Services.TournamentService
     {
         DisplayTournamentDTO GetById(int id);
         Tournament Add(AddTournamentDTO DTO);
+        List<Tournament> GetFirst4ActiveTournaments();
+
     }
 }

@@ -44,5 +44,10 @@ namespace DawryDashAPIs.Services.TournamentService
                 return tournament;
             }
         }
+        public List<Tournament> GetFirst4ActiveTournaments()
+        {
+            return tournamentRepo.GetAll().Where(t => t.Status == Enums.EventStatus.Preparing).Take(4).ToList();
+            //return null;
+        }
     }
 }
