@@ -1,9 +1,9 @@
 import { Component, inject, signal } from '@angular/core';
-import { Button } from '../../../Components/button/button';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Auth } from '../../../Core/Services/Auth/auth';
-import { RegisterDTO } from '../../../Core/Services/Auth/register-request';
 import { RouterLink } from '@angular/router';
+import { Button } from '../../../../Components/button/button';
+import { Auth } from '../../services/auth';
+import { RegisterDTO } from '../../models/register-request';
 
 @Component({
   selector: 'app-signup',

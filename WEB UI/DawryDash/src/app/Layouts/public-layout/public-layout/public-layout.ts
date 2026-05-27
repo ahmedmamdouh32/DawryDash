@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Login } from '../login/login';
+import { Login } from '../../../Features/auth/pages/login/login';
 import { Navbar } from '../navbar/navbar';
 import { Footer } from '../footer/footer';
 import { RouterOutlet } from '@angular/router';

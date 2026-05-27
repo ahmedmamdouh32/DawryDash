@@ -76,8 +76,9 @@ namespace DawryDashAPIs.Controllers
                         {
                             success = true,
                             token = encodedToken,
-                            fullname = result.Data.FullName,
-                            username = result.Data.UserName,
+                            userId = result.Data.Id,
+                            userName = result.Data.UserName,
+                            fullName = result.Data.FullName,
                             imgUrl = result.Data.ImgUrl
                         });
                 }

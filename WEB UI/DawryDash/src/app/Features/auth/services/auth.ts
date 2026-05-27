@@ -1,10 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-// import { RegisterRequest } from './register-request';
 import { Observable } from 'rxjs';
-import { RegisterDTO } from './register-request';
-import { LoginDTO } from './login-dto';
-// import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { RegisterDTO } from '../models/register-request';
+import { LoginDTO } from '../models/login-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -33,8 +31,4 @@ export class Auth {
   Login(loginDTO: LoginDTO): Observable<any> {
     return this.http.post(`${this.baseUrl}/Login`, loginDTO);
   }
-
-
-
-
 }

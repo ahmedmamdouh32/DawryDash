@@ -35,9 +35,9 @@ namespace DawryDashAPIs.Controllers
         public IActionResult GetDashboardHomeDetails(string userId)
         {
             DashboardHomeDTO result = new();
-            result.userDashboardDTO = map.Map<UserDashboardDTO>(userService.GetUserData(userId));
-            result.Teams = map.Map<List<TeamCardDTO>>(teamService.getTeamsByUserId(userId));
-            result.Tournaments = map.Map<List<TournamentCardDTO>>(tournamentService.GetFirst4ActiveTournaments());
+            result.user= map.Map<UserDashboardDTO>(userService.GetUserData(userId));
+            result.latestTeams = map.Map<List<TeamCardDTO>>(teamService.getTeamsByUserId(userId));
+            result.activeTournaments = map.Map<List<TournamentCardDTO>>(tournamentService.GetFirst4ActiveTournaments());
             return Ok(result);
         }
     }

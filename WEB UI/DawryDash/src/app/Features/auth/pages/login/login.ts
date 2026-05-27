@@ -1,9 +1,10 @@
 import { Component, inject, signal } from '@angular/core';
-import { Button } from '../../../Components/button/button';
-import { RouterLink } from '@angular/router';
+import { Button } from '../../../../Components/button/button';
+import { Router, RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { LoginDTO } from '../../../Core/Services/Auth/login-dto';
-import { Auth } from '../../../Core/Services/Auth/auth';
+import { LoginDTO } from '../../models/login-dto';
+import { Auth } from '../../services/auth';
+import { LoginResponse } from '../../models/login-response';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ import { Auth } from '../../../Core/Services/Auth/auth';
 export class Login {
 
   authService = inject(Auth);
-
+  router = inject(Router);
   loginErrorMessage = signal<string>('');
 
   loginForm = new FormGroup({
@@ -55,8 +56,18 @@ export class Login {
 
       this.authService.Login(body).subscribe(
         {
-          next: (res) => {
-            console.log(res)
+          next: (res: LoginResponse) => {
+            localStorage.setItem('token', res.token);
+            localStorage.setItem('fullName', res.fullName);
+            localStorage.setItem('imgUrl', res.imgUrl);
+            localStorage.setItem('userId', res.userId);
+            localStorage.setItem('userName', res.userName);
+
+            // this.authState.setUser(res); //storing user data in a service to be called later
+            this.router.navigate(['/dashboard']);
+
+            // console.log(res.fullName)
+            // console.log(res.imgUrl)
           },
 
           error: (err) => {
@@ -82,7 +93,4 @@ export class Login {
       )
     }
   }
-
-
-
 }

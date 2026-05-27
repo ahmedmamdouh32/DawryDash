@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { Login } from './Layouts/public-layout/login/login';
-import { Signup } from './Layouts/public-layout/signup/signup';
 import { LandingPage } from './Layouts/public-layout/landing-page/landing-page';
 import { PublicLayout } from './Layouts/public-layout/public-layout/public-layout';
 import { DashboardLayout } from './Layouts/dashboard-layout/dashboard-layout/dashboard-layout';
-import { DashboardHome } from './Layouts/dashboard-layout/dashboard-home/dashboard-home';
+import { Signup } from './Features/auth/pages/signup/signup';
+import { Login } from './Features/auth/pages/login/login';
+import { DashboardHome } from './Features/dashboard/pages/dashboard-home/dashboard-home';
 
 export const routes: Routes = [
     {

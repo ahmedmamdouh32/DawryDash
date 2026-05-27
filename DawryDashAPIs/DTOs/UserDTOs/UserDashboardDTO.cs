@@ -4,5 +4,7 @@
     {
         public string FullName { set; get; }
         public string ImgUrl { set; get; }
+
+        public string userName { set; get; }
     }
 }

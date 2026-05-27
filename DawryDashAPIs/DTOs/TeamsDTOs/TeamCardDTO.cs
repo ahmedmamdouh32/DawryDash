@@ -2,6 +2,8 @@
 {
     public class TeamCardDTO
     {
+        public int Id { set; get; }
+
         public string Name { set; get; }
 
         public int MembersCount { set; get; }

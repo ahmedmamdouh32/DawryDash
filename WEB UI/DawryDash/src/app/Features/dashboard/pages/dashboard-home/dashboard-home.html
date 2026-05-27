@@ -1,0 +1,103 @@
+<div class="p-md-4 main-content ">
+    <div class="container-fluid px-0">
+
+        <!-- Welcome Banner -->
+        <div class="rounded-4 p-4 mb-4"
+            style="background :linear-gradient(to right, var(--bg-to-green), var(--color-function-light))">
+            <h1 class="text-white fw-bold fs-2 fs-md-1 mb-2">Welcome back, {{dashboardData()?.user?.fullName}}</h1>
+            <div class="d-flex flex-wrap gap-3 gap-md-4 mt-3">
+                <div class="d-flex align-items-center gap-2">
+                    <!-- <iconify-icon icon="lucide:users" class="text-success"></iconify-icon> -->
+                    <span class="text-white-50 small">3 Teams Created</span>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <!-- <iconify-icon icon="lucide:trophy" class="text-success"></iconify-icon> -->
+                    <span class="text-white-50 small">5 Tournaments Joined</span>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <!-- <iconify-icon icon="lucide:circle-dot" class="text-success"></iconify-icon> -->
+                    <span class="text-white-50 small">2 Active Matches</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- My Teams Section -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+        <h2 class="text-white fw-bold fs-3 mb-2 mb-md-0">My Teams</h2>
+        <!-- <span class="badge rounded-pill px-3 py-2">3 Teams</span> -->
+    </div>
+
+    <div class="row g-3 g-md-4 mb-5">
+
+
+
+        @for (team of (dashboardData()?.latestTeams ?? []); track team.id) {
+
+        <div class="col-md-6 col-xl-4">
+            <div class="bg-grey-dark rounded-4 p-4 green-border h-100">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <img src="https://ui-avatars.com/api/?name=Real+Madrid&background=89e900&color=222222&size=128"
+                        class="rounded-circle border border-success border-2" width="56" height="56">
+                    <div>
+                        <h5 class="text-white mb-1">{{team.name}}</h5>
+                        <!-- <span class="badge bg-success bg-opacity-25 text-success">Admin</span> -->
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between text-white-50 small">
+                        <span>Members</span>
+                        <span class="text-white">{{team.membersCount}}</span>
+                    </div>
+                    <!-- <div class="d-flex justify-content-between text-white-50 small mt-2">
+                        <span>Active Tournaments</span>
+                        <span class="text-white">2</span>
+                    </div> -->
+                </div>
+                <app-button variant="gray" size="medium" routerLink="/login" customClass="w-100">View
+                    Team</app-button>
+            </div>
+        </div>
+        }
+
+        <div class="col-md-6 col-xl-4">
+            <div
+                class="bg-grey-dark rounded-4 p-4 green-border d-flex flex-column justify-content-center align-items-center text-center h-100">
+                <!-- <iconify-icon icon="lucide:plus" class="text-success fs-1 mb-2"></iconify-icon> -->
+                <a href="#"><img style="width:60px; margin: 8px;" src="plus.png"></a>
+                <span class="text-white-50 fw-semibold">Create New Team</span>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Open Tournaments -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+        <h2 class="text-white fw-bold fs-3 mb-2 mb-md-0">Open Tournaments</h2>
+        <a href="#" class="small" style="color:var(--accent)">View All →</a>
+    </div>
+
+    <div class="row g-3 g-md-4 mb-5">
+
+        @for(tournament of (dashboardData()?.activeTournaments??[]) ; track tournament.id){
+
+        <div class="col-sm-6 col-lg-3 ">
+            <div class="rounded-3 overflow-hidden green-border h-100">
+                <img src="https://static.paraflowcontent.com/public/resource/image/447869cb-1c1e-4888-965a-1454873663b1.jpeg"
+                    class="w-100" style="height: 120px; object-fit: cover;">
+                <div class="p-3">
+                    <span
+                        class="badge bg-success bg-opacity-25 text-success rounded-pill mb-2 d-inline-flex align-items-center gap-1">
+                        <span class="bg-success rounded-circle" style="width: 6px; height: 6px;"></span>
+                        Registration Open
+                    </span>
+                    <h6 class="text-white fw-semibold mb-1">{{tournament.name}}</h6>
+                    <div class="text-white-50 small mb-2">{{tournament.teamsEntered}}/{{tournament.maxTeams}} teams • Starts {{tournament.startDate}}</div>
+                    <app-button variant="green" size="medium" routerLink="/login" customClass="w-100">View
+                        Details</app-button>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>
