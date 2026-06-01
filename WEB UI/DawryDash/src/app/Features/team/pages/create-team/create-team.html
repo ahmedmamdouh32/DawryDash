@@ -1,0 +1,263 @@
+<!-- create-team.component.html -->
+<div class="p-md-4 main-content">
+    <div class="container-fluid px-0">
+        <!-- Hero Section -->
+        <div class="rounded-4 p-4 mb-4"
+            style="background: linear-gradient(135deg, rgba(137,233,0,0.08) 0%, rgba(0,150,136,0.08) 100%);">
+            <h1 class="text-white fw-bold fs-1 mb-2">Create Your Team</h1>
+            <p class="text-white-50 fs-5 mb-0">Build your squad and compete in tournaments</p>
+
+            <!-- Stepper -->
+            <div class="d-flex align-items-center gap-3 mt-4">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="d-flex justify-content-center align-items-center rounded-circle border border-success border-2"
+                        style="width: 32px; height: 32px; background: rgba(137,233,0,0.2); color: var(--accent); font-weight: 600;">
+                        1
+                    </div>
+                    <span style="color: var(--accent); font-weight: 600;">Team Info</span>
+                </div>
+                <div style="width: 48px; height: 2px; background: rgba(255,255,255,0.3);"></div>
+                <div class="d-flex align-items-center gap-2">
+                    <div class="d-flex justify-content-center align-items-center rounded-circle"
+                        style="width: 32px; height: 32px; background: rgba(255,255,255,0.15); color: var(--text-muted);">
+                        2
+                    </div>
+                    <span class="text-white-50">Add Members</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <!-- Main Form Column -->
+            <div class="col-lg-8">
+                <form [formGroup]="teamForm" (ngSubmit)="onSubmit()">
+
+                    <!-- Team Information Card -->
+                    <div class="bg-grey-dark rounded-4 p-4 mb-4 green-border">
+                        <h2 class="text-white fw-bold fs-5 mb-4">Team Information</h2>
+
+                        <div class="mb-4">
+                            <label class=" text-white-50 mt-3 mb-1" style="font-size: 16px;">Team Name</label>
+                            <input class="form-control bg-white-black text-white-50 green-border" style="height:3rem"
+                                type="text" placeholder="Enter team name" formControlName="name"
+                                (input)="teamNameChanged($event)">
+                            @if(name?.touched && name?.invalid)
+                            {
+                            @if(name?.errors?.['required'])
+                            {
+                            <span class="validation-error-font">Team name is required</span>
+                            }
+                            @else
+                            {
+                            @if(name?.errors?.['maxlength'])
+                            {
+                            <span class="validation-error-font">Maximum length is 100 characters</span>
+                            }
+                            }
+                            }
+
+                        </div>
+
+                        <div class="mb-4">
+                            <label class=" text-white-50 mt-3 mb-1" style="font-size: 16px;">Team Abbreviation (3-4
+                                characters)</label>
+                            <input class="form-control bg-white-black text-white-50 green-border" style="height:3rem"
+                                type="email" placeholder="RM" formControlName="teamAbbreviation"
+                                (input)="OnTeamAbbrevChange($event)">
+                            <small class="d-block mt-1 text-white-50" style="font-size: 11px;">Will be displayed on
+                                brackets
+                                and scoreboards</small>
+                            @if(teamAbbreviation?.touched && teamAbbreviation?.invalid)
+                            {
+                            @if(teamAbbreviation?.errors?.['required'])
+                            {
+                            <span class="validation-error-font">Team abbreviation is required</span>
+                            }
+                            @else
+                            {
+                            @if(teamAbbreviation?.errors?.['maxlength'])
+                            {
+                            <span class="validation-error-font">Maximum length is 4 characters</span>
+                            }
+                            @else
+                            {
+                            @if(teamAbbreviation?.errors?.['minlength'])
+                            {
+                            <span class="validation-error-font">Minimum length is 2 characters</span>
+                            }
+                            }
+                            }
+                            }
+
+                        </div>
+
+                        <div>
+                            <label class="text-white-50 mt-3 mb-1" style="font-size: 16px;">Team Slogan
+                                (Optional)</label>
+                            <input class="form-control bg-white-black text-white-50 green-border" style="height:3rem"
+                                type="email" placeholder="Enter team slogan or motto" formControlName="slogan">
+                            @if(slogan?.touched && slogan?.invalid)
+                            {
+                            @if(slogan?.errors?.['maxlength'])
+                            {
+                            <span class="validation-error-font">Slogan max length is 100 characters</span>
+                            }
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Team Logo Card -->
+                    <!-- create-team.html -->
+                    <!-- Team Logo Card -->
+                    <div class="bg-grey-dark rounded-4 p-4 mb-4 green-border">
+                        <h2 class="text-white fw-bold fs-5 mb-4">Team Logo</h2>
+
+                        <!-- Hidden file input - using both # and id for fallback -->
+                        <input type="file" #fileInput id="fileInput" (change)="onFileSelected($event)"
+                            accept="image/png, image/jpeg, image/jpg, image/svg+xml, image/webp" style="display: none;">
+
+                        <!-- Drag & Drop Area -->
+                        <div class="text-center p-5 green-border bg-white-black"
+                            style="border-style: dashed!important; transition: all 0.3s ease; cursor: pointer;"
+                            [class.drag-over]="isDragging" (dragover)="onDragOver($event)"
+                            (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">
+
+                            <!-- Content when NO image selected -->
+                            <div *ngIf="!selectedImage; else imageSelected">
+                                <p class="text-white-50 fw-semibold mb-2">Drag & drop logo here</p>
+                                <p class="text-white-50 small mb-3">or</p>
+
+                                <!-- Browse Button -->
+                                <button type="button" class="green px-4 py-2 rounded-3 fw-semibold"
+                                    (click)="triggerFileInput($event)">
+                                    Browse Files
+                                </button>
+
+                                <p class="text-white-50 mt-3 small">Supported: PNG, JPG, SVG • Max size: 5MB</p>
+                            </div>
+
+                            <!-- Content when image IS selected -->
+                            <ng-template #imageSelected>
+                                <div class="d-flex flex-column align-items-center gap-3">
+                                    <!-- Cropped Image Preview (80x80 square) -->
+                                    <div class="rounded-circle overflow-hidden"
+                                        style="width: 80px; height: 80px; border: 2px solid #89e900; box-shadow: 0 0 16px rgba(137,233,0,0.3);">
+                                        <img [attr.src]="croppedImage"
+                                            style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+
+                                    <!-- File name -->
+                                    <p class="text-white-50 small mb-2">{{ fileName }}</p>
+
+                                    <!-- Action buttons -->
+                                    <div class="d-flex gap-2">
+                                        <button type="button" class="green-small px-3 py-1 rounded-3"
+                                            (click)="triggerFileInput($event)">
+                                            Change
+                                        </button>
+                                        <button type="button" class="red-small px-3 py-1 rounded-3"
+                                            (click)="removeImage($event)">
+                                            Remove
+                                        </button>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </div>
+
+                    <!-- Team Colors Card -->
+                    <div class="bg-grey-dark rounded-4 p-4 mb-4 green-border">
+                        <h2 class="text-white fw-bold fs-5 mb-4">Team Colors</h2>
+
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <label class="form-label text-white-50 small fw-semibold mb-2">Primary Color</label>
+                                <div class="d-flex gap-3 align-items-center">
+                                    <input type="color" class="form-control-color rounded-3"
+                                        style="width: 64px; height: 64px;" [value]="primaryColorTxt"
+                                        (input)="onPrimaryColorChange($event)" formControlName="primaryColor">
+                                    <input type="text" class="form-control  text-white green-border" disabled
+                                        [value]="primaryColorTxt"
+                                        style="background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1);">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label text-white-50 small fw-semibold mb-2">Secondary Color</label>
+                                <div class="d-flex gap-3 align-items-center">
+                                    <input type="color" class="form-control-color rounded-3"
+                                        style="width: 64px; height: 64px;" [value]="secondaryColorTxt"
+                                        (input)="onSecondaryColorChange($event)">
+                                    <input type="text" class="form-control text-white green-border" disabled
+                                        [value]="secondaryColorTxt"
+                                        style="background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1);">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Team Description Card -->
+                    <div class="bg-grey-dark p-4 mb-4 green-border">
+                        <h2 class="text-white fw-bold fs-5 mb-4">Team Description</h2>
+
+                        <div>
+                            <label class="form-label text-white-50 small fw-semibold mb-2">Team Description
+                                (Optional)</label>
+                            <textarea rows="4" class="form-control green-border text-white-50"
+                                placeholder="Tell us about your team..." (input)="OnDescriptionChange($event)"
+                                formControlName="description"
+                                style="background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1);"></textarea>
+                            <small class="d-block mt-1 " [class.text-danger]="teamDescriptionLengthExcedded"
+                                [class.text-white-50]="!teamDescriptionLengthExcedded">{{teamDescriptionSpanMessage}}
+
+                            </small>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="d-flex justify-content-center">
+                        <app-button size="medium" type="submit">Create Team</app-button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Live Preview Sidebar -->
+            <div class="col-lg-4">
+                <div class="position-sticky" style="top: 2rem;">
+                    <div class="bg-grey-dark rounded-4 p-4 green-border">
+                        <h3 class="text-white fw-bold fs-6 mb-2">Live Preview</h3>
+                        <p class="text-white-50 small mb-4">See how your team will appear</p>
+
+                        <!-- Preview Card -->
+                        <div class="rounded-3 p-4"
+                            style="background: linear-gradient(135deg, rgba(137,233,0,0.08) 0%, rgba(0,150,136,0.05) 100%);">
+                            <div class="d-flex align-items-center gap-3 mb-3">
+                                <!-- Image - fixed size, won't shrink -->
+                                <div class="rounded-circle overflow-hidden"
+                                    style="width: 80px; height: 80px; border: 2px solid #89e900; box-shadow: 0 0 16px rgba(137,233,0,0.3);">
+                                    <img [attr.src]="croppedImage"
+                                        style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+
+                                <!-- Team name with wrapping -->
+                                <div class="flex-grow-1">
+                                    <h4 class="text-white fw-bold fs-5 mb-0"
+                                        style="word-break: break-word; overflow-wrap: break-word;">
+                                        {{teamName}}
+                                    </h4>
+                                    <span class="text-white-50">{{teamAbbreviationTxt}}</span>
+
+                                </div>
+                            </div>
+                            <div class="d-flex gap-2 mb-3">
+                                <div style="flex: 1; height: 32px; border-radius: 8px"
+                                    [style.backgroundColor]="primaryColorTxt"></div>
+                                <div style="flex: 1; height: 32px; border-radius: 8px"
+                                    [style.backgroundColor]="secondaryColorTxt"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

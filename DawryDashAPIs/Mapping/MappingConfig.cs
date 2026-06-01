@@ -13,7 +13,7 @@ namespace DawryDashAPIs.Mapping
         public MappingConfig(){
             //Team Mapping
             CreateMap<Team, DisplayTeamDTO>();
-            CreateMap<AddTeamDTO, Team>();
+            CreateMap<CreateTeamDTO, Team>();
             CreateMap<UpdateTeamDTO, Team>();
             CreateMap<Team, TeamCardDTO>();
             

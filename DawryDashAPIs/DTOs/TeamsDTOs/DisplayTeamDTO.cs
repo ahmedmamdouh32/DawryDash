@@ -21,6 +21,8 @@
             }
         }
         public string ImgUrl { set; get; }
-        public int TournamentId { set; get; }
+
+
+
     }
 }

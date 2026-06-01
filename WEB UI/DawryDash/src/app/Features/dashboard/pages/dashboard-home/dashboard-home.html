@@ -25,48 +25,87 @@
     <!-- My Teams Section -->
     <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
         <h2 class="text-white fw-bold fs-3 mb-2 mb-md-0">My Teams</h2>
+        <a href="#" class="small" style="color:var(--accent)">View All →</a>
+
         <!-- <span class="badge rounded-pill px-3 py-2">3 Teams</span> -->
     </div>
 
-    <div class="row g-3 g-md-4 mb-5">
+    <div class="row g-3 g-md-4 mb-5 ">
 
 
 
         @for (team of (dashboardData()?.latestTeams ?? []); track team.id) {
 
-        <div class="col-md-6 col-xl-4">
-            <div class="bg-grey-dark rounded-4 p-4 green-border h-100">
+        <div class="col-lg-3 col-md-6 mb-4 d-flex">
+
+            <div class="bg-grey-dark rounded-4 p-4 green-border w-100 d-flex flex-column">
+
+                <!-- HEADER -->
                 <div class="d-flex align-items-center gap-3 mb-3">
-                    <img src="https://ui-avatars.com/api/?name=Real+Madrid&background=89e900&color=222222&size=128"
-                        class="rounded-circle border border-success border-2" width="56" height="56">
-                    <div>
-                        <h5 class="text-white mb-1">{{team.name}}</h5>
-                        <!-- <span class="badge bg-success bg-opacity-25 text-success">Admin</span> -->
+
+                    <div class="rounded-circle overflow-hidden"
+                        style="width: 80px; height: 80px; border: 2px solid #89e900;">
+
+                        <img [src]="team.imgUrl" style="width: 100%; height: 100%; object-fit: cover;" />
+
                     </div>
+
+                    <div class="flex-grow-1">
+                        <h4 class="text-white fw-bold fs-5 mb-0">
+                            {{ team.name }}
+                        </h4>
+                        <span class="text-white-50">
+                            {{ team.teamAbbreviation }}
+                        </span>
+                    </div>
+
                 </div>
-                <div class="mb-3">
+
+                <!-- CONTENT -->
+                <div class="mb-3 flex-grow-1">
+
                     <div class="d-flex justify-content-between text-white-50 small">
                         <span>Members</span>
-                        <span class="text-white">{{team.membersCount}}</span>
+                        <span class="text-white">{{ team.membersCount }}</span>
                     </div>
-                    <!-- <div class="d-flex justify-content-between text-white-50 small mt-2">
-                        <span>Active Tournaments</span>
-                        <span class="text-white">2</span>
-                    </div> -->
+
                 </div>
-                <app-button variant="gray" size="medium" routerLink="/login" customClass="w-100">View
-                    Team</app-button>
+
+                <!-- FOOTER (BUTTON AREA) -->
+                <div class="mt-auto">
+
+                    <app-button variant="green" size="medium" customClass="w-100">
+
+                        View Details
+
+                    </app-button>
+
+                </div>
+
             </div>
+
         </div>
+
         }
 
-        <div class="col-md-6 col-xl-4">
-            <div
-                class="bg-grey-dark rounded-4 p-4 green-border d-flex flex-column justify-content-center align-items-center text-center h-100">
-                <!-- <iconify-icon icon="lucide:plus" class="text-success fs-1 mb-2"></iconify-icon> -->
-                <a href="#"><img style="width:60px; margin: 8px;" src="plus.png"></a>
-                <span class="text-white-50 fw-semibold">Create New Team</span>
+        <div class="col-lg-3 col-md-6 mb-4 d-flex">
+
+            <div class="bg-grey-dark rounded-4 green-border w-100 d-flex flex-column">
+
+                <div class="d-flex flex-column justify-content-center align-items-center text-center flex-grow-1">
+
+                    <a routerLink="../create-team">
+                        <img style="width:60px; margin: 8px;" src="plus.png">
+                    </a>
+
+                    <span class="text-white-50 fw-semibold">
+                        Create New Team
+                    </span>
+
+                </div>
+
             </div>
+
         </div>
     </div>
 
@@ -92,7 +131,9 @@
                         Registration Open
                     </span>
                     <h6 class="text-white fw-semibold mb-1">{{tournament.name}}</h6>
-                    <div class="text-white-50 small mb-2">{{tournament.teamsEntered}}/{{tournament.maxTeams}} teams • Starts {{tournament.startDate}}</div>
+                    <div class="text-white-50 small mb-2">{{tournament.teamsEntered}}/{{tournament.maxTeams}} teams
+                        •
+                        Starts {{tournament.startDate}}</div>
                     <app-button variant="green" size="medium" routerLink="/login" customClass="w-100">View
                         Details</app-button>
                 </div>

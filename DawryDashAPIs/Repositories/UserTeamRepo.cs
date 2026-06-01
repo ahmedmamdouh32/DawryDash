@@ -16,6 +16,14 @@ namespace DawryDashAPIs.Repositories
             return _dbContext.TeamUsers.Where(tu => tu.UserId == userId).Include(t => t.Team).Select(tu => tu.Team);
         }
 
+        public void AddTeamAndUser(int teamId, string userId)
+        {
+            TeamUser teamUser = new();
+            teamUser.UserId = userId;
+            teamUser.TeamId = teamId;
+            _dbContext.TeamUsers.Add(teamUser);
+        }
+
 
     }
 }

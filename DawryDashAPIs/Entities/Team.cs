@@ -16,6 +16,10 @@ namespace DawryDashAPIs.Entities
         [MaxLength(100)]
         public string? Slogan { set; get; }
 
+        [MaxLength(4)]
+        [MinLength(2)]
+        public string TeamAbbreviation { set; get; }
+
         [MaxLength(20)]
         public string PrimaryColor { set; get; }
 
@@ -27,9 +31,9 @@ namespace DawryDashAPIs.Entities
 
         public int MembersCount { set; get; } = 1;
 
-        public string CaptainId { get; set; }
+        public string? CaptainId { get; set; }
 
-        public ApplicationUser Captain { get; set; }
+        public ApplicationUser? Captain { get; set; }
 
         public virtual ICollection<TeamUser> TeamUsers { set; get; } = new List<TeamUser>();
 

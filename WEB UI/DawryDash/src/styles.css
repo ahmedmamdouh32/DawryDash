@@ -24,11 +24,30 @@ a{
     text-decoration: none !important;
 }
 
-
 .green-border{
-    
-    border: 1px solid;
-    border-color: color-mix(in oklab, #89e900 15%, transparent);
+    border: 3px solid !important;
+    border-radius: 1rem !important;
+    border-color: color-mix(in oklab, #89e900 15%, transparent) !important;
+}
+
+.bg-white-black{
+    background-color : color-mix(in oklab, #fff 8%, transparent) !important;
+}
+
+input::placeholder {
+    color: #a3a3a3 !important;
+    font-size: 14px !important;
+}
+
+textarea::placeholder {
+    color: #a3a3a3 !important;
+    font-size: 14px !important;
+}
+
+.validation-error-font{
+    font-size: 14px;
+    color:var(--accent);
+    display: block;
 }
 
 .bg-grey{

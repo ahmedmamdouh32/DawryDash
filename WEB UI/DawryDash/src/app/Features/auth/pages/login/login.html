@@ -1,4 +1,4 @@
-<section class="background-color">
+<section style="background-color: var(--bg);">
     <!-- <div class="p-3"></div> -->
     <div class="text-center pt-4 pb-2">
 
@@ -12,7 +12,7 @@
 
     </div>
 
-    <div class="row background-color p-3 justify-content-center">
+    <div class="row p-3 justify-content-center">
         <div class="col col-12 col-lg-4">
             <div class="green-border p-3" style="background-color: rgba(255, 255, 255, 0.1)">
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -23,20 +23,20 @@
                     @if(email?.touched && email?.invalid){
 
                     @if(email?.errors?.['required']){
-                    <span class="font-style">email is required</span>
+                    <span class="validation-error-font">email is required</span>
                     }
                     @else{
                     @if(email?.errors?.['maxlength']){
-                    <span class="font-style">Maximum length is 256 characters</span>
+                    <span class="validation-error-font">Maximum length is 256 characters</span>
                     }
                     @else{
                     @if(email?.errors?.['email']){
-                    <span class="font-style">Invalid email format</span>
+                    <span class="validation-error-font">Invalid email format</span>
 
                     }
                     @else{
                     @if(email?.errors?.['serverError']){
-                    <span class="font-style">{{email?.errors?.['serverError']}}</span>
+                    <span class="validation-error-font">{{email?.errors?.['serverError']}}</span>
                     }
                     }
                     }
@@ -50,15 +50,15 @@
                     @if(password?.touched && password?.invalid){
 
                     @if(password?.errors?.['required']){
-                    <span class="font-style">Password is required</span>
+                    <span class="validation-error-font">Password is required</span>
                     }
                     @else{
                     @if(password?.errors?.['minlength']){
-                    <span class="font-style">Minimum length is 8 characters</span>
+                    <span class="validation-error-font">Minimum length is 8 characters</span>
                     }
                     @else{
                     @if(password?.errors?.['pattern']){
-                    <span class="font-style"> Password must contain:
+                    <span class="validation-error-font"> Password must contain:
                         uppercase, lowercase and number</span>
                     }
                     }
@@ -68,7 +68,7 @@
 
 
                     <div class="mt-4 mb-2 row">
-                        <span class="font-style text-center mb-3">{{loginErrorMessage()}}</span>
+                        <span class="validation-error-font text-center mb-3">{{loginErrorMessage()}}</span>
                         <app-button size="medium" type="submit" customClass="w-100">Login</app-button>
                     </div>
                 </form>

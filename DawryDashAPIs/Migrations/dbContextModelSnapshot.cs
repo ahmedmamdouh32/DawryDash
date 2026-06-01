@@ -167,7 +167,6 @@ namespace DawryDashAPIs.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CaptainId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Description")
@@ -199,6 +198,11 @@ namespace DawryDashAPIs.Migrations
                     b.Property<string>("Slogan")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("TeamAbbreviation")
+                        .IsRequired()
+                        .HasMaxLength(4)
+                        .HasColumnType("nvarchar(4)");
 
                     b.HasKey("Id");
 
@@ -489,9 +493,7 @@ namespace DawryDashAPIs.Migrations
                 {
                     b.HasOne("DawryDashAPIs.Entities.ApplicationUser", "Captain")
                         .WithMany()
-                        .HasForeignKey("CaptainId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CaptainId");
 
                     b.Navigation("Captain");
                 });

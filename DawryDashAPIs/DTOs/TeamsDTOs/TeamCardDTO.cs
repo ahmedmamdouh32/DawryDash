@@ -9,5 +9,7 @@
         public int MembersCount { set; get; }
 
         public string ImgUrl { set; get; }
+
+        public string TeamAbbreviation { set; get; }
     }
 }

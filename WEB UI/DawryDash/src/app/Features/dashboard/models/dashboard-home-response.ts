@@ -10,7 +10,8 @@ export interface DashboardHomeResponse {
         id: number;
         name: string,
         membersCount: number,
-        imgUrl: string
+        imgUrl: string,
+        teamAbbreviation: string
     }[],
 
     activeTournaments: {

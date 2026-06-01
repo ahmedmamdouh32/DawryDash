@@ -30,7 +30,7 @@ namespace DawryDashAPIs.Services.TeamsServices
             return teams.Select(t => map.Map<DisplayTeamDTO>(t)).ToList();
         }
 
-        public ServiceResult<Team> Add(AddTeamDTO teamDTO)
+        public async Task<ServiceResult<Team>> Add(CreateTeamDTO teamDTO)
         {
             if (teamDTO == null)
             {
@@ -40,31 +40,40 @@ namespace DawryDashAPIs.Services.TeamsServices
                     Message = "Team data is required."
                 };
             }
-            
-            Tournament tournament = tournamentRepo.GetById(teamDTO.TournamentID);
-
-            if(tournament == null)
-            {
-                return new ServiceResult<Team>
-                {
-                    Success = false,
-                    Message = "Tournament not found."
-                };
-            }
-            
-            if(tournament.TeamsEntered >= tournament.MaxTeams)
-            {
-                return new ServiceResult<Team>
-                {
-                    Success = false,
-                    Message = "Tournament is already full."
-                };
-            }
-
             Team team = map.Map<Team>(teamDTO);
+
+            string? imagePath = null;
+
+            if (teamDTO.Image != null)
+            {
+                string fileName =
+                    Guid.NewGuid().ToString() +
+                    Path.GetExtension(teamDTO.Image.FileName);
+
+                string folder =
+                    Path.Combine(
+                        Directory.GetCurrentDirectory(),
+                        "wwwroot/images/teams");
+
+                string fullPath =
+                    Path.Combine(folder, fileName);
+
+                using (var stream = new FileStream(fullPath, FileMode.Create))
+                {
+                   await teamDTO.Image.CopyToAsync(stream);
+                }
+
+                imagePath = "/images/teams/" + fileName;
+                team.ImgUrl = "https://localhost:7042/" + imagePath;
+            }
+
+            
+
             repo.Add(team);
-            tournament.TeamsEntered++;
             repo.Save();
+            userTeamRepo.AddTeamAndUser(teamId : team.Id, userId: teamDTO.userId);
+            repo.Save();
+
             return new ServiceResult<Team>
             {
                 Success = true,

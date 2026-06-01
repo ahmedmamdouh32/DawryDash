@@ -5,6 +5,7 @@ import { DashboardLayout } from './Layouts/dashboard-layout/dashboard-layout/das
 import { Signup } from './Features/auth/pages/signup/signup';
 import { Login } from './Features/auth/pages/login/login';
 import { DashboardHome } from './Features/dashboard/pages/dashboard-home/dashboard-home';
+import { CreateTeam } from './Features/team/pages/create-team/create-team';
 
 export const routes: Routes = [
     {
@@ -34,7 +35,14 @@ export const routes: Routes = [
             [
                 {
                     path: '', component: DashboardHome
-                }
+                },
+                {
+                    path: 'home', component: DashboardHome
+                },
+                {
+                    path: 'create-team', component: CreateTeam
+                },
+
             ]
     }, // Empty path
 

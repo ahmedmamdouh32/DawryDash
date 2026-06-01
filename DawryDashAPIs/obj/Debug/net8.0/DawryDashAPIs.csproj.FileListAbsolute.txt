@@ -147,3 +147,4 @@ C:\Users\adminstrator\Documents\Dawry Dash\DawryDashAPIs\bin\Debug\net8.0\Micros
 C:\Users\adminstrator\Documents\Dawry Dash\DawryDashAPIs\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
 C:\Users\adminstrator\Documents\Dawry Dash\DawryDashAPIs\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\adminstrator\Documents\Dawry Dash\DawryDashAPIs\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\adminstrator\Documents\Dawry Dash\DawryDashAPIs\bin\Debug\net8.0\DawryDashAPIs.staticwebassets.runtime.json

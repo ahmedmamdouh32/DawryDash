@@ -31,9 +31,10 @@ namespace DawryDashAPIs.Controllers
 
         [EndpointSummary("Adding a new Team")]
         [HttpPost]
-        public IActionResult Add(AddTeamDTO teamDTO)
+        public async Task<IActionResult> Add([FromForm]CreateTeamDTO teamDTO)
         {
-            var result = teamService.Add(teamDTO);
+
+            var result = await teamService.Add(teamDTO);
             if (result.Success)
             {
                 return CreatedAtAction(

@@ -214,19 +214,71 @@
         "summary": "Adding a new Team",
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/AddTeamDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddTeamDTO"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddTeamDTO"
+                "required": [
+                  "Name",
+                  "userId"
+                ],
+                "type": "object",
+                "properties": {
+                  "userId": {
+                    "type": "string"
+                  },
+                  "Name": {
+                    "maxLength": 100,
+                    "type": "string"
+                  },
+                  "Slogan": {
+                    "maxLength": 100,
+                    "type": "string"
+                  },
+                  "TeamAbbreviation": {
+                    "maxLength": 4,
+                    "minLength": 2,
+                    "type": "string"
+                  },
+                  "PrimaryColor": {
+                    "type": "string"
+                  },
+                  "SecondaryColor": {
+                    "type": "string"
+                  },
+                  "Description": {
+                    "maxLength": 500,
+                    "type": "string"
+                  },
+                  "Image": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "userId": {
+                  "style": "form"
+                },
+                "Name": {
+                  "style": "form"
+                },
+                "Slogan": {
+                  "style": "form"
+                },
+                "TeamAbbreviation": {
+                  "style": "form"
+                },
+                "PrimaryColor": {
+                  "style": "form"
+                },
+                "SecondaryColor": {
+                  "style": "form"
+                },
+                "Description": {
+                  "style": "form"
+                },
+                "Image": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -498,26 +550,6 @@
         },
         "additionalProperties": false
       },
-      "AddTeamDTO": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "maxLength": 100,
-            "type": "string",
-            "nullable": true
-          },
-          "imgUrl": {
-            "maxLength": 200,
-            "type": "string",
-            "nullable": true
-          },
-          "tournamentID": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
       "AddTournamentDTO": {
         "required": [
           "maxTeams"
@@ -604,10 +636,6 @@
           "imgUrl": {
             "type": "string",
             "nullable": true
-          },
-          "tournamentId": {
-            "type": "integer",
-            "format": "int32"
           }
         },
         "additionalProperties": false
