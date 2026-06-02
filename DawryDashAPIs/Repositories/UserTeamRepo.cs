@@ -1,4 +1,5 @@
-﻿using DawryDashAPIs.Entities;
+﻿using DawryDashAPIs.DTOs.TeamsDTOs;
+using DawryDashAPIs.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DawryDashAPIs.Repositories
@@ -14,6 +15,20 @@ namespace DawryDashAPIs.Repositories
         public IQueryable<Team> GetTeamsByUserId(string userId)
         {
             return _dbContext.TeamUsers.Where(tu => tu.UserId == userId).Include(t => t.Team).Select(tu => tu.Team);
+        }
+
+
+        public IQueryable<TeamMemberDTO> GetTeamMembers(int teamId)
+        {
+            return _dbContext.TeamUsers.Where(tu => tu.TeamId == teamId).Include(u => u.User).
+                Select(r => new TeamMemberDTO { 
+                    userId = r.User.Id,
+                    Fullname = r.User.FullName,
+                    ImgUrl = r.User.ImgUrl,
+                    Position = r.Position.ToString(),
+                    TshirtNumber = r.userNumber,
+                    IsCaptain = r.IsCaptain
+                });
         }
 
         public void AddTeamUser(int teamId, string userId, bool isCaptain)

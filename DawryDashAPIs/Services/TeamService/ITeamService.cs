@@ -8,7 +8,8 @@ namespace DawryDashAPIs.Services.TeamService
     {
         List<DisplayTeamDTO> GetAll();
         Task<ServiceResult<Team>> Add(CreateTeamDTO teamDTO);
-        DisplayTeamDTO GetById(int id);
+        TeamDetailsForMembersDTO GetTeamDetailsForMembers(int teamId);
+        List<TeamMemberDTO> GetTeamMembers(int teamId);
         bool DeleteById(int id);
         bool Update(UpdateTeamDTO teamDTO, int id);
         List<Team> getTeamsByUserId(string userId);

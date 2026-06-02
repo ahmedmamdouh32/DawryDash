@@ -6,6 +6,7 @@ import { Signup } from './Features/auth/pages/signup/signup';
 import { Login } from './Features/auth/pages/login/login';
 import { DashboardHome } from './Features/dashboard/pages/dashboard-home/dashboard-home';
 import { CreateTeam } from './Features/team/pages/create-team/create-team';
+import { TeamDetails } from './Features/team/pages/team-details/team-details';
 
 export const routes: Routes = [
     {
@@ -39,7 +40,7 @@ export const routes: Routes = [
                     pathMatch: 'full'
                 },
                 {
-                    path: 'home', component: DashboardHome
+                    path: 'home', component: TeamDetails
                 },
                 {
                     path: 'create-team', component: CreateTeam

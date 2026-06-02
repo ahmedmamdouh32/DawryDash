@@ -64,3 +64,19 @@ textarea::placeholder {
 .bg-grey-dark{
     background-color: var(--bg-grey);
 }
+
+
+
+.bg-white-06 {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* Optional: Add hover effects */
+.bg-white-06:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
+}
+
+.bg-white-04 {
+    background: rgba(255, 255, 255, 0.04);
+}

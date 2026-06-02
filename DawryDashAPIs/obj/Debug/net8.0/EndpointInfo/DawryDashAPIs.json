@@ -290,7 +290,7 @@
         }
       }
     },
-    "/api/Team/{id}": {
+    "/api/Team/DetailsForMembers/{teamId}": {
       "get": {
         "tags": [
           "Team"
@@ -298,7 +298,7 @@
         "summary": "Get By Id",
         "parameters": [
           {
-            "name": "id",
+            "name": "teamId",
             "in": "path",
             "required": true,
             "schema": {
@@ -312,7 +312,33 @@
             "description": "OK"
           }
         }
-      },
+      }
+    },
+    "/api/Team/{teamId}/Members": {
+      "get": {
+        "tags": [
+          "Team"
+        ],
+        "summary": "Get By Id",
+        "parameters": [
+          {
+            "name": "teamId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Team/{id}": {
       "delete": {
         "tags": [
           "Team"

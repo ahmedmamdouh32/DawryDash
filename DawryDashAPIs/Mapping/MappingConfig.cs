@@ -16,7 +16,13 @@ namespace DawryDashAPIs.Mapping
             CreateMap<CreateTeamDTO, Team>();
             CreateMap<UpdateTeamDTO, Team>();
             CreateMap<Team, TeamCardDTO>();
-            
+            CreateMap<Team, TeamDetailsForMembersDTO>().ForMember(
+                dest => dest.WinRate,
+                opt => opt.MapFrom(src => src.TotalMatchesPlayed > 0
+                    ? Math.Round((src.TotalWins / (double)src.TotalMatchesPlayed) * 100, 2)
+                    : 0)
+            );
+
 
             //Match Mapping
             CreateMap<AddMatchDTO, Match>();

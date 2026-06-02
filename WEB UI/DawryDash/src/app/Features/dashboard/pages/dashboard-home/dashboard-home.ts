@@ -27,7 +27,7 @@ export class DashboardHome {
 
           console.log(res);
           res.latestTeams.forEach(team => {
-            if(team.imgUrl === null){
+            if (team.imgUrl === null) {
               team.imgUrl = 'group.png';
             }
           });

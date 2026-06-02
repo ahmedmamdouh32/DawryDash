@@ -1,0 +1,19 @@
+/* Add these to your styles.css or component CSS */
+
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+    .main-content {
+        padding-top: 66px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+
+@media (min-width: 768px) {
+    .main-content {
+        margin-left: 260px;
+        margin-right: 0px;
+    }
+}
+

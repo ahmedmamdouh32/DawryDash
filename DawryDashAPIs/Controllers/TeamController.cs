@@ -37,11 +37,12 @@ namespace DawryDashAPIs.Controllers
             var result = await teamService.Add(teamDTO);
             if (result.Success)
             {
-                return CreatedAtAction(
-                       nameof(GetById),
-                       new { id = result.Data.Id },
-                       map.Map<DisplayTeamDTO>(result.Data)
-                );
+                //return CreatedAtAction(
+                //       nameof(gettea),
+                //       new { id = result.Data.Id },
+                //       map.Map<DisplayTeamDTO>(result.Data)
+                //);
+                return Ok();
             }
             else
             {
@@ -50,12 +51,26 @@ namespace DawryDashAPIs.Controllers
         }
 
         [EndpointSummary("Get By Id")]
-        [HttpGet("{id:int}")]
-        public IActionResult GetById(int id)
+        [HttpGet("DetailsForMembers/{teamId:int}")]
+        public IActionResult GetTeamDetailsForMembers(int teamId)
         {
-            var team  = teamService.GetById(id);
+            var team = teamService.GetTeamDetailsForMembers(teamId);
             return team == null ? NotFound() : Ok(team);
         }
+
+
+        [EndpointSummary("Get By Id")]
+        [HttpGet("{teamId:int}/Members")]
+        public IActionResult GetTeamMembers(int teamId)
+        {
+            var members = teamService.GetTeamMembers(teamId);
+            return members == null ? NotFound() : Ok(members);
+        }
+
+
+
+
+
 
         [EndpointSummary("delet a Team by its Id")]
         [HttpDelete("{id:int}")]

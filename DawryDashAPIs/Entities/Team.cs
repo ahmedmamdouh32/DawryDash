@@ -31,6 +31,14 @@ namespace DawryDashAPIs.Entities
 
         public int MembersCount { set; get; } = 1;
 
+        public int TotalMatchesPlayed { set; get;}
+
+        public int TotalWins { set; get; }
+        
+        public int TotalLosses { set; get; }
+
+        public int TotalGoalsScored { set; get; }
+
         public string? CaptainId { get; set; }
 
         public ApplicationUser? Captain { get; set; }

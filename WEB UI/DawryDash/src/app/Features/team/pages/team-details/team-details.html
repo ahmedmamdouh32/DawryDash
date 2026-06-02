@@ -1,0 +1,182 @@
+<!-- create-team.component.html -->
+<div class="p-md-4 main-content">
+    <div class="container-fluid px-0">
+
+        <!-- HERO SECTION -->
+        <div class="rounded-4 p-4 mb-4"
+            style="background: linear-gradient(135deg, rgba(137,233,0,0.08) 0%, rgba(0,150,136,0.05) 100%); backdrop-filter: blur(20px);">
+
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+                <div class="d-flex gap-4 align-items-center flex-wrap">
+                    <!-- Team Icon -->
+                    <div class="rounded-circle overflow-hidden"
+                        style="width: 120px; height: 120px; border: 2px solid #89e900; box-shadow: 0 0 16px rgba(137,233,0,0.3);">
+                        <img src="group.png" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+
+                    <div>
+                        <h1 class="text-white fw-bold mb-1" style="font-size: 2.5rem;">{{teamDetails()?.name}}</h1>
+                        <p class="text-white-50 mb-0">{{teamDetails()?.slogan}}</p>
+
+                        <div class="d-flex gap-3 mt-3 flex-wrap">
+                            <span class="badge px-3 py-2 rounded-pill"
+                                style="background: rgba(137,233,0,0.15); color: #89e900; font-weight: 600;">
+                                {{teamDetails()?.membersCount}}
+                                Players</span>
+                            <span class="badge px-3 py-2 rounded-pill"
+                                style="background: rgba(255,255,255,0.08); color: white;">3 Active Tournaments</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex gap-3">
+                    <app-button variant="gray" size="medium" routerLink="/login" customClass="fw-semibold">Edit
+                        Team</app-button>
+                    <app-button variant="green" size="medium" routerLink="/signup" customClass="fw-bold">Invite
+                        Players</app-button>
+                </div>
+            </div>
+        </div>
+
+        <!-- STATS ROW -->
+        <div class="row g-4 mb-5">
+            <div class="col-6 col-lg-3">
+                <div class="bg-white-06 rounded-4 p-4">
+                    <p class="text-white-50 mb-2">Matches Played</p>
+                    <h2 class="text-white fw-bold mb-0" style="font-size: 2rem;">{{teamDetails()?.totalMatchesPlayed}}
+                    </h2>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="rounded-4 p-4 bg-white-06">
+                    <p class="text-white-50 mb-2">Wins</p>
+                    <h2 class="fw-bold mb-0" style="font-size: 2rem; color: var(--accent);">{{teamDetails()?.totalWins}}
+                    </h2>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="bg-white-06 rounded-4 p-4">
+                    <p class="text-white-50 mb-2">Win Rate</p>
+                    <h2 class="text-white fw-bold mb-0" style="font-size: 2rem;">{{teamDetails()?.winRate}}</h2>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="bg-white-06 rounded-4 p-4">
+                    <p class="text-white-50 mb-2">Goals Scored</p>
+                    <h2 class="text-white fw-bold mb-0" style="font-size: 2rem;">{{teamDetails()?.totalGoalsScored}}
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN GRID -->
+        <div class="row g-4">
+            <!-- LEFT COLUMN -->
+            <div class="col-lg-8">
+                <!-- UPCOMING MATCH -->
+                <div class="bg-white-06 rounded-4 p-4 mb-4">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+                        <h2 class="text-white fw-bold fs-5 mb-2 mb-md-0">Upcoming Match</h2>
+                        <span class="fw-semibold" style="color: var(--accent2);">Tomorrow • 8:00 PM</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="text-center">
+                            <h3 class="text-white fs-6 mb-0">Falcons FC</h3>
+                        </div>
+                        <div class="text-white-50 fs-6">VS</div>
+                        <div class="text-center">
+                            <h3 class="text-white fs-6 mb-0">Titans FC</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TEAM MEMBERS -->
+                <!-- <div class="bg-white-06 rounded-4 p-4">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+                        <h2 class="text-white fw-bold fs-5 mb-2 mb-md-0">Team Members</h2>
+                        <button class="btn btn-sm px-3 py-2 rounded-3 fw-semibold"
+                            style="background: rgba(137,233,0,0.15); color: #89e900;">Add Player</button>
+                    </div>
+
+                    <div class="d-flex flex-column gap-3">
+                        <div class="bg-white-04 rounded-3 p-3 d-flex justify-content-between align-items-center">
+                            <div>
+                                <h4 class="text-white fs-6 mb-1">Ahmed Hassan</h4>
+                                <p class="text-white-50 small mb-0">Captain • Midfielder</p>
+                            </div>
+                            <span class="text-success fw-semibold">#10</span>
+                        </div>
+                    </div>
+                </div> -->
+
+
+                <div class="bg-white-06 rounded-4 p-4">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+                        <h2 class="text-white fw-bold fs-5 mb-2 mb-md-0">Team Members</h2>
+                        <button class="btn btn-sm px-3 py-2 rounded-3 fw-semibold"
+                            style="background: rgba(137,233,0,0.15); color: #89e900;">Add Player</button>
+                    </div>
+                    @for (member of teamMembers(); track $index) {
+                    <div class="d-flex flex-column gap-3 mb-3">
+                        <div class="bg-white-04 rounded-3 p-3 d-flex align-items-center gap-3">
+                            <!-- Player Image - Circular, small size -->
+                            <div class="rounded-circle overflow-hidden flex-shrink-0"
+                                style="width: 48px; height: 48px; border: 2px solid #89e900; box-shadow: 0 0 8px rgba(137,233,0,0.3);">
+                                <img [src]="member.imgUrl ?? 'user.png'" alt="Player Avatar"
+                                    style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+
+                            <!-- Player Info -->
+                            <div class="flex-grow-1">
+                                <h4 class="text-white fs-6 mb-1">{{member.fullname}}</h4>
+                                <p class="text-white-50 small mb-0">{{member.isCaptain ? 'Captain • ' : ''}}
+                                    {{member.position}}</p>
+                            </div>
+
+                            <!-- Player Number -->
+                            <span class="fw-semibold flex-shrink-0"
+                                style="color: var(--accent3);">#{{member.tshirtNumber}}</span>
+                        </div>
+                    </div>
+                    }
+                </div>
+
+            </div>
+
+            <!-- RIGHT SIDEBAR -->
+            <div class="col-lg-4">
+                <!-- TOURNAMENTS -->
+                <div class="bg-white-06 rounded-4 p-4 mb-4">
+                    <h2 class="text-white fw-bold fs-6 mb-3">Current Tournaments</h2>
+
+                    <div class="d-flex flex-column gap-3">
+                        <div class="bg-white-04 rounded-3 p-3">
+                            <h4 class="text-white fs-6 mb-1">Summer Cup 2026</h4>
+                            <p class="small mb-0" style="color: var(--accent3);">Quarter Finals</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RECENT ACTIVITY -->
+                <div class="bg-white-06 rounded-4 p-4">
+                    <h2 class="text-white fw-bold fs-6 mb-3">Recent Activity</h2>
+
+                    <div class="d-flex flex-column gap-3">
+                        <div class="border-start border-success ps-3" style="border-left-width: 2px;">
+                            <p class="text-white mb-1">Joined Summer Cup</p>
+                            <span class="text-white-50 small">2 hours ago</span>
+                        </div>
+
+                        <div class="border-start ps-3"
+                            style="border-left-width: 2px; border-left-color: rgba(255,255,255,0.2);">
+                            <p class="text-white mb-1">Added New Player</p>
+                            <span class="text-white-50 small">Yesterday</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

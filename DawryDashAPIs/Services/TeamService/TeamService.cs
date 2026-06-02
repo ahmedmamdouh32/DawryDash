@@ -82,14 +82,30 @@ namespace DawryDashAPIs.Services.TeamsServices
             };
         }
 
-        public DisplayTeamDTO GetById(int id)
+
+
+        public TeamDetailsForMembersDTO GetTeamDetailsForMembers (int teamId)
         {
-            Team team = repo.GetById(id);
+            Team team = repo.GetById(teamId);
             if(team != null)
             {
-                return map.Map<DisplayTeamDTO>(team);
+                TeamDetailsForMembersDTO result = new();
+
+                //storing team details
+                result = map.Map<TeamDetailsForMembersDTO>(team);
+
+                //storing members details
+                //var members = userTeamRepo.GetTeamMembers(teamId);
+                //result.Members = members.ToList();
+                return result;
             }
             return null;
+        }
+
+
+        public List<TeamMemberDTO> GetTeamMembers(int teamId)
+        {
+            return userTeamRepo.GetTeamMembers(teamId).ToList(); 
         }
 
         public bool DeleteById(int id) 
