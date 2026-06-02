@@ -13,8 +13,8 @@ export class TeamService {
   private baseUrl = 'https://localhost:7042/api/team';
 
 
-  Register(teamDTO: CreateTeamDTO): Observable<any> {
-    return this.http.post(`${this.baseUrl}/Register`, teamDTO);
+  Register(teamDTO: FormData): Observable<any> {
+    return this.http.post(`${this.baseUrl}`, teamDTO);
   }
 
 

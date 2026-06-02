@@ -39,7 +39,7 @@
                         <div class="mb-4">
                             <label class=" text-white-50 mt-3 mb-1" style="font-size: 16px;">Team Name</label>
                             <input class="form-control bg-white-black text-white-50 green-border" style="height:3rem"
-                                type="text" placeholder="Enter team name" formControlName="name"
+                                type="text" placeholder="Enter team name" formControlName="Name"
                                 (input)="teamNameChanged($event)">
                             @if(name?.touched && name?.invalid)
                             {
@@ -62,7 +62,7 @@
                             <label class=" text-white-50 mt-3 mb-1" style="font-size: 16px;">Team Abbreviation (3-4
                                 characters)</label>
                             <input class="form-control bg-white-black text-white-50 green-border" style="height:3rem"
-                                type="email" placeholder="RM" formControlName="teamAbbreviation"
+                                type="text" placeholder="RM" formControlName="teamAbbreviation"
                                 (input)="OnTeamAbbrevChange($event)">
                             <small class="d-block mt-1 text-white-50" style="font-size: 11px;">Will be displayed on
                                 brackets
@@ -95,7 +95,7 @@
                             <label class="text-white-50 mt-3 mb-1" style="font-size: 16px;">Team Slogan
                                 (Optional)</label>
                             <input class="form-control bg-white-black text-white-50 green-border" style="height:3rem"
-                                type="email" placeholder="Enter team slogan or motto" formControlName="slogan">
+                                type="text" placeholder="Enter team slogan or motto" formControlName="slogan">
                             @if(slogan?.touched && slogan?.invalid)
                             {
                             @if(slogan?.errors?.['maxlength'])

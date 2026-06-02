@@ -71,7 +71,7 @@ namespace DawryDashAPIs.Services.TeamsServices
 
             repo.Add(team);
             repo.Save();
-            userTeamRepo.AddTeamAndUser(teamId : team.Id, userId: teamDTO.userId);
+            userTeamRepo.AddTeamUser(teamId : team.Id, userId : teamDTO.userId, isCaptain : true);
             repo.Save();
 
             return new ServiceResult<Team>

@@ -1,6 +1,6 @@
 export interface CreateTeamDTO {
     userId: string,
-    name: string,
+    Name: string,
     slogan?: string,
     teamAbbreviation: string,
     primaryColor: string,

@@ -1,4 +1,1 @@
-wwwroot\images\teams\342000c1-c151-45f2-98ca-6633197bb9a5.png
-wwwroot\images\teams\cdf47f34-a409-41a0-b2a1-e4da3a22a8db.png
-wwwroot\images\teams\2ee9cc69-4d61-493f-8db1-e76a12af7eac.JPG
-wwwroot\images\teams\b8cceb5c-47af-4582-83ad-aa11983c3aa4.png
+wwwroot\images\teams\5dd932f7-dc58-40fd-be36-18316506c346.png

@@ -1,11 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, ViewChild, ChangeDetectorRef, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Button } from '../../../../Components/button/button';
-import { concatWith } from 'rxjs';
 import { TeamService } from '../../services/team-service';
-import { CreateTeamDTO } from '../../models/create-team-dto';
 
 @Component({
   selector: 'app-create-team',
@@ -16,6 +14,8 @@ import { CreateTeamDTO } from '../../models/create-team-dto';
 export class CreateTeam {
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
   teamServe = inject(TeamService);
+  router = inject(Router);
+
   primaryColorTxt: string = '#89e900';
   secondaryColorTxt: string = '#222222';
   teamDescriptionMaxLength = 500;
@@ -221,7 +221,7 @@ export class CreateTeam {
 
 
   teamForm = new FormGroup({
-    name: new FormControl('',
+    Name: new FormControl('',
       [
         Validators.required,
         Validators.maxLength(100),
@@ -243,12 +243,13 @@ export class CreateTeam {
         Validators.maxLength(500)
       ]
     ),
-    img: new FormControl(this.croppedImage)
+    image: new FormControl<File | null>(null)
+    // img: new FormControl(this.croppedImage)
   });
 
   //getters for form controls
   get name() {
-    return this.teamForm.get('name');
+    return this.teamForm.get('Name');
   }
   get teamAbbreviation() {
     return this.teamForm.get('teamAbbreviation');
@@ -266,52 +267,101 @@ export class CreateTeam {
     return this.teamForm.get('description');
   }
 
-
   onSubmit() {
+
     if (this.teamForm.invalid) {
+
       this.teamForm.markAllAsTouched();
+      return;
+
     }
-    else {
 
-      const teamDTO: CreateTeamDTO = {
-        userId: localStorage.getItem('userId')!,
-        name: this.name?.value!,
-        slogan: this.slogan?.value!,
-        teamAbbreviation: this.teamAbbreviation?.value!,
-        primaryColor: this.primaryColor?.value!,
-        secondaryColor: this.secondaryColor?.value!,
-        description: this.description?.value!,
-      }
+    const formData = new FormData();
 
-      if (this.hasCustomImg) {
-        teamDTO.image = this.croppedImg;
-      }
+    formData.append(
+      'userId',
+      localStorage.getItem('userId')!
+    );
 
+    formData.append(
+      'Name',
+      this.name?.value!
+    );
 
+    formData.append(
+      'slogan',
+      this.slogan?.value!
+    );
 
+    formData.append(
+      'teamAbbreviation',
+      this.teamAbbreviation?.value!
+    );
 
+    formData.append(
+      'primaryColor',
+      this.primaryColor?.value!
+    );
 
-      this.teamServe.Register(teamDTO).subscribe({
-        next: () => { },
+    formData.append(
+      'secondaryColor',
+      this.secondaryColor?.value!
+    );
 
-        error: (err) => {
-          if (err.status === 400) {
-            console.log(err.error)
-            if (err.error?.errors) {
-              const validationErrors = err.error.errors;
-              Object.keys(validationErrors).forEach(key => {
-                const control = this.teamForm.get(key);
-                if (control) {
-                  control.setErrors({
-                    serverError: validationErrors[key][0]
-                  });
-                }
-              });
-            }
+    formData.append(
+      'description',
+      this.description?.value!
+    );
+
+    // IMAGE
+    if (this.hasCustomImg && this.croppedImg) {
+
+      formData.append(
+        'image',
+        this.croppedImg
+      );
+
+    }
+
+    this.teamServe.Register(formData).subscribe({
+
+      next: () => {
+        this.teamForm.reset();
+        this.router.navigate(['/dashboard']);
+
+      },
+
+      error: (err) => {
+
+        if (err.status === 400) {
+
+          console.log(err.error);
+
+          if (err.error?.errors) {
+
+            const validationErrors = err.error.errors;
+
+            Object.keys(validationErrors).forEach(key => {
+
+              const control = this.teamForm.get(key);
+
+              if (control) {
+
+                control.setErrors({
+                  serverError: validationErrors[key][0]
+                });
+
+              }
+
+            });
+
           }
+
         }
-      });
-    }
+
+      }
+
+    });
 
   }
 
