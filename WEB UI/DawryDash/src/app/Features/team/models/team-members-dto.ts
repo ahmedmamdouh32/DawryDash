@@ -3,7 +3,7 @@ export interface TeamMembersDTO {
     username: string,
     fullname: string,
     imgUrl: string,
-    position: number,
-    tshirtNumber: number,
+    position: string,
+    tshirtNumber: string,
     isCaptain: boolean
 }

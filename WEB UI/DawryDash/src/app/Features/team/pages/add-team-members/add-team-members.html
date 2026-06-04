@@ -5,9 +5,9 @@
             <div class="rounded-4 p-4 mb-4 d-flex justify-content-between align-items-center"
                 style="background :linear-gradient(to right, var(--bg-to-green), var(--color-function-light))">
                 <div>
-                    <h1 class="text-white fw-bold fs-2 fs-md-1 mb-2">Add Team Members</h1>
-                    <p class="text-white-50" style="font-size: 15px;">Search players, assign positions, and build your
-                        squad.</p>
+                    <h1 class="text-white fw-bold fs-2 fs-md-1 mb-2">Team Members</h1>
+                    <p class="text-white-50" style="font-size: 15px;">Manage your squad members, assign positions, and
+                        build your team.</p>
                 </div>
                 <div class="d-flex gap-3">
                     <app-button variant="gray" size="large" customClass="fw-semibold"
@@ -18,10 +18,10 @@
             </div>
         </div>
 
-        <!-- Main Row - Left Column (75%) and Right Column (25%) -->
+        <!-- Main Row -->
         <div class="row g-4">
-            <!-- Left Column - Search and Editor (9 columns on desktop, 12 on mobile) -->
-            <div class="col-lg-9 col-12">
+            <!-- Left Column - Search and Editor -->
+            <div class="col-lg-8 col-12">
                 <!-- Search Section -->
                 <div class="search-section text-white-50 rounded-4 p-4 mb-4">
                     <div class="position-relative mb-4">
@@ -36,20 +36,28 @@
                     <div class="search-results d-flex flex-column gap-3">
                         @for (user of searchResultList(); track user.id) {
                         <div class="user-card rounded-4 p-3 d-flex justify-content-between align-items-center"
-                            [class.disabled]="NewMembersUsernames.includes(user.userName) || OldMembersUsernames.includes(user.userName)"
-                            (click)="!NewMembersUsernames.includes(user.userName) && !OldMembersUsernames.includes(user.userName) && onCardClick(user)">
+                            [class.disabled]="isUserInSquad(user.userName)"
+                            (click)="!isUserInSquad(user.userName) && onCardClickFromUserSearch(user)">
                             <div class="d-flex align-items-center gap-3">
-                                <app-avatar [src]="user.imgUrl ?? 'user.png'" [size]="60"></app-avatar>
+                                <app-avatar [src]="user.imgUrl || 'user.png'" [size]="60"></app-avatar>
                                 <div>
                                     <h3 class="text-white fs-6 mb-1">{{user.fullName}}</h3>
                                     <span class="text-white-50 small">@{{user.userName}}</span>
                                 </div>
                             </div>
-                            <div *ngIf="NewMembersUsernames.includes(user.userName) || OldMembersUsernames.includes(user.userName)"
-                                class="selected-badge">
-                                <i class="fa-solid fa-check-circle me-1"></i>
-                                <span>Already Added</span>
+                            <!-- Show badge for users already in squad -->
+                            @if (isUserInSquad(user.userName)) {
+                            <div class="selected-badge">
+                                <span>Already in Squad</span>
                             </div>
+                            }
+                        </div>
+                        }
+
+                        <!-- Empty search state -->
+                        @if (searchResultList().length === 0 && searchQuery) {
+                        <div class="text-center py-4">
+                            <p class="text-white-50 mb-0">No users found</p>
                         </div>
                         }
                     </div>
@@ -61,10 +69,24 @@
                         <app-avatar [src]="selectedUser()?.imgUrl ?? 'user.png'" [size]="100"></app-avatar>
                         <div>
                             <h2 class="text-white mb-1" style="font-size: 24px;">
-                                {{selectedUser()?.fullName||'Select a player'}}</h2>
-                            <p class="text-white-50 mb-0">Configure player role inside the team.</p>
+                                {{selectedUser()?.fullName || 'Select a player'}}</h2>
+                            <p class="text-white-50 mb-0">
+                                @if (isEditingMode()) {
+                                Editing existing team member
+                                } @else {
+                                Configure player role inside the team
+                                }
+                            </p>
                         </div>
                     </div>
+
+                    <!-- Error Messages -->
+                    <!-- @if (NoUserSelectedErrorSignal()) {
+                    <div class="alert alert-danger mb-3">{{ NoUserSelectedErrorSignal() }}</div>
+                    }
+                    @if (TshirtNumberErrorSignal()) {
+                    <div class="alert alert-warning mb-3">{{ TshirtNumberErrorSignal() }}</div>
+                    } -->
 
                     <div class="row g-3">
                         <div class="col-md-6">
@@ -72,7 +94,7 @@
                             <select
                                 class="form-select player-position-select bg-glass-dark border-glass text-white rounded-3 py-3 px-3"
                                 [(ngModel)]="selectedUserPosition">
-                                <option *ngFor="let position of playerPositions" [value]="position.value">
+                                <option *ngFor="let position of playerPositionOptions" [value]="position.value">
                                     {{ position.label }}
                                 </option>
                             </select>
@@ -85,48 +107,75 @@
                         </div>
                     </div>
 
-                    <div class="d-flex justify-content-end mt-4">
-                        <app-button variant="green" size="large" customClass="fw-semibold"
-                            (btnClick)="addPlayerToSquad()">Add Player</app-button>
+                    <div class="d-flex justify-content-between gap-3 mt-4">
+                        <div class="flex-grow-1">
+                            @if (NoUserSelectedErrorSignal()) {
+                            <span class="validation-error-font mb-3" style="display: block;">{{
+                                NoUserSelectedErrorSignal()
+                                }}</span>
+                            }
+                            @if (TshirtNumberErrorSignal()) {
+                            <span class="validation-error-font mb-3" style="display: block;">{{
+                                TshirtNumberErrorSignal()
+                                }}</span>
+                            }
+                        </div>
+                        <div class="flex-shrink-0">
+                            <app-button variant="gray" size="large" customClass="fw-semibold me-3"
+                                (btnClick)="clearSelection()">Cancel</app-button>
+                            <app-button variant="green" size="large" customClass="fw-semibold"
+                                (btnClick)="addOrUpdatePlayer()">
+                                {{ isEditingMode() ? 'Update Player' : 'Add Player' }}
+                            </app-button>
+                        </div>
+
                     </div>
                 </div>
             </div>
 
             <!-- Right Column - Squad Members Card -->
-            <div class="col-lg-3 col-12">
+            <div class="col-lg-4 col-12">
                 <div class="squad-card rounded-4">
                     <div class="squad-card-header p-4 border-bottom">
-                        <h2 class="text-white mb-1" style="font-size: 20px;">Team Members</h2>
-                        <p class="text-white-50 small mb-0">{{ newTeamMembersSignal().length }} players added</p>
+                        <h2 class="text-white mb-1" style="font-size: 20px;">Squad Members</h2>
+                        <p class="text-white-50 small mb-0">{{ squadMembers().length }} players in squad</p>
                     </div>
 
                     <div class="squad-members-list p-3 d-flex flex-column gap-3">
-                        @for (member of newTeamMembersSignal(); track member.userId) {
+                        @for (member of squadMembers(); track member.userId; let i = $index) {
                         <div class="member-item rounded-3 p-3 d-flex align-items-center gap-3"
-                            (click)="onCardClickFromNewTeam(member)">
-                            <img [src]="member.imgUrl || 'user.png'"
+                            [class.active]="editingMemberId() === member.userId" (click)="onCardClickFromSquad(member)">
+                            <!-- <img [src]="member.imgUrl || 'user.png'"
                                 class="rounded-circle border border-success border-2"
-                                style="width: 54px; height: 54px; object-fit: cover;">
+                                style="width: 54px; height: 54px; object-fit: cover;"> -->
+
+                            <app-avatar [src]="member.imgUrl || 'user.png'" [size]="60"></app-avatar>
+
                             <div class="flex-grow-1">
                                 <h4 class="text-white mb-1 fs-6">{{ member.fullname }}</h4>
-                                <p class="text-white-50 mb-0 small">{{ getPositionLabel(member.position) }}</p>
+                                <p class="text-white-50 mb-0 small">{{ member.position }}</p>
                             </div>
-                            <div class="shirt-number d-flex align-items-center justify-content-center">
-                                {{ member.tshirtNumber }}
+
+
+                            <div class="d-flex align-items-center justify-content-cente">
+                                <div class="shirt-number me-3">
+                                    {{ member.tshirtNumber }}
+                                </div>
+
+
+                                <app-button size="small" customClass="bg-danger text-white"
+                                    (btnClick)="removeMember(i)">X</app-button>
+
                             </div>
-                            <!-- <button class="btn-remove" (click)="removeMember($index); $event.stopPropagation()">
-                                <i class="fa-solid fa-trash"></i>
-                            </button> -->
-                            <app-button size="small" customClass="bg-danger text-white"
-                                (btnClick)="removeMember($index)">X</app-button>
+
                         </div>
                         }
 
                         <!-- Empty state -->
-                        @if (newTeamMembersSignal().length === 0) {
+                        @if (squadMembers().length === 0) {
                         <div class="text-center py-4">
-                            <p class="text-white-50 mb-0">No players added yet</p>
-                            <p class="text-white-50 small">Click on a user to add them</p>
+                            <p class="text-white-50 mb-0">No players in squad</p>
+                            <p class="text-white-50 small">Search and add players to build your team</p>
                         </div>
                         }
                     </div>

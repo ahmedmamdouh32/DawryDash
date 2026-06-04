@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, computed } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -9,7 +9,7 @@ import { TeamMembersDTO } from '../../models/team-members-dto';
 import { TeamService } from '../../services/team-service';
 import { User } from '../../../user/services/user';
 import { UserSearchResult } from '../../../user/models/user-search-result';
-import { PlayerPosition } from '../../enums/player-position';
+import { PlayerPosition, PlayerPositionOptions, PlayerPositionDisplay } from '../../enums/player-position';
 
 @Component({
   selector: 'app-add-team-members',
@@ -23,14 +23,37 @@ export class AddTeamMembers {
   private route = inject(ActivatedRoute);
   private location = inject(Location);
 
-  OldMembersUsernames: string[] = [];
-  NewMembersUsernames: string[] = [];
+  // Error messages
+  TshirtNumberErrorSignal = signal<string>('');
+  NoUserSelectedErrorSignal = signal<string>('');
+
+  // All squad members (both existing and new)
+  squadMembers = signal<TeamMembersDTO[]>([]);
+
+  // Computed set of usernames in squad for quick lookup
+  squadMemberUsernames = computed(() =>
+    this.squadMembers().map(member => member.username)
+  );
+
+  // Enum references for template
+  PlayerPosition = PlayerPosition;
+  playerPositionOptions = PlayerPositionOptions;
+  getPositionLabel = PlayerPositionDisplay;
+
+  // Track editing mode
+  isEditingMode = signal<boolean>(false);
+  editingMemberId = signal<string | null>(null);
 
   ngOnInit() {
     const teamId: string = this.route.snapshot.paramMap.get('id')!;
+    this.loadSquadMembers(teamId);
+  }
+
+  loadSquadMembers(teamId: string) {
     this.teamService.GetMembers(teamId).subscribe({
       next: (members: TeamMembersDTO[]) => {
-        this.OldMembersUsernames = members.map(m => m.username);
+        this.squadMembers.set(members);
+        // console.log('Loaded squad members:', members);
       },
       error: (err) => {
         console.log(err);
@@ -43,12 +66,13 @@ export class AddTeamMembers {
   }
 
   saveThenGoBack() {
-    // Implement save logic here
     console.log('Saving squad...');
-    console.log('New members:', this.newTeamMembersSignal());
+    console.log('All members:', this.squadMembers());
+    //api call for saving members
+    this.goBack();
   }
 
-  // Search user
+  // Search user - DON'T filter out squad members, show all
   searchResultList = signal<UserSearchResult[]>([]);
   searchQuery: string = '';
 
@@ -57,6 +81,7 @@ export class AddTeamMembers {
     if (this.searchQuery.trim()) {
       this.userService.GetUsersByName(this.searchQuery).subscribe({
         next: (members: UserSearchResult[]) => {
+          // Show ALL search results, don't filter
           this.searchResultList.set(members);
         },
         error: (err) => {
@@ -68,144 +93,145 @@ export class AddTeamMembers {
     }
   }
 
-  // Selected user
+  // Selected user for editing
   selectedUser = signal<UserSearchResult | null>(null);
   selectedUserNumber = signal<number | null>(null);
-  selectedUserPosition = signal<number>(PlayerPosition.NotSet);
+  selectedUserPosition = signal<string>(PlayerPosition.NotSet);
 
-  playerPositions = [
-    { value: PlayerPosition.NotSet, label: 'Not Set' },
-    { value: PlayerPosition.GoalKeeper, label: 'Goal Keeper' },
-    { value: PlayerPosition.Defender, label: 'Defender' },
-    { value: PlayerPosition.Midfielder, label: 'Midfielder' },
-    { value: PlayerPosition.Attacker, label: 'Attacker' }
-  ];
+  // Click on user from search results
+  onCardClickFromUserSearch(user: UserSearchResult) {
+    // Check if user is already in squad
+    if (this.isUserInSquad(user.userName)) {
+      console.log('User already in squad, cannot select');
+      return;
+    }
 
-
-
-  onCardClick(user: UserSearchResult) {
+    this.isEditingMode.set(false);
+    this.editingMemberId.set(null);
     this.selectedUser.set(user);
-    this.selectedUserNumber.set(0);
+    this.selectedUserNumber.set(null);
     this.selectedUserPosition.set(PlayerPosition.NotSet);
+    this.clearErrors();
   }
 
-  onCardClickFromNewTeam(userClicked: TeamMembersDTO) {
+  // Click on squad member to edit
+  onCardClickFromSquad(member: TeamMembersDTO) {
     const user: UserSearchResult = {
-      fullName: userClicked.fullname,
-      id: userClicked.userId,
-      imgUrl: userClicked.imgUrl,
-      userName: userClicked.username
+      fullName: member.fullname,
+      id: member.userId,
+      imgUrl: member.imgUrl,
+      userName: member.username
     };
+
+    this.isEditingMode.set(true);
+    this.editingMemberId.set(member.userId);
     this.selectedUser.set(user);
-    this.selectedUserNumber.set(userClicked.tshirtNumber);
-    this.selectedUserPosition.set(userClicked.position);
+    this.selectedUserNumber.set(parseInt(member.tshirtNumber) || null);
+    this.selectedUserPosition.set(member.position);
+    this.clearErrors();
   }
 
-  getPositionLabel(positionValue: any): string {
-    // Convert to number if it's a string
-    const numericValue = typeof positionValue === 'string'
-      ? parseInt(positionValue, 10)
-      : positionValue;
-
-    const position = this.playerPositions.find(p => p.value === numericValue);
-    return position ? position.label : 'Not Set';
+  clearErrors() {
+    this.TshirtNumberErrorSignal.set('');
+    this.NoUserSelectedErrorSignal.set('');
   }
-
 
   clearSelection() {
-    this.selectedUserPosition.set(PlayerPosition.NotSet);
+    this.selectedUser.set(null);
     this.selectedUserNumber.set(null);
+    this.selectedUserPosition.set(PlayerPosition.NotSet);
+    this.isEditingMode.set(false);
+    this.editingMemberId.set(null);
+    this.clearErrors();
   }
-  // Creating new team members
-  newTeamMembersSignal = signal<TeamMembersDTO[]>([]);
 
-  addPlayerToSquad() {
+  // Add or update player in squad
+  addOrUpdatePlayer() {
     const selectedUser = this.selectedUser();
+    this.clearErrors();
 
     if (!selectedUser) {
-      console.log('No user selected');
+      this.NoUserSelectedErrorSignal.set('*No user selected');
       return;
     }
 
-    // Check if user already exists in either list
-    const isInNewMembers = this.NewMembersUsernames.includes(selectedUser.userName!);
-    const isInOldMembers = this.OldMembersUsernames.includes(selectedUser.userName!);
-
-    // If user is in new members list, update them
-    if (isInNewMembers) {
-      this.updateExistingNewMember(selectedUser);
-      return;
-    }
-
-    // If user is in old members list, show error or handle differently
-    if (isInOldMembers) {
-      console.log('User is already an existing team member and cannot be modified here');
-      // Optionally show a message to the user
-      return;
-    }
-
-    // If user is not in any list, add as new member
-    if (!isInNewMembers && !isInOldMembers) {
-      // Validate shirt number
-      if (!this.selectedUserNumber()) {
-        console.log('Please enter a shirt number');
-        return;
-      }
-
-      const result: TeamMembersDTO = {
-        userId: selectedUser.id,
-        fullname: selectedUser.fullName,
-        username: selectedUser.userName,
-        position: this.selectedUserPosition(),
-        isCaptain: false,
-        imgUrl: selectedUser.imgUrl || 'user.png',
-        tshirtNumber: this.selectedUserNumber()!
-      };
-
-      // Update signal with new array
-      this.newTeamMembersSignal.update(current => [...current, result]);
-
-      // Add username to track
-      this.NewMembersUsernames.push(selectedUser.userName!);
-
-      // Clear selection after adding
-      this.clearSelection();
-
-      console.log('Added successfully. Total members:', this.newTeamMembersSignal().length);
-    }
-  }
-
-  // New method to update existing new member
-  updateExistingNewMember(selectedUser: UserSearchResult) {
-    // Find the index of the member to update
-    const memberIndex = this.newTeamMembersSignal().findIndex(
-      member => member.username === selectedUser.userName
-    );
-
-    if (memberIndex === -1) {
-      console.log('Member not found in new members list');
+    // Check if trying to add a user that's already in squad
+    if (!this.isEditingMode() && this.isUserInSquad(selectedUser.userName)) {
+      this.NoUserSelectedErrorSignal.set('*User is already in the squad');
       return;
     }
 
     // Validate shirt number
-    if (!this.selectedUserNumber()) {
-      console.log('Please enter a shirt number');
+    if (!this.selectedUserNumber() || this.selectedUserNumber()! <= 0) {
+      this.TshirtNumberErrorSignal.set('*Enter valid T-Shirt Number');
       return;
     }
 
-    // Get the existing member
-    const existingMember = this.newTeamMembersSignal()[memberIndex];
+    if (this.isEditingMode() && this.editingMemberId()) {
+      this.updatePlayerInSquad();
+    } else {
+      this.addNewPlayerToSquad();
+    }
+  }
+
+  addNewPlayerToSquad() {
+    const selectedUser = this.selectedUser();
+
+    if (!selectedUser) return;
+
+    // Double-check user not already in squad
+    if (this.isUserInSquad(selectedUser.userName!)) {
+      this.NoUserSelectedErrorSignal.set('*User already in squad');
+      return;
+    }
+
+    const result: TeamMembersDTO = {
+      userId: selectedUser.id,
+      fullname: selectedUser.fullName,
+      username: selectedUser.userName,
+      position: this.selectedUserPosition(),
+      isCaptain: false,
+      imgUrl: selectedUser.imgUrl || 'user.png',
+      tshirtNumber: this.selectedUserNumber()!.toString()
+    };
+
+    // Add to squad
+    this.squadMembers.update(current => [...current, result]);
+
+    // Clear selection
+    this.clearSelection();
+
+    console.log('Added successfully. Total members:', this.squadMembers().length);
+  }
+
+  updatePlayerInSquad() {
+    const selectedUser = this.selectedUser();
+    const memberId = this.editingMemberId();
+
+    if (!selectedUser || !memberId) return;
+
+    // Find the index of the member to update
+    const memberIndex = this.squadMembers().findIndex(
+      member => member.userId === memberId
+    );
+
+    if (memberIndex === -1) {
+      console.log('Member not found in squad');
+      return;
+    }
+
+    const existingMember = this.squadMembers()[memberIndex];
 
     // Create updated member with new values
     const updatedMember: TeamMembersDTO = {
-      ...existingMember, // Spread existing properties
+      ...existingMember,
       position: this.selectedUserPosition(),
-      tshirtNumber: this.selectedUserNumber()!,
-      imgUrl: selectedUser.imgUrl || existingMember.imgUrl // Update image if changed
+      tshirtNumber: this.selectedUserNumber()!.toString(),
+      imgUrl: selectedUser.imgUrl || existingMember.imgUrl
     };
 
-    // Update the signal with the modified array
-    this.newTeamMembersSignal.update(current => {
+    // Update the signal
+    this.squadMembers.update(current => {
       const updated = [...current];
       updated[memberIndex] = updatedMember;
       return updated;
@@ -215,15 +241,25 @@ export class AddTeamMembers {
     this.clearSelection();
 
     console.log('Updated successfully. Member:', updatedMember.fullname);
-    // Optionally show success message
   }
 
-  // Optional: Remove member from squad
+  // Remove member from squad
   removeMember(index: number) {
-    const memberToRemove = this.newTeamMembersSignal()[index];
-    this.newTeamMembersSignal.update(current => current.filter((_, i) => i !== index));
-    this.NewMembersUsernames = this.NewMembersUsernames.filter(
-      username => username !== memberToRemove.username
-    );
+    const memberToRemove = this.squadMembers()[index];
+
+    this.squadMembers.update(current => current.filter((_, i) => i !== index));
+
+    // If we're editing the removed member, clear selection
+    if (this.editingMemberId() === memberToRemove.userId) {
+      this.clearSelection();
+    }
+
+    console.log('Removed successfully. Member:', memberToRemove.fullname);
+
+  }
+
+  // Check if user is in squad (for disabling search results)
+  isUserInSquad(username: string): boolean {
+    return this.squadMemberUsernames().includes(username);
   }
 }
