@@ -4,6 +4,7 @@ using DawryDashAPIs.DTOs.TeamsDTOs;
 using DawryDashAPIs.Entities;
 using DawryDashAPIs.Repositories;
 using DawryDashAPIs.Services.TeamService;
+using Microsoft.AspNetCore.Identity;
 
 namespace DawryDashAPIs.Services.TeamsServices
 {
@@ -71,7 +72,13 @@ namespace DawryDashAPIs.Services.TeamsServices
 
             repo.Add(team);
             repo.Save();
-            userTeamRepo.AddTeamUser(teamId : team.Id, userId : teamDTO.userId, isCaptain : true);
+            TeamUser user = new();
+            user.TeamId = team.Id;
+            user.UserId = teamDTO.userId;
+            user.IsCaptain = true;
+            user.Position = Enums.PlayerPosition.NotSet; //position and user number are not set yet
+
+            userTeamRepo.AddTeamUser(user);
             repo.Save();
 
             return new ServiceResult<Team>
@@ -140,7 +147,15 @@ namespace DawryDashAPIs.Services.TeamsServices
         }
 
 
-
-
+        public void AddMembers(List<AddTeamMemberDTO> members, int teamId)
+        {
+            foreach (var member in members)
+            {
+                TeamUser tUser = map.Map<TeamUser>(member);
+                tUser.TeamId = teamId;
+                userTeamRepo.AddTeamUser(tUser);
+            }
+            repo.Save();
+        }
     }
 }

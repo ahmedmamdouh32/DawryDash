@@ -1,0 +1,137 @@
+<div class="p-md-4 main-content">
+    <div class="container-fluid px-0">
+        <div class="container-fluid px-0">
+            <!-- Welcome Banner -->
+            <div class="rounded-4 p-4 mb-4 d-flex justify-content-between align-items-center"
+                style="background :linear-gradient(to right, var(--bg-to-green), var(--color-function-light))">
+                <div>
+                    <h1 class="text-white fw-bold fs-2 fs-md-1 mb-2">Add Team Members</h1>
+                    <p class="text-white-50" style="font-size: 15px;">Search players, assign positions, and build your
+                        squad.</p>
+                </div>
+                <div class="d-flex gap-3">
+                    <app-button variant="gray" size="large" customClass="fw-semibold"
+                        (btnClick)="goBack()">Return</app-button>
+                    <app-button variant="green" size="large" customClass="fw-semibold"
+                        (btnClick)="saveThenGoBack()">Save</app-button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Row - Left Column (75%) and Right Column (25%) -->
+        <div class="row g-4">
+            <!-- Left Column - Search and Editor (9 columns on desktop, 12 on mobile) -->
+            <div class="col-lg-9 col-12">
+                <!-- Search Section -->
+                <div class="search-section text-white-50 rounded-4 p-4 mb-4">
+                    <div class="position-relative mb-4">
+                        <i class="fa-solid fa-magnifying-glass position-absolute start-0 top-50 translate-middle-y ms-4"
+                            style="color: #89e900; font-size: 18px;"></i>
+                        <input type="text" class="search-input w-100 rounded-4 py-3 px-5"
+                            style="height: 58px; padding-left: 52px;" placeholder="Search by username or full name"
+                            (input)="onSearchChange($event)">
+                    </div>
+
+                    <!-- Search Results -->
+                    <div class="search-results d-flex flex-column gap-3">
+                        @for (user of searchResultList(); track user.id) {
+                        <div class="user-card rounded-4 p-3 d-flex justify-content-between align-items-center"
+                            [class.disabled]="NewMembersUsernames.includes(user.userName) || OldMembersUsernames.includes(user.userName)"
+                            (click)="!NewMembersUsernames.includes(user.userName) && !OldMembersUsernames.includes(user.userName) && onCardClick(user)">
+                            <div class="d-flex align-items-center gap-3">
+                                <app-avatar [src]="user.imgUrl ?? 'user.png'" [size]="60"></app-avatar>
+                                <div>
+                                    <h3 class="text-white fs-6 mb-1">{{user.fullName}}</h3>
+                                    <span class="text-white-50 small">@{{user.userName}}</span>
+                                </div>
+                            </div>
+                            <div *ngIf="NewMembersUsernames.includes(user.userName) || OldMembersUsernames.includes(user.userName)"
+                                class="selected-badge">
+                                <i class="fa-solid fa-check-circle me-1"></i>
+                                <span>Already Added</span>
+                            </div>
+                        </div>
+                        }
+                    </div>
+                </div>
+
+                <!-- Editor Card -->
+                <div class="editor-card rounded-4 p-4">
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <app-avatar [src]="selectedUser()?.imgUrl ?? 'user.png'" [size]="100"></app-avatar>
+                        <div>
+                            <h2 class="text-white mb-1" style="font-size: 24px;">
+                                {{selectedUser()?.fullName||'Select a player'}}</h2>
+                            <p class="text-white-50 mb-0">Configure player role inside the team.</p>
+                        </div>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="d-block mb-2 text-white-75 fw-semibold small">Player Position</label>
+                            <select
+                                class="form-select player-position-select bg-glass-dark border-glass text-white rounded-3 py-3 px-3"
+                                [(ngModel)]="selectedUserPosition">
+                                <option *ngFor="let position of playerPositions" [value]="position.value">
+                                    {{ position.label }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="d-block mb-2 text-white-75 fw-semibold small">T-Shirt Number</label>
+                            <input type="number" placeholder="10"
+                                class="form-control bg-glass-dark border-glass text-white rounded-3 py-3 px-3"
+                                [(ngModel)]="selectedUserNumber">
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end mt-4">
+                        <app-button variant="green" size="large" customClass="fw-semibold"
+                            (btnClick)="addPlayerToSquad()">Add Player</app-button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Squad Members Card -->
+            <div class="col-lg-3 col-12">
+                <div class="squad-card rounded-4">
+                    <div class="squad-card-header p-4 border-bottom">
+                        <h2 class="text-white mb-1" style="font-size: 20px;">Team Members</h2>
+                        <p class="text-white-50 small mb-0">{{ newTeamMembersSignal().length }} players added</p>
+                    </div>
+
+                    <div class="squad-members-list p-3 d-flex flex-column gap-3">
+                        @for (member of newTeamMembersSignal(); track member.userId) {
+                        <div class="member-item rounded-3 p-3 d-flex align-items-center gap-3"
+                            (click)="onCardClickFromNewTeam(member)">
+                            <img [src]="member.imgUrl || 'user.png'"
+                                class="rounded-circle border border-success border-2"
+                                style="width: 54px; height: 54px; object-fit: cover;">
+                            <div class="flex-grow-1">
+                                <h4 class="text-white mb-1 fs-6">{{ member.fullname }}</h4>
+                                <p class="text-white-50 mb-0 small">{{ getPositionLabel(member.position) }}</p>
+                            </div>
+                            <div class="shirt-number d-flex align-items-center justify-content-center">
+                                {{ member.tshirtNumber }}
+                            </div>
+                            <!-- <button class="btn-remove" (click)="removeMember($index); $event.stopPropagation()">
+                                <i class="fa-solid fa-trash"></i>
+                            </button> -->
+                            <app-button size="small" customClass="bg-danger text-white"
+                                (btnClick)="removeMember($index)">X</app-button>
+                        </div>
+                        }
+
+                        <!-- Empty state -->
+                        @if (newTeamMembersSignal().length === 0) {
+                        <div class="text-center py-4">
+                            <p class="text-white-50 mb-0">No players added yet</p>
+                            <p class="text-white-50 small">Click on a user to add them</p>
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

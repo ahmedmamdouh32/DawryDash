@@ -14,7 +14,7 @@ namespace DawryDashAPIs.Entities
 
         public bool IsCaptain { get; set; }
 
-        public int userNumber { set; get; }
+        public int? userNumber { set; get; }
 
         public PlayerPosition Position { set; get; }
     }

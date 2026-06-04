@@ -1,0 +1,372 @@
+/* add-team-members.component.css */
+
+/* Main content layout */
+.main-content {
+    min-height: 100vh;
+}
+
+@media (max-width: 767.98px) {
+    .main-content {
+        padding-top: 66px;
+    }
+}
+
+@media (min-width: 768px) {
+    .main-content {
+        margin-left: 260px;
+    }
+}
+
+/* Search Section */
+.search-section {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(18px);
+}
+
+.search-input {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: white;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.search-input:focus {
+    border-color: #89e900;
+    box-shadow: 0 0 0 4px rgba(137, 233, 0, 0.12);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Search Results - Fixed max height with scroll */
+.search-results {
+    max-height: 200px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.search-results::-webkit-scrollbar {
+    width: 6px;
+}
+
+.search-results::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.search-results::-webkit-scrollbar-thumb {
+    background: rgba(137, 233, 0, 0.3);
+    border-radius: 10px;
+}
+
+.search-results::-webkit-scrollbar-thumb:hover {
+    background: #89e900;
+}
+
+/* User Cards */
+.user-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+}
+
+.user-card:hover {
+    border-color: rgba(137, 233, 0, 0.3);
+    
+}
+
+/* Buttons */
+.btn-save {
+    background: #89e900;
+    color: #222;
+    border: none;
+    transition: all 0.2s;
+    box-shadow: 0 0 24px rgba(137, 233, 0, 0.25);
+}
+
+.btn-save:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(137, 233, 0, 0.4);
+    background: #89e900;
+    color: #222;
+}
+
+
+.btn-add:hover {
+    background: #89e900;
+    color: #222;
+}
+
+.btn-confirm {
+    background: #89e900;
+    color: #222;
+    border: none;
+    transition: all 0.2s;
+}
+
+.btn-confirm:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(137, 233, 0, 0.3);
+}
+
+.btn-finish {
+    background: #89e900;
+    color: #222;
+    border: none;
+    transition: all 0.2s;
+}
+
+.btn-finish:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(137, 233, 0, 0.35);
+}
+
+/* Editor Card */
+.editor-card {
+    background: linear-gradient(135deg, rgba(137, 233, 0, 0.08), rgba(255, 255, 255, 0.03));
+    border: 1px solid rgba(137, 233, 0, 0.12);
+}
+
+/* Squad Card */
+.squad-card {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(22px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.squad-card-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.squad-members-list {
+    flex: 1;
+    overflow-y: auto;
+    max-height: calc(100vh - 300px);
+    min-height: 400px;
+}
+
+.squad-members-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.squad-members-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.squad-members-list::-webkit-scrollbar-thumb {
+    background: rgba(137, 233, 0, 0.3);
+    border-radius: 10px;
+}
+
+.squad-members-list::-webkit-scrollbar-thumb:hover {
+    background: #89e900;
+}
+
+.squad-card-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Member Items */
+.member-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.member-item:hover {
+    border-color: rgba(137, 233, 0, 0.3);
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.member-item.active {
+    border-color: #89e900;
+    background: rgba(137, 233, 0, 0.08);
+    box-shadow: 0 0 20px rgba(137, 233, 0, 0.1);
+}
+
+.shirt-number {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: #89e900;
+    color: #222;
+    font-weight: 800;
+    font-size: 15px;
+}
+
+/* Form controls */
+.form-select, .form-control {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    color: white !important;
+}
+
+.form-select:focus, .form-control:focus {
+    border-color: #89e900 !important;
+    box-shadow: 0 0 0 4px rgba(137, 233, 0, 0.12) !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Utility classes */
+.bg-glass-dark {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.border-glass {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.text-white-75 {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+
+Override browser default select styling
+select.player-position-select {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    cursor: pointer;
+}
+
+select.player-position-select option {
+    background-color: #2a2a3e;
+    color: white;
+    padding: 10px;
+}
+
+select.player-position-select optgroup,
+select.player-position-select option:not(:checked) {
+    background-color: #2a2a3e;
+    color: white;
+}
+
+/* For Webkit browsers (Chrome, Edge, Safari) */
+select.player-position-select::-webkit-listbox,
+select.player-position-select::-webkit-listbox option {
+    background-color: #2a2a3e;
+    color: white;
+}
+
+/* For Firefox */
+@-moz-document url-prefix() {
+    select.player-position-select,
+    select.player-position-select option {
+        background-color: #2a2a3e !important;
+        color: white !important;
+    }
+}
+
+
+.user-card.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.selected-badge {
+    background: rgba(137, 233, 0, 0.15);
+    border: 1px solid rgba(137, 233, 0, 0.3);
+    border-radius: 20px;
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.btn-remove {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ff6b6b;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-remove:hover {
+    background: rgba(255, 107, 107, 0.2);
+    transform: scale(1.1);
+}
+
+.shirt-number {
+    background: rgba(137, 233, 0, 0.2);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-weight: bold;
+    color: var(--accent);
+}
+
+
+/* Active/Editing state for member item */
+.member-item {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.member-item.active {
+    background: rgba(137, 233, 0, 0.15);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(137, 233, 0, 0.1);
+}
+
+.member-item:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateX(4px);
+}
+
+.btn-remove {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ff6b6b;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    opacity: 0;
+}
+
+.member-item:hover .btn-remove {
+    opacity: 1;
+}
+
+.btn-remove:hover {
+    background: rgba(255, 107, 107, 0.2);
+    transform: scale(1.1);
+}
+
+.shirt-number {
+    background: rgba(137, 233, 0, 0.2);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: var(--accent);
+    min-width: 36px;
+}

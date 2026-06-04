@@ -2,7 +2,8 @@
 {
     public enum PlayerPosition
     {
-        GoalKeeper = 1,
+        NotSet = 0,
+        GoalKeeper,
         Defender,
         Midfielder,
         Attacker

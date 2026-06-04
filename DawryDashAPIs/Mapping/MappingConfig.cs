@@ -24,6 +24,10 @@ namespace DawryDashAPIs.Mapping
             );
 
 
+            //TeamUser Mapping
+            CreateMap<TeamUser, AddTeamMemberDTO>();
+
+
             //Match Mapping
             CreateMap<AddMatchDTO, Match>();
             CreateMap<Match, DisplayMatchDTO>();
@@ -42,9 +46,12 @@ namespace DawryDashAPIs.Mapping
                             : null
                     )
                 );
+
             //User Mapping
             CreateMap<AddUserDTO, ApplicationUser>();
             CreateMap<ApplicationUser, UserDashboardDTO>();
+            CreateMap<ApplicationUser, UserCardDTO>();
+
 
         }
     }

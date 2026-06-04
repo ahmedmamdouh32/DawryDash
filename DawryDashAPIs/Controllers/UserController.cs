@@ -1,6 +1,7 @@
 ﻿using DawryDashAPIs.DTOs.UserDTOs;
 using DawryDashAPIs.Services.UserService;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -98,21 +99,11 @@ namespace DawryDashAPIs.Controllers
             }
         }
 
-
-
-        [HttpGet("message")]
-        
-        
-        public IActionResult getData()
+        [HttpGet("GetUsersByName/{name}")]
+        public IActionResult GetUsersByName(string name)
         {
-            return Ok(new {message= "Data Received Successfully" });
+            List<UserCardDTO> result = userService.GetUsersByName(name);
+            return Ok(result);
         }
-
-        [HttpGet("Pmessage/{number:int}")]
-        public IActionResult getDataT([FromRoute]int number)
-        {
-            return Ok(number % 2 ==0 ? "even" : "odd");
-        }
-
     }
 }

@@ -16,11 +16,13 @@ export class TeamService {
     return this.http.post(`${this.baseUrl}`, teamDTO);
   }
 
-  GetMembers(teamId: number): Observable<any> {
+  GetMembers(teamId: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/${teamId}/Members`);
   }
 
-  GetTeamDetailsForMembers(teamId: number): Observable<any> {
+  GetTeamDetailsForMembers(teamId: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/DetailsForMembers/${teamId}`);
   }
+
+  
 }

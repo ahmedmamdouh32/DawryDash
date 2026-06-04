@@ -23,6 +23,7 @@ namespace DawryDashAPIs.Repositories
             return _dbContext.TeamUsers.Where(tu => tu.TeamId == teamId).Include(u => u.User).
                 Select(r => new TeamMemberDTO { 
                     userId = r.User.Id,
+                    username = r.User.UserName,
                     Fullname = r.User.FullName,
                     ImgUrl = r.User.ImgUrl,
                     Position = r.Position.ToString(),
@@ -31,13 +32,9 @@ namespace DawryDashAPIs.Repositories
                 });
         }
 
-        public void AddTeamUser(int teamId, string userId, bool isCaptain)
+        public void AddTeamUser(TeamUser tUser)
         {
-            TeamUser teamUser = new();
-            teamUser.UserId = userId;
-            teamUser.TeamId = teamId;
-            teamUser.IsCaptain = isCaptain;
-            _dbContext.TeamUsers.Add(teamUser);
+            _dbContext.TeamUsers.Add(tUser);
         }
 
 

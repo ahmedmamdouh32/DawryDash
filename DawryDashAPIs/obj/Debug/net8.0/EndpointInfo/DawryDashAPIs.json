@@ -338,6 +338,57 @@
         }
       }
     },
+    "/api/Team/addMembers/{teamId}": {
+      "post": {
+        "tags": [
+          "Team"
+        ],
+        "parameters": [
+          {
+            "name": "teamId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AddTeamMemberDTO"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AddTeamMemberDTO"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AddTeamMemberDTO"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Team/{id}": {
       "delete": {
         "tags": [
@@ -520,31 +571,18 @@
         }
       }
     },
-    "/api/User/message": {
-      "get": {
-        "tags": [
-          "User"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/User/Pmessage/{number}": {
+    "/api/User/GetUsersByName/{name}": {
       "get": {
         "tags": [
           "User"
         ],
         "parameters": [
           {
-            "name": "number",
+            "name": "name",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string"
             }
           }
         ],
@@ -572,6 +610,27 @@
           "tournamentId": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddTeamMemberDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "$ref": "#/components/schemas/PlayerPosition"
+          },
+          "tshirtNumber": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "isCaptain": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -712,6 +771,16 @@
           }
         },
         "additionalProperties": false
+      },
+      "PlayerPosition": {
+        "enum": [
+          "NotSet",
+          "GoalKeeper",
+          "Defender",
+          "Midfielder",
+          "Attacker"
+        ],
+        "type": "string"
       },
       "UpdateTeamDTO": {
         "type": "object",

@@ -24,7 +24,6 @@ export class DashboardHome {
       .subscribe({
 
         next: (res) => {
-
           console.log(res);
           res.latestTeams.forEach(team => {
             if (team.imgUrl === null) {
@@ -32,7 +31,6 @@ export class DashboardHome {
             }
           });
           this.dashboardData.set(res);
-
         },
 
         error: (err) => {

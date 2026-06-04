@@ -11,7 +11,8 @@
                     <!-- Team Icon -->
                     <div class="rounded-circle overflow-hidden"
                         style="width: 120px; height: 120px; border: 2px solid #89e900; box-shadow: 0 0 16px rgba(137,233,0,0.3);">
-                        <img src="group.png" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img [src]="teamDetails()?.imgUrl ?? 'group.png'"
+                            style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
 
                     <div>
@@ -57,7 +58,7 @@
             <div class="col-6 col-lg-3">
                 <div class="bg-white-06 rounded-4 p-4">
                     <p class="text-white-50 mb-2">Win Rate</p>
-                    <h2 class="text-white fw-bold mb-0" style="font-size: 2rem;">{{teamDetails()?.winRate}}</h2>
+                    <h2 class="text-white fw-bold mb-0" style="font-size: 2rem;">{{teamDetails()?.winRate}}%</h2>
                 </div>
             </div>
             <div class="col-6 col-lg-3">
@@ -114,8 +115,15 @@
                 <div class="bg-white-06 rounded-4 p-4">
                     <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
                         <h2 class="text-white fw-bold fs-5 mb-2 mb-md-0">Team Members</h2>
-                        <button class="btn btn-sm px-3 py-2 rounded-3 fw-semibold"
-                            style="background: rgba(137,233,0,0.15); color: #89e900;">Add Player</button>
+                        <!-- <button class="btn btn-sm px-3 py-2 rounded-3 fw-semibold"
+                            style="background: rgba(137,233,0,0.15); color: #89e900;">Add Player</button> -->
+                        <app-button variant="green" size="medium" customClass="w-100"
+                            routerLink="/dashboard/team/{{teamDetails()?.id}}/members">
+                            Add Player
+                        </app-button>
+
+
+
                     </div>
                     @for (member of teamMembers(); track $index) {
                     <div class="d-flex flex-column gap-3 mb-3">
@@ -130,13 +138,16 @@
                             <!-- Player Info -->
                             <div class="flex-grow-1">
                                 <h4 class="text-white fs-6 mb-1">{{member.fullname}}</h4>
-                                <p class="text-white-50 small mb-0">{{member.isCaptain ? 'Captain • ' : ''}}
-                                    {{member.position}}</p>
+                                <p class="text-white-50 small mb-0">
+                                    {{ member.isCaptain ? 'Captain' : '' }}
+                                    {{ member.isCaptain && member.position !== 'NotSet' ? ' • ' : '' }}
+                                    {{ member.position !== 'NotSet' ? member.position : '' }}
+                                </p>
                             </div>
 
                             <!-- Player Number -->
-                            <span class="fw-semibold flex-shrink-0"
-                                style="color: var(--accent3);">#{{member.tshirtNumber}}</span>
+                            <span class="fw-semibold flex-shrink-0" style="color: var(--accent3);">{{member.tshirtNumber
+                                === null ? '' : '#'+member.tshirtNumber}}</span>
                         </div>
                     </div>
                     }

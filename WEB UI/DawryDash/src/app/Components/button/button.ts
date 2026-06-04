@@ -1,9 +1,9 @@
 import { NgClass } from '@angular/common';
-import { Component, input, Input } from '@angular/core';
+import { Component, EventEmitter, input, Input, Output } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-button',
-  imports: [NgClass, RouterLink],
+  imports: [NgClass],
   templateUrl: './button.html',
   styleUrl: './button.css',
 })
@@ -20,12 +20,17 @@ export class Button {
 
   @Input() customClass: string = '';
 
+  @Output() btnClick = new EventEmitter<void>();
+
   onBtnPress() {
 
     if (this.routerLink) {
 
       this.router.navigate([this.routerLink]);
 
+    }
+    else {
+      this.btnClick.emit();
     }
     //write the remaining logic of the button press here
 

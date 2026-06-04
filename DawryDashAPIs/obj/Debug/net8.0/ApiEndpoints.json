@@ -224,6 +224,27 @@
   },
   {
     "ContainingType": "DawryDashAPIs.Controllers.TeamController",
+    "Method": "AddTeamMembers",
+    "RelativePath": "api/Team/addMembers/{teamId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "members",
+        "Type": "System.Collections.Generic.List\u00601[[DawryDashAPIs.DTOs.TeamsDTOs.AddTeamMemberDTO, DawryDashAPIs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      },
+      {
+        "Name": "teamId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DawryDashAPIs.Controllers.TeamController",
     "Method": "GetTeamDetailsForMembers",
     "RelativePath": "api/Team/DetailsForMembers/{teamId}",
     "HttpMethod": "GET",
@@ -274,6 +295,22 @@
   },
   {
     "ContainingType": "DawryDashAPIs.Controllers.UserController",
+    "Method": "GetUsersByName",
+    "RelativePath": "api/User/GetUsersByName/{name}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DawryDashAPIs.Controllers.UserController",
     "Method": "Login",
     "RelativePath": "api/User/Login",
     "HttpMethod": "POST",
@@ -283,32 +320,6 @@
       {
         "Name": "DTO",
         "Type": "DawryDashAPIs.DTOs.UserDTOs.LoginUserDTO",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "DawryDashAPIs.Controllers.UserController",
-    "Method": "getData",
-    "RelativePath": "api/User/message",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "DawryDashAPIs.Controllers.UserController",
-    "Method": "getDataT",
-    "RelativePath": "api/User/Pmessage/{number}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "number",
-        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

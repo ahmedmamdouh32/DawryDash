@@ -69,6 +69,18 @@ namespace DawryDashAPIs.Controllers
 
 
 
+        [HttpPost("addMembers/{teamId:int}")]
+        public IActionResult AddTeamMembers(List<AddTeamMemberDTO> members, int teamId)
+        {
+            teamService.AddMembers(members, teamId);
+            return Ok();
+        }
+        
+
+        
+
+
+
 
 
 

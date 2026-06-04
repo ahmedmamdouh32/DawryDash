@@ -7,6 +7,7 @@ import { Login } from './Features/auth/pages/login/login';
 import { DashboardHome } from './Features/dashboard/pages/dashboard-home/dashboard-home';
 import { CreateTeam } from './Features/team/pages/create-team/create-team';
 import { TeamDetails } from './Features/team/pages/team-details/team-details';
+import { AddTeamMembers } from './Features/team/pages/add-team-members/add-team-members';
 
 export const routes: Routes = [
     {
@@ -35,17 +36,22 @@ export const routes: Routes = [
         children:
             [
                 {
-                    path:'',
+                    path: '',
                     redirectTo: 'home',
                     pathMatch: 'full'
                 },
                 {
-                    path: 'home', component: TeamDetails
+                    path: 'home', component: DashboardHome
                 },
                 {
                     path: 'create-team', component: CreateTeam
                 },
-
+                {
+                    path: 'team/:id', component: TeamDetails
+                },
+                {
+                    path: 'team/:id/members', component: AddTeamMembers
+                }
             ]
     }, // Empty path
 

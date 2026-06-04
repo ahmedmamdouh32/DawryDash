@@ -173,6 +173,15 @@ namespace DawryDashAPIs.Services.UserService
         {
             return userManager.FindByIdAsync(userId).Result;
         }
+
+
+        public List<UserCardDTO> GetUsersByName(string name)
+        {
+            var result = userManager.Users.Where(u => u.FullName.Contains(name)  || u.UserName.Contains(name)).Take(10).Select(r =>
+              map.Map<UserCardDTO>(r)
+            );
+            return result.ToList();
+        }
        
     }
 }

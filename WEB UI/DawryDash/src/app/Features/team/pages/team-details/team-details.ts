@@ -4,22 +4,24 @@ import { TeamService } from '../../services/team-service';
 import { TeamMembersDTO } from '../../models/team-members-dto';
 import { SignalFormControl } from '@angular/forms/signals/compat';
 import { TeamDetailsForMembers } from '../../models/team-details-for-members';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-team-details',
-  imports: [Button],
+  imports: [Button, RouterLink, Button],
   templateUrl: './team-details.html',
   styleUrl: './team-details.css',
 })
 export class TeamDetails {
   teamService = inject(TeamService);
-
-  teamId: number = 25;
+  private route = inject(ActivatedRoute);
   teamMembers = signal<TeamMembersDTO[]>([]);
   teamDetails = signal<TeamDetailsForMembers | null>(null);
 
   ngOnInit() {
-    this.teamService.GetTeamDetailsForMembers(this.teamId).subscribe({
+    const teamId: string = this.route.snapshot.paramMap.get('id')!;
+
+    this.teamService.GetTeamDetailsForMembers(teamId).subscribe({
       next: (details) => {
         this.teamDetails.set(details);
       },
@@ -28,7 +30,7 @@ export class TeamDetails {
       }
     })
 
-    this.teamService.GetMembers(this.teamId).subscribe({
+    this.teamService.GetMembers(teamId).subscribe({
       next: (members) => {
         this.teamMembers.set(members);
       },

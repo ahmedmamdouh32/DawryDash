@@ -237,7 +237,7 @@ namespace DawryDashAPIs.Migrations
                     b.Property<int>("Position")
                         .HasColumnType("int");
 
-                    b.Property<int>("userNumber")
+                    b.Property<int?>("userNumber")
                         .HasColumnType("int");
 
                     b.HasKey("TeamId", "UserId");
