@@ -1,0 +1,96 @@
+<div class="p-md-4 main-content ">
+    <div class="container-fluid px-0">
+
+        <!-- Welcome Banner -->
+        <div class="rounded-4 p-4 mb-4 d-flex justify-content-between align-items-center"
+            style="background :linear-gradient(to right, var(--bg-to-green), var(--color-function-light))">
+            <div>
+                <h1 class="text-white fw-bold fs-2 fs-md-1 mb-2">Manage your teams from one place</h1>
+                <div class="d-flex flex-wrap gap-3 gap-md-4 mt-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="text-white-50 small">3 Teams Created</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <app-button variant="gray" size="medium" routerLink="/login" customClass="fw-semibold">Create
+                    Team</app-button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- My Teams Section -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+        <h2 class="text-white fw-bold fs-3 mb-2 mb-md-0">My Teams</h2>
+        <!-- <a href="#" class="small" style="color:var(--accent)">View All →</a> -->
+
+        <!-- <span class="badge rounded-pill px-3 py-2">3 Teams</span> -->
+    </div>
+
+    <div class="row g-3 g-md-4 mb-5 ">
+
+
+
+        @for (team of (dashboardData()?.latestTeams ?? []); track team.id) {
+
+        <div class="col-lg-3 col-md-6 mb-4 d-flex">
+
+            <div class="bg-grey-dark rounded-4 p-4 green-border w-100 d-flex flex-column">
+
+                <!-- HEADER -->
+                <div class="d-flex align-items-center gap-3 mb-3">
+
+                    <div class="rounded-circle overflow-hidden"
+                        style="width: 80px; height: 80px; border: 2px solid #89e900;">
+
+                        <img [src]="team.imgUrl" style="width: 100%; height: 100%; object-fit: cover;" />
+
+                    </div>
+
+                    <div class="flex-grow-1">
+                        <h4 class="text-white fw-bold fs-5 mb-0">
+                            {{ team.name }}
+                        </h4>
+                        <span class="text-white-50">
+                            {{ team.teamAbbreviation }}
+                        </span>
+                    </div>
+
+                </div>
+
+                <!-- CONTENT -->
+                <div class="mb-3 flex-grow-1">
+
+                    <div class="d-flex justify-content-between text-white-50 small">
+                        <span>Members</span>
+                        <span class="text-white">{{ team.membersCount }}</span>
+                    </div>
+
+                </div>
+
+                <!-- FOOTER (BUTTON AREA) -->
+                <div class="mt-auto">
+
+                    <app-button variant="green" size="medium" customClass="w-100"
+                        routerLink="/dashboard/teams/{{team.id}}">
+
+                        View Details
+
+                    </app-button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        }
+
+
+    </div>
+
+
+
+</div>

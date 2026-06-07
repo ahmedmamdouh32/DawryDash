@@ -338,8 +338,8 @@
         }
       }
     },
-    "/api/Team/addMembers/{teamId}": {
-      "post": {
+    "/api/Team/updateMembers/{teamId}": {
+      "put": {
         "tags": [
           "Team"
         ],

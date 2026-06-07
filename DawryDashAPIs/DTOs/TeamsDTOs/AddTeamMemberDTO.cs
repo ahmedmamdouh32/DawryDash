@@ -4,10 +4,12 @@ namespace DawryDashAPIs.DTOs.TeamsDTOs
 {
     public class AddTeamMemberDTO
     {
-        public string Id { set; get; }
-        public PlayerPosition Position { set; get; }
-        public int? TshirtNumber { set; get; }
-        public bool IsCaptain { set; get; }
+        public string id { set; get; }
+        public PlayerPosition position { set; get; }
+        public int? tshirtNumber { set; get; }
+        public bool isCaptain { set; get; }
     }
 }
+
+
 

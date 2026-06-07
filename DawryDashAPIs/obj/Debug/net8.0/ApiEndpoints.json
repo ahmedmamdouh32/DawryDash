@@ -224,9 +224,26 @@
   },
   {
     "ContainingType": "DawryDashAPIs.Controllers.TeamController",
+    "Method": "GetTeamDetailsForMembers",
+    "RelativePath": "api/Team/DetailsForMembers/{teamId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "teamId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [],
+    "Summary": "Get By Id"
+  },
+  {
+    "ContainingType": "DawryDashAPIs.Controllers.TeamController",
     "Method": "AddTeamMembers",
-    "RelativePath": "api/Team/addMembers/{teamId}",
-    "HttpMethod": "POST",
+    "RelativePath": "api/Team/updateMembers/{teamId}",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -242,23 +259,6 @@
       }
     ],
     "ReturnTypes": []
-  },
-  {
-    "ContainingType": "DawryDashAPIs.Controllers.TeamController",
-    "Method": "GetTeamDetailsForMembers",
-    "RelativePath": "api/Team/DetailsForMembers/{teamId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "teamId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [],
-    "Summary": "Get By Id"
   },
   {
     "ContainingType": "DawryDashAPIs.Controllers.TournamentController",

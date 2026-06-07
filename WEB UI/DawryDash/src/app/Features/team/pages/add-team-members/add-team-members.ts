@@ -10,6 +10,7 @@ import { TeamService } from '../../services/team-service';
 import { User } from '../../../user/services/user';
 import { UserSearchResult } from '../../../user/models/user-search-result';
 import { PlayerPosition, PlayerPositionOptions, PlayerPositionDisplay } from '../../enums/player-position';
+import { UpdateTeamMemberDTO } from '../../models/update-team-member-dto';
 
 @Component({
   selector: 'app-add-team-members',
@@ -66,10 +67,40 @@ export class AddTeamMembers {
   }
 
   saveThenGoBack() {
-    console.log('Saving squad...');
-    console.log('All members:', this.squadMembers());
-    //api call for saving members
-    this.goBack();
+
+    const teamId = this.route.snapshot.paramMap.get('id');
+
+    if (!teamId) {
+      return;
+    }
+
+    //generating the body
+    const body: UpdateTeamMemberDTO[] = this.squadMembers().map(member => ({
+      id: member.userId,
+      position: member.position,
+      tshirtNumber: member.tshirtNumber,
+      isCaptain: member.isCaptain
+    }));
+
+
+    console.log(body);
+
+
+
+
+    //calling the API
+    this.teamService.UpdateTeamMembers(body, teamId).subscribe({
+      next: (res) => {
+        console.log("The Result : ");
+        console.log(res);
+        this.goBack();
+      },
+      error: (err) => {
+        console.log("The Error : ");
+
+        console.log(err);
+      }
+    });
   }
 
   // Search user - DON'T filter out squad members, show all
@@ -262,4 +293,12 @@ export class AddTeamMembers {
   isUserInSquad(username: string): boolean {
     return this.squadMemberUsernames().includes(username);
   }
+
+
+
+
+
+
+
+
 }

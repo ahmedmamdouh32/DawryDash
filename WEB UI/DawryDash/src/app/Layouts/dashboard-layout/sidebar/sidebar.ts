@@ -10,6 +10,7 @@ import { NavigationEnd, Router, RouterLink } from "@angular/router";
 export class Sidebar {
   userName = localStorage.getItem('userName');
   fullName = localStorage.getItem('fullName');
+
   activeRoute: string = 'home';
 
   constructor(private router: Router) {
@@ -19,7 +20,7 @@ export class Sidebar {
         const url = event.urlAfterRedirects;
         if (url.includes('/dashboard/home')) {
           this.activeRoute = 'home';
-        } else if (url.includes('/dashboard/create-team')) {
+        } else if (url.includes('/dashboard/teams')) {
           this.activeRoute = 'teams';
         } else if (url.includes('/dashboard/tournaments')) {
           this.activeRoute = 'tournaments';

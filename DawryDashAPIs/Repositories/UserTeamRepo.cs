@@ -32,10 +32,23 @@ namespace DawryDashAPIs.Repositories
                 });
         }
 
+
+        public IQueryable<TeamUser> GetTeamUsers(int teamId)
+        {
+            return _dbContext.TeamUsers.Where(tu => tu.TeamId == teamId);
+        }
+
+
         public void AddTeamUser(TeamUser tUser)
         {
             _dbContext.TeamUsers.Add(tUser);
         }
+
+        public void DeleteTeamUser(TeamUser tUser)
+        {
+            _dbContext.TeamUsers.Remove(tUser);
+        }
+
 
 
     }

@@ -13,8 +13,6 @@ namespace DawryDashAPIs.Services.TeamService
         bool DeleteById(int id);
         bool Update(UpdateTeamDTO teamDTO, int id);
         List<Team> getTeamsByUserId(string userId);
-        void AddMembers(List<AddTeamMemberDTO> members, int teamId);
-
-
+        void UpdateMembers(List<AddTeamMemberDTO> newMembers, int teamId);
     }
 }

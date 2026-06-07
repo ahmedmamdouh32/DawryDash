@@ -26,6 +26,10 @@ namespace DawryDashAPIs.Mapping
 
             //TeamUser Mapping
             CreateMap<TeamUser, AddTeamMemberDTO>();
+            CreateMap<AddTeamMemberDTO, TeamUser>()
+                .ForMember(dest => dest.userNumber, opt => opt.MapFrom(src => src.tshirtNumber))
+                .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.id));
+
 
 
             //Match Mapping

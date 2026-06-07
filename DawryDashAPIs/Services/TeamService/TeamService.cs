@@ -147,15 +147,47 @@ namespace DawryDashAPIs.Services.TeamsServices
         }
 
 
-        public void AddMembers(List<AddTeamMemberDTO> members, int teamId)
+       
+        public void UpdateMembers(List<AddTeamMemberDTO> newMembers, int teamId)
         {
-            foreach (var member in members)
+            var existingMembers = userTeamRepo.GetTeamUsers(teamId).ToList();
+
+            Dictionary<string, AddTeamMemberDTO> newMembersDict = newMembers.ToDictionary(x => x.id);
+
+            foreach (TeamUser existingMember in existingMembers)
             {
-                TeamUser tUser = map.Map<TeamUser>(member);
+                bool existsInNewList = newMembersDict.TryGetValue(
+                    existingMember.UserId,
+                    out AddTeamMemberDTO? newMember);
+
+                // Member removed
+                if (!existsInNewList)
+                {
+                    userTeamRepo.DeleteTeamUser(existingMember);
+                    continue;
+                }
+
+                // Update existing member
+                existingMember.Position = newMember!.position;
+                existingMember.userNumber = newMember.tshirtNumber;
+                existingMember.IsCaptain = newMember.isCaptain;
+
+                // Remove processed member
+                newMembersDict.Remove(existingMember.UserId);
+            }
+
+            // Remaining members are new
+            foreach (AddTeamMemberDTO newMember in newMembersDict.Values)
+            {
+                TeamUser tUser = map.Map<TeamUser>(newMember);
+
                 tUser.TeamId = teamId;
+
                 userTeamRepo.AddTeamUser(tUser);
             }
+
             repo.Save();
         }
+
     }
 }

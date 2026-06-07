@@ -8,6 +8,7 @@ import { DashboardHome } from './Features/dashboard/pages/dashboard-home/dashboa
 import { CreateTeam } from './Features/team/pages/create-team/create-team';
 import { TeamDetails } from './Features/team/pages/team-details/team-details';
 import { AddTeamMembers } from './Features/team/pages/add-team-members/add-team-members';
+import { MyTeams } from './Features/team/pages/my-teams/my-teams';
 
 export const routes: Routes = [
     {
@@ -47,10 +48,13 @@ export const routes: Routes = [
                     path: 'create-team', component: CreateTeam
                 },
                 {
-                    path: 'team/:id', component: TeamDetails
+                    path: 'teams/:id', component: TeamDetails
                 },
                 {
-                    path: 'team/:id/members', component: AddTeamMembers
+                    path: 'teams/:id/members', component: AddTeamMembers
+                },
+                {
+                    path: 'teams', component: MyTeams
                 }
             ]
     }, // Empty path
