@@ -1,0 +1,280 @@
+<div class="main-content p-3 p-md-4">
+
+    <div class="container-fluid" style="max-width: 1100px;">
+
+        <!-- Header -->
+        <div class="mb-4">
+            <h1 class="text-white fw-bold mb-2">
+                Create Tournament
+            </h1>
+
+            <p class="text-white-50 mb-0">
+                Configure your tournament settings and start organizing matches.
+            </p>
+        </div>
+
+        <form [formGroup]="tournamentForm" (ngSubmit)="onSubmit()">
+
+            <div class="row g-4">
+
+                <!-- LEFT SIDE -->
+                <div class="col-lg-8">
+
+                    <!-- BASIC INFO -->
+                    <div class="bg-grey-dark green-border rounded-4 p-4 mb-4">
+
+                        <h4 class="text-white fw-bold mb-4">
+                            Basic Information
+                        </h4>
+
+                        <!-- Name -->
+                        <div class="mb-4">
+
+                            <label class="form-label text-white-75">
+                                Tournament Name *
+                            </label>
+
+                            <input type="text" class="form-control custom-input" formControlName="name"
+                                placeholder="Enter tournament name">
+                            @if(name?.touched && name?.invalid)
+                            {
+                            @if(name?.errors?.['required'])
+                            {
+                            <span class="validation-error-font">Tournament name is required</span>
+                            }
+                            @else
+                            {
+                            @if(name?.errors?.['maxlength'])
+                            {
+                            <span class="validation-error-font">Maximum length is 50 characters</span>
+                            }
+                            }
+                            }
+
+                        </div>
+
+                        <!-- Description -->
+                        <div>
+
+                            <label class="form-label text-white-75">
+                                Description
+                            </label>
+
+                            <textarea rows="5" class="form-control custom-input" formControlName="description"
+                                placeholder="Describe your tournament">
+                            </textarea>
+                            @if(description?.touched && description?.invalid)
+                            {
+                            @if(description?.errors?.['maxlength'])
+                            {
+                            <span class="validation-error-font">Maximum length is 300 characters</span>
+                            }
+                            }
+                        </div>
+
+                    </div>
+
+                    <!-- TOURNAMENT SETTINGS -->
+                    <div class="bg-grey-dark green-border rounded-4 p-4 mb-4">
+
+                        <h4 class="text-white fw-bold mb-4">
+                            Tournament Settings
+                        </h4>
+
+                        <div class="row g-3">
+
+                            <!-- Max Teams -->
+                            <div class="col-md-6">
+
+                                <label class="form-label text-white-75">
+                                    Max Teams *
+                                </label>
+
+                                <input type="number" class="form-control custom-input" formControlName="maxTeams"
+                                    placeholder="16">
+                                @if(maxTeams?.touched && maxTeams?.invalid)
+                                {
+                                @if(maxTeams?.errors?.['required'])
+                                {
+                                <span class="validation-error-font">Max Teams is required</span>
+                                }
+                                @else
+                                {
+                                @if(maxTeams?.errors?.['max'])
+                                {
+                                <span class="validation-error-font">Max Teams length is 32 team</span>
+                                }
+
+                                @else
+                                {
+                                @if(maxTeams?.errors?.['min']){
+                                <span class="validation-error-font">Min Teams length is 2 teams</span>
+                                }
+                                @else {
+                                @if (maxTeams?.errors?.['invalidSize']) {
+                                <span class="validation-error-font">Number of teams must be 2, 4, 8, 16, or 32</span>
+                                }
+                                }
+                                }
+                                }
+                                }
+
+
+                            </div>
+
+                            <!-- Match Duration -->
+                            <div class="col-md-6">
+
+                                <label class="form-label text-white-75">
+                                    Match Duration (minutes) *
+                                </label>
+
+                                <input type="number" class="form-control custom-input" formControlName="matchDuration"
+                                    placeholder="90">
+                                @if(matchDuration?.touched && matchDuration?.invalid)
+                                {
+                                @if(matchDuration?.errors?.['required'])
+                                {
+                                <span class="validation-error-font">Match Duration is required</span>
+                                }
+                                @else
+                                {
+                                @if(matchDuration?.errors?.['min'])
+                                {
+                                <span class="validation-error-font">Invalid Duration</span>
+                                }
+                                }
+                                }
+
+                            </div>
+
+                            <!-- Tournament Duration -->
+                            <div class="col-md-6">
+
+                                <label class="form-label text-white-75">
+                                    Tournament Duration
+                                </label>
+
+                                <input type="text" class="form-control custom-input" formControlName="duration"
+                                    placeholder="7 Days">
+                                @if(duration?.touched && duration?.invalid)
+                                {
+                                @if(duration?.errors?.['min'])
+                                {
+                                <span class="validation-error-font">Invalid Duration</span>
+                                }
+                                }
+
+
+                            </div>
+
+                            <!-- Start Date -->
+                            <div class="col-md-6">
+                                <label class="form-label text-white-75"> Start Date </label>
+                                <input type="date" class="form-control custom-input" formControlName="startDate">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LOCATION -->
+                    <div class="bg-grey-dark green-border rounded-4 p-4">
+
+                        <h4 class="text-white fw-bold mb-4">
+                            Location & Media
+                        </h4>
+
+                        <div class="row g-3">
+
+                            <!-- Address -->
+                            <div class="col-12">
+                                <label class="form-label text-white-75"> Address </label>
+                                <input type="text" class="form-control custom-input" formControlName="address"
+                                    placeholder="Tournament location">
+                            </div>
+                            <div class="col-12">
+
+                                <label class="form-label text-white-75">
+                                    Tournament Image
+                                </label>
+
+                                <!-- Hidden Input -->
+                                <input #fileInput type="file" accept="image/*" hidden
+                                    (change)="onImageSelected($event)">
+
+                                <!-- Upload Box -->
+                                <div class="upload-box text-center p-5">
+
+                                    <!-- EMPTY STATE -->
+                                    @if (previewImage() === 'tournament.png') {
+                                    <div>
+                                        <app-button customClass="fw-bold px-5 py-3" (btnClick)="fileInput.click()">
+                                            +
+                                        </app-button>
+                                        <p class="text-white-50 mt-3 mb-0">
+                                            Click to upload an image
+                                        </p>
+                                    </div>
+                                    } @else {
+
+                                    <!-- IMAGE PREVIEW -->
+                                    <div class="d-flex flex-column align-items-center gap-3">
+                                        <div class="preview-container col-12">
+                                            <img [src]="previewImage()" alt="Tournament preview">
+                                        </div>
+                                        <app-button variant="gray" customClass="fw-bold" (btnClick)="removeImage()">
+                                            Remove
+                                        </app-button>
+
+                                    </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="d-flex justify-content-center mt-3 mb-5">
+                        <app-button variant="green" size="medium" customClass="w-100 px-4 py-3" type="submit">
+
+                            Create Tournament
+
+                        </app-button>
+                    </div>
+
+                </div>
+
+                <!-- RIGHT SIDE -->
+                <div class="col-lg-4">
+
+                    <!-- PREVIEW CARD -->
+                    <div class="bg-grey-dark green-border rounded-4 p-4 sticky-card">
+
+                        <h4 class="text-white fw-bold mb-4">
+                            Preview
+                        </h4>
+                        <div class="preview-box rounded-4 overflow-hidden mb-4 d-flex justify-content-center">
+                            <img [src]="previewImage()">
+                        </div>
+
+                        <h5 class="text-white fw-bold">
+                            {{ tournamentForm.value.name || 'Tournament Name' }}
+                        </h5>
+
+                        <p class="text-white-50 small">
+                            {{ tournamentForm.value.description || 'Tournament description will appear here.' }}
+                        </p>
+
+                        <div class="d-flex justify-content-between text-white-50 small mb-2">
+                            <span>Teams</span>
+                            <span>{{ tournamentForm.value.maxTeams || 0 }}</span>
+                        </div>
+
+                        <div class="d-flex justify-content-between text-white-50 small mb-4">
+                            <span>Match Duration</span>
+                            <span>{{ tournamentForm.value.matchDuration || 0 }} min</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

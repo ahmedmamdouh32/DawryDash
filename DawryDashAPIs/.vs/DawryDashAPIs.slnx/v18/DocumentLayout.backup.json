@@ -98,8 +98,7 @@
               "RelativeToolTip": "DTOs\\TeamsDTOs\\AddMembersToTeamDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAABaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-06T22:40:40.05Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-06T22:40:40.05Z"
             },
             {
               "$type": "Document",
@@ -123,8 +122,7 @@
               "RelativeToolTip": "DTOs\\TeamsDTOs\\AddTeamMemberDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAQAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-03T20:30:51.295Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-03T20:30:51.295Z"
             },
             {
               "$type": "Document",
@@ -136,8 +134,7 @@
               "RelativeToolTip": "Repositories\\UserTeamRepo.cs",
               "ViewState": "AgIAAB4AAAAAAAAAAAApwCsAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-03T20:24:52.78Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-03T20:24:52.78Z"
             },
             {
               "$type": "Document",
@@ -149,8 +146,7 @@
               "RelativeToolTip": "DTOs\\TeamsDTOs\\TeamMemberDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAQAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-03T20:24:26.317Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-03T20:24:26.317Z"
             },
             {
               "$type": "Document",
@@ -160,7 +156,7 @@
               "RelativeDocumentMoniker": "Services\\TeamService\\TeamService.cs",
               "ToolTip": "C:\\Users\\adminstrator\\Documents\\Dawry Dash\\DawryDashAPIs\\Services\\TeamService\\TeamService.cs",
               "RelativeToolTip": "Services\\TeamService\\TeamService.cs",
-              "ViewState": "AgIAAJQAAAAAAAAAAAAswJwAAABAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJ4AAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-03T20:24:00.493Z",
               "EditorCaption": ""
@@ -175,8 +171,7 @@
               "RelativeToolTip": "Controllers\\TeamController.cs",
               "ViewState": "AgIAAD4AAAAAAAAAAAAswEkAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-03T20:23:52.245Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-03T20:23:52.245Z"
             },
             {
               "$type": "Document",
@@ -200,8 +195,7 @@
               "RelativeToolTip": "Mapping\\MappingConfig.cs",
               "ViewState": "AgIAABAAAAAAAAAAAAAQwB4AAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-03T19:12:06.767Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-03T19:12:06.767Z"
             },
             {
               "$type": "Document",
@@ -261,8 +255,7 @@
               "RelativeToolTip": "Entities\\TeamUser.cs",
               "ViewState": "AgIAAAUAAAAAAAAAAAAAwAYAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-03T15:09:42.487Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-03T15:09:42.487Z"
             },
             {
               "$type": "Document",
@@ -274,8 +267,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAA8AAAAAAAAAAAAAABwAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-31T21:25:05.616Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-31T21:25:05.616Z"
             },
             {
               "$type": "Document",
@@ -287,8 +279,7 @@
               "RelativeToolTip": "Services\\TeamService\\ITeamService.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAuwBAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-31T21:21:37.473Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-31T21:21:37.473Z"
             }
           ]
         },

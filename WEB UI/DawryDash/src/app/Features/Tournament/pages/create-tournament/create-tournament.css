@@ -1,0 +1,122 @@
+.main-content {
+    min-height: 100vh;
+}
+
+@media (max-width: 767.98px) {
+
+    .main-content {
+        padding-top: 66px;
+    }
+
+}
+
+@media (min-width: 768px) {
+
+    .main-content {
+        margin-left: 260px;
+    }
+
+}
+
+/* Reusable dark card */
+.bg-grey-dark {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(18px);
+}
+
+/* Green border */
+.green-border {
+    border: 1px solid rgba(137, 233, 0, 0.18);
+    box-shadow: 0 0 18px rgba(137, 233, 0, 0.05);
+}
+
+/* Inputs */
+.custom-input {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    color: white !important;
+    padding: 12px 14px;
+}
+
+.custom-input:focus {
+    border-color: #89e900 !important;
+    box-shadow: 0 0 0 4px rgba(137, 233, 0, 0.12) !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.custom-input::placeholder {
+    color: rgba(255, 255, 255, 0.45);
+}
+
+/* Text */
+.text-white-75 {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+/* Preview */
+.preview-box {
+    height: 220px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+
+
+/* Sticky right card */
+.sticky-card {
+    position: sticky;
+    top: 100px;
+}
+
+
+.upload-area {
+
+    border-style: dashed !important;
+
+    transition: all 0.3s ease;
+
+    cursor: pointer;
+
+}
+
+.upload-area.drag-over {
+
+    border-color: #89e900 !important;
+
+    background: rgba(137, 233, 0, 0.08);
+
+}
+
+/* For the preview container */
+.preview-container {
+    width: 100%;
+    max-width: 200px; /* Adjust as needed */
+    height: 150px; /* Fixed height */
+    overflow: hidden; /* Hides anything outside the container */
+    border-radius: 8px;
+    position: relative;
+}
+
+/* For the image itself */
+.preview-container img {
+    width: 100%;
+    /* height: 100%; */
+    object-fit: cover; /* Ensures image covers area without distortion */
+    display: block;
+}
+
+/* Alternative if you want the whole image visible without cropping */
+.preview-container img {
+    width: 100%;
+    /* height: auto; */
+    object-fit: contain; /* Shows entire image, may leave empty space */
+    display: block;
+}
+
+/* Alternative for exact fit with potential distortion */
+.preview-container img {
+    width: 100%;
+    height: 100%;
+    object-fit:contain; 
+    /* Stretches to fill, may distort */
+}
