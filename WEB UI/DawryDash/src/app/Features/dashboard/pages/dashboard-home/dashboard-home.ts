@@ -5,10 +5,11 @@ import { DashboardHomeResponse } from '../../models/dashboard-home-response';
 import { RouterLink } from "@angular/router";
 import { TeamService } from '../../../team/services/team-service';
 import { groupBy } from 'rxjs';
+import { NgOptimizedImage } from "@angular/common";
 
 @Component({
   selector: 'app-dashboard-home',
-  imports: [Button, RouterLink],
+  imports: [Button, RouterLink, NgOptimizedImage],
   templateUrl: './dashboard-home.html',
   styleUrl: './dashboard-home.css',
 })

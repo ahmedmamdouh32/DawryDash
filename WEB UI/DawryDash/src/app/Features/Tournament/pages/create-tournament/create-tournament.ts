@@ -1,6 +1,9 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Button } from '../../../../Components/button/button';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { TournamentService } from '../../services/tournament-service';
+import { NotExpr } from '@angular/compiler';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-tournament',
@@ -9,6 +12,8 @@ import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validatio
   styleUrl: './create-tournament.css',
 })
 export class CreateTournament {
+  tournmentService = inject(TournamentService);
+  router = inject(Router);
 
   tournamentForm = new FormGroup({
 
@@ -24,7 +29,7 @@ export class CreateTournament {
         this.allowedTournamentSize() // Add the custom validator here
       ]),
 
-    matchDuration: new FormControl<number | null>(90,
+    matchDurationMinutes: new FormControl<number | null>(90,
       [
         Validators.required,
         Validators.min(1),
@@ -47,17 +52,24 @@ export class CreateTournament {
         Validators.maxLength(300)
       ]),
 
-    image: new FormControl<File | null>(null)
+    prize: new FormControl(
+      [
+        Validators.min(0)
+      ]),
 
+    image: new FormControl<File | null>(null),
+
+    creatorId: new FormControl({ value: localStorage.getItem('userId'), disabled: true })
   });
 
   get name() { return this.tournamentForm.get('name'); }
+  get prize() { return this.tournamentForm.get('prize'); }
   get maxTeams() { return this.tournamentForm.get('maxTeams'); }
   get duration() { return this.tournamentForm.get('duration'); }
   get startDate() { return this.tournamentForm.get('startDate'); }
   get address() { return this.tournamentForm.get('address'); }
   get description() { return this.tournamentForm.get('description'); }
-  get matchDuration() { return this.tournamentForm.get('matchDuration'); }
+  get matchDurationMinutes() { return this.tournamentForm.get('matchDurationMinutes'); }
 
   // Custom validator for allowed tournament sizes
   allowedTournamentSize(): ValidatorFn {
@@ -83,7 +95,51 @@ export class CreateTournament {
       // 2- create create-tournament API
       // 3- create tournament page (dashboard) to show your created tournamnets, joined ones, and search on tournaments by name
       // 4- create search-tournament API
+
     }
+    const formData = new FormData();
+    const formValue = this.tournamentForm.getRawValue();
+
+    Object.entries(formValue).forEach(([key, value]) => {
+      if (value !== null && value !== undefined) {
+        // image/file
+        if (value instanceof File) {
+          formData.append(key, value);
+        }
+        // normal values
+        else {
+          formData.append(key, value.toString());
+        }
+      }
+    });
+
+    this.tournmentService.Register(formData).subscribe(
+      {
+        next: (res) => {
+          console.log(res);
+          this.tournamentForm.reset();
+          this.removeImage();
+          this.router.navigate(['/dashboard']);
+
+
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      }
+
+
+
+    )
+
+
+
+
+
+
+
+
+
   }
 
 

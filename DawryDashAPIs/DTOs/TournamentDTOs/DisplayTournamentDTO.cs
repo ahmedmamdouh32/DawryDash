@@ -21,7 +21,7 @@ namespace DawryDashAPIs.DTOs.TournamentDTOs
 
         public int? Duration { set; get; } //duration by day
 
-        public int MathcDurationMinutes { set; get; } 
+        public int MatchDurationMinutes { set; get; } 
 
         public EventStatus Status { set; get; }
 

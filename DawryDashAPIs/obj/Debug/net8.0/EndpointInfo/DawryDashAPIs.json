@@ -483,25 +483,137 @@
         "tags": [
           "Tournament"
         ],
+        "summary": "Adding a new Tournament",
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/AddTournamentDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddTournamentDTO"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddTournamentDTO"
+                "required": [
+                  "CreatorId",
+                  "MaxTeams"
+                ],
+                "type": "object",
+                "properties": {
+                  "Name": {
+                    "maxLength": 50,
+                    "type": "string"
+                  },
+                  "Description": {
+                    "maxLength": 300,
+                    "type": "string"
+                  },
+                  "prize": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "CreatorId": {
+                    "type": "string"
+                  },
+                  "MaxTeams": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "StartDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "Address": {
+                    "maxLength": 200,
+                    "type": "string"
+                  },
+                  "Duration": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "MatchDurationMinutes": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "Image": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "Name": {
+                  "style": "form"
+                },
+                "Description": {
+                  "style": "form"
+                },
+                "prize": {
+                  "style": "form"
+                },
+                "CreatorId": {
+                  "style": "form"
+                },
+                "MaxTeams": {
+                  "style": "form"
+                },
+                "StartDate": {
+                  "style": "form"
+                },
+                "Address": {
+                  "style": "form"
+                },
+                "Duration": {
+                  "style": "form"
+                },
+                "MatchDurationMinutes": {
+                  "style": "form"
+                },
+                "Image": {
+                  "style": "form"
+                }
               }
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Tournament/Creator": {
+      "get": {
+        "tags": [
+          "Tournament"
+        ],
+        "summary": "Get tournaments created by user",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Tournament/User": {
+      "get": {
+        "tags": [
+          "Tournament"
+        ],
+        "summary": "Get tournaents user has joined",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -631,53 +743,6 @@
           },
           "isCaptain": {
             "type": "boolean"
-          }
-        },
-        "additionalProperties": false
-      },
-      "AddTournamentDTO": {
-        "required": [
-          "maxTeams"
-        ],
-        "type": "object",
-        "properties": {
-          "name": {
-            "maxLength": 50,
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "maxLength": 300,
-            "type": "string",
-            "nullable": true
-          },
-          "imgUrl": {
-            "maxLength": 200,
-            "type": "string",
-            "nullable": true
-          },
-          "maxTeams": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "startDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "address": {
-            "maxLength": 200,
-            "type": "string",
-            "nullable": true
-          },
-          "duration": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "mathcDurationMinutes": {
-            "type": "integer",
-            "format": "int32"
           }
         },
         "additionalProperties": false

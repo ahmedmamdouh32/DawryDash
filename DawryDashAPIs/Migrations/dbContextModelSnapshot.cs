@@ -262,6 +262,10 @@ namespace DawryDashAPIs.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("CreatorId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Description")
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
@@ -273,7 +277,7 @@ namespace DawryDashAPIs.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<int>("MathcDurationMinutes")
+                    b.Property<int>("MatchDurationMinutes")
                         .HasColumnType("int");
 
                     b.Property<int>("MaxTeams")
@@ -293,7 +297,12 @@ namespace DawryDashAPIs.Migrations
                     b.Property<int>("TeamsEntered")
                         .HasColumnType("int");
 
+                    b.Property<int?>("prize")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CreatorId");
 
                     b.ToTable("Tournaments");
                 });
@@ -535,6 +544,17 @@ namespace DawryDashAPIs.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("DawryDashAPIs.Entities.Tournament", b =>
+                {
+                    b.HasOne("DawryDashAPIs.Entities.ApplicationUser", "Creator")
+                        .WithMany("CreatedTournaments")
+                        .HasForeignKey("CreatorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Creator");
+                });
+
             modelBuilder.Entity("DawryDashAPIs.Entities.TournamentTeam", b =>
                 {
                     b.HasOne("DawryDashAPIs.Entities.Team", "Team")
@@ -607,6 +627,8 @@ namespace DawryDashAPIs.Migrations
 
             modelBuilder.Entity("DawryDashAPIs.Entities.ApplicationUser", b =>
                 {
+                    b.Navigation("CreatedTournaments");
+
                     b.Navigation("TeamUsers");
                 });
 

@@ -269,12 +269,58 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "DTO",
-        "Type": "DawryDashAPIs.DTOs.TournamentDTOs.AddTournamentDTO",
-        "IsRequired": true
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "prize",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "CreatorId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "MaxTeams",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "StartDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Duration",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "MatchDurationMinutes",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Image",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [],
+    "Summary": "Adding a new Tournament"
   },
   {
     "ContainingType": "DawryDashAPIs.Controllers.TournamentController",
@@ -292,6 +338,40 @@
     ],
     "ReturnTypes": [],
     "Summary": "Get By Id"
+  },
+  {
+    "ContainingType": "DawryDashAPIs.Controllers.TournamentController",
+    "Method": "GetCreatorTournaments",
+    "RelativePath": "api/Tournament/Creator",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [],
+    "Summary": "Get tournaments created by user"
+  },
+  {
+    "ContainingType": "DawryDashAPIs.Controllers.TournamentController",
+    "Method": "GetUserTournaments",
+    "RelativePath": "api/Tournament/User",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [],
+    "Summary": "Get tournaents user has joined"
   },
   {
     "ContainingType": "DawryDashAPIs.Controllers.UserController",

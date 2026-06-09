@@ -14,5 +14,9 @@ namespace DawryDashAPIs.Entities
         public virtual ICollection<TeamUser> TeamUsers { set; get; } = new List<TeamUser>();
         public DateTime JoinedAt { get; set; } = DateTime.UtcNow;
 
+
+        public ICollection<Tournament> CreatedTournaments
+        { get; set; } = new List<Tournament>();
+
     }
 }

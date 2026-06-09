@@ -1,16 +1,15 @@
 <div class="main-content p-3 p-md-4">
 
     <div class="container-fluid" style="max-width: 1100px;">
-
-        <!-- Header -->
-        <div class="mb-4">
-            <h1 class="text-white fw-bold mb-2">
-                Create Tournament
-            </h1>
-
+        <!-- Hero Section -->
+        <div class="rounded-4 p-4 mb-4"
+            style="background: linear-gradient(135deg, rgba(137,233,0,0.08) 0%, rgba(0,150,136,0.08) 100%);">
+            <h1 class="text-white fw-bold fs-1 mb-2">Create Tournament</h1>
             <p class="text-white-50 mb-0">
                 Configure your tournament settings and start organizing matches.
             </p>
+            <!-- Stepper -->
+
         </div>
 
         <form [formGroup]="tournamentForm" (ngSubmit)="onSubmit()">
@@ -48,6 +47,25 @@
                             {
                             <span class="validation-error-font">Maximum length is 50 characters</span>
                             }
+                            }
+                            }
+
+                        </div>
+
+
+                        <div class="mb-4">
+
+                            <label class="form-label text-white-75">
+                                Prize
+                            </label>
+
+                            <input type="number" class="form-control custom-input" formControlName="prize"
+                                placeholder="Enter prize in EGP">
+                            @if(prize?.touched && prize?.invalid)
+                            {
+                            @if(name?.errors?.['min'])
+                            {
+                            <span class="validation-error-font">Enter Valid Value</span>
                             }
                             }
 
@@ -129,17 +147,17 @@
                                     Match Duration (minutes) *
                                 </label>
 
-                                <input type="number" class="form-control custom-input" formControlName="matchDuration"
-                                    placeholder="90">
-                                @if(matchDuration?.touched && matchDuration?.invalid)
+                                <input type="number" class="form-control custom-input"
+                                    formControlName="matchDurationMinutes" placeholder="90">
+                                @if(matchDurationMinutes?.touched && matchDurationMinutes?.invalid)
                                 {
-                                @if(matchDuration?.errors?.['required'])
+                                @if(matchDurationMinutes?.errors?.['required'])
                                 {
                                 <span class="validation-error-font">Match Duration is required</span>
                                 }
                                 @else
                                 {
-                                @if(matchDuration?.errors?.['min'])
+                                @if(matchDurationMinutes?.errors?.['min'])
                                 {
                                 <span class="validation-error-font">Invalid Duration</span>
                                 }
@@ -270,7 +288,7 @@
 
                         <div class="d-flex justify-content-between text-white-50 small mb-4">
                             <span>Match Duration</span>
-                            <span>{{ tournamentForm.value.matchDuration || 0 }} min</span>
+                            <span>{{ tournamentForm.value.matchDurationMinutes || 0 }} min</span>
                         </div>
                     </div>
                 </div>

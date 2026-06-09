@@ -13,9 +13,10 @@ namespace DawryDashAPIs.DTOs.TournamentDTOs
         [MaxLength(300, ErrorMessage = "Maximum length for Tournament Description is 300")]
         public string? Description { set; get; }
 
-        [MaxLength(200, ErrorMessage = "Maximum length for Image URL is 200")]
-        public string? ImgUrl { set; get; }
+        public int? prize { set; get; }
 
+        [Required(ErrorMessage = "Creator Id is required")]
+        public string CreatorId { set; get; }
 
         [Required(ErrorMessage ="This field is required")]
         [ValidTeamsNumber(ErrorMessage = "Invalid teams number, Choose a number of power 2")]
@@ -26,6 +27,7 @@ namespace DawryDashAPIs.DTOs.TournamentDTOs
         [MaxLength(200)]
         public string? Address { set; get; }
         public int? Duration { set; get; } //duration by day
-        public int MathcDurationMinutes { set; get; } = 15;
+        public int MatchDurationMinutes { set; get; }
+        public IFormFile? Image { get; set; } //for receiving image
     }
 }

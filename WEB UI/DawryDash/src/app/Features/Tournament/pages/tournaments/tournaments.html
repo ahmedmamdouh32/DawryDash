@@ -1,0 +1,159 @@
+<div class="p-md-4 main-content">
+
+    <div class="container-fluid px-0">
+
+        <!-- Welcome Banner -->
+        <div class="rounded-4 p-4 mb-4 d-flex justify-content-between align-items-center"
+            style="background :linear-gradient(to right, var(--bg-to-green), var(--color-function-light))">
+            <div>
+                <h1 class="text-white fw-bold fs-2 fs-md-1 mb-2">Your Tournament Hub</h1>
+                <p class="text-white-50 mb-0 fs-6">
+                    Manage competitions, track matches, and keep your teams competing.
+                </p>
+            </div>
+            <div>
+                <app-button variant="gray" size="medium" routerLink="/dashboard/tournaments/create-tournament"
+                    customClass="fw-semibold">Create Tournament</app-button>
+            </div>
+
+        </div>
+
+
+
+
+        <!-- SEARCH + FILTERS -->
+
+        <div class="bg-grey-dark rounded-4 p-3 p-md-4 mb-4 green-border">
+
+            <div class="row g-3 align-items-center">
+
+                <!-- SEARCH -->
+
+                <div class="col-lg-6">
+
+                    <div class="position-relative">
+
+                        <i
+                            class="fa-solid fa-magnifying-glass position-absolute top-50 start-0 translate-middle-y ms-3 text-white-50">
+                        </i>
+
+                        <input type="text" class="form-control custom-input ps-5" placeholder="Search tournaments..." />
+
+                    </div>
+
+                </div>
+
+                <!-- FILTERS -->
+
+                <div class="col-lg-6">
+
+                    <div class="d-flex gap-2 flex-wrap justify-content-lg-end">
+
+                        <button class="filter-btn active-filter">
+                            All
+                        </button>
+
+                        <button class="filter-btn">
+                            Created
+                        </button>
+
+                        <button class="filter-btn">
+                            Joined
+                        </button>
+
+                        <button class="filter-btn">
+                            Active
+                        </button>
+
+                        <button class="filter-btn">
+                            Completed
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <br>
+        <!-- MY TOURNAMENTS -->
+        <div class="d-flex justify-content-between align-items-center mt-3 mb-4">
+            <h2 class="text-white fw-bold fs-3 mb-0">
+                My Tournaments
+            </h2>
+        </div>
+        <!-- user created tournament -->
+        <div class="row g-3 g-md-4 mb-4">
+            @for (t of (creatorTournaments()); track $index)
+            {
+            <div class="col-lg-4 col-md-6 d-flex">
+                <div class="bg-grey-dark rounded-4 green-border overflow-hidden w-100 d-flex flex-column">
+                    <div style="height:180px;">
+                        <img [src]="t.imgUrl" style="width:100%;height:100%;object-fit:contain;" />
+                    </div>
+                    <div class="p-4 d-flex flex-column flex-grow-1 mb-1">
+                        <h4 class="text-white fw-bold mb-2">{{t.name}}</h4>
+                        <div class="text-white-50 small mb-2">{{t.teamsEntered}}/{{t.maxTeams}} teams • Starts
+                            {{t.startDate}}</div>
+                        <div>
+                            <!-- <div class="mb-4"> -->
+                            <!-- <div class="d-flex justify-content-between mb-2 small">
+                                <span class="text-white-50">Current Stage</span>
+                                <span class="text-white">Semi Finals</span>
+                            </div>
+                            <div class="d-flex justify-content-between small">
+                                <span class="text-white-50">Matches Played</span><span class="text-white">18</span>
+                            </div> -->
+                            <!-- </div> -->
+                            <div>
+                                <app-button variant="green" size="medium" customClass="w-100 mt-2">View
+                                    Dashboard</app-button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+
+        <br>
+        <div class="d-flex justify-content-between align-items-center mt-3 mb-4">
+            <h2 class="text-white fw-bold fs-3 mb-0">
+                Tournaments Joined
+            </h2>
+        </div>
+        <!-- user joined tournament -->
+        <div class="row g-3 g-md-4 mb-5">
+            @for (t of (userTournaments()); track $index)
+            {
+            <div class="col-lg-4 col-md-6 d-flex">
+                <div class="bg-grey-dark rounded-4 green-border overflow-hidden w-100 d-flex flex-column">
+                    <div style="height:180px;">
+                        <img [src]="t.imgUrl" style="width:100%;height:100%;object-fit:contain;" />
+                    </div>
+                    <div class="p-4 d-flex flex-column flex-grow-1 mb-1">
+                        <h4 class="text-white fw-bold mb-2">{{t.name}}</h4>
+                        <div class="text-white-50 small mb-2">{{t.teamsEntered}}/{{t.maxTeams}} teams • Starts
+                            {{t.startDate}}</div>
+                        <div>
+                            <!-- <div class="mb-4"> -->
+                            <!-- <div class="d-flex justify-content-between mb-2 small">
+                                <span class="text-white-50">Current Stage</span>
+                                <span class="text-white">Semi Finals</span>
+                            </div>
+                            <div class="d-flex justify-content-between small">
+                                <span class="text-white-50">Matches Played</span><span class="text-white">18</span>
+                            </div> -->
+                            <!-- </div> -->
+                            <div>
+                                <app-button variant="green" size="medium" customClass="w-100 mt-2">View
+                                    Dashboard</app-button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>

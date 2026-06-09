@@ -3,6 +3,7 @@ using DawryDashAPIs.DTOs.TeamDTOs;
 using DawryDashAPIs.DTOs.TeamsDTOs;
 using DawryDashAPIs.DTOs.TournamentDTOs;
 using DawryDashAPIs.Entities;
+using DawryDashAPIs.Services;
 using DawryDashAPIs.Services.TeamService;
 using DawryDashAPIs.Services.TeamsServices;
 using DawryDashAPIs.Services.TournamentService;
@@ -16,6 +17,7 @@ namespace DawryDashAPIs.Controllers
     public class TournamentController : ControllerBase
     {
         ITournanemtService tournamentService;
+
         IMapper map;
         public TournamentController(ITournanemtService _tournamentService, IMapper _map)
         {
@@ -33,15 +35,46 @@ namespace DawryDashAPIs.Controllers
         }
 
 
+        [EndpointSummary("Adding a new Tournament")]
         [HttpPost]
-        public IActionResult Add(AddTournamentDTO DTO)
+        public async Task<IActionResult> Add([FromForm]AddTournamentDTO DTO)
         {
-            Tournament createdTournament = tournamentService.Add(DTO);
-            return CreatedAtAction(
-                   nameof(GetById),
-                   new { id = createdTournament.Id },
-                   map.Map<DisplayTournamentDTO>(createdTournament)
-            );
+            ServiceResult<Tournament> result = await tournamentService.Add(DTO);
+            if(result.Success == true)
+            {
+                return CreatedAtAction(
+                    nameof(GetById),
+                    new { id = result.Data.Id },
+                    map.Map<DisplayTournamentDTO>(result.Data)
+                );
+            }
+            else
+            {
+                return BadRequest(result.Message);
+            }
+            
         }
+
+
+
+        [EndpointSummary("Get tournaments created by user")]
+        [HttpGet("Creator")]
+        public IActionResult GetCreatorTournaments(string userId)
+        {
+            var tournaments = tournamentService.UserCreatedTournaments(userId);
+            return tournaments == null ? NotFound() : Ok(tournaments);
+        }
+
+
+        [EndpointSummary("Get tournaents user has joined")]
+        [HttpGet("User")]
+        public IActionResult GetUserTournaments(string userId)
+        {
+            var tournaments = tournamentService.UserJoinedTournaments(userId);
+            return tournaments == null ? NotFound() : Ok(tournaments);
+        }
+
+
+
     }
 }

@@ -99,7 +99,7 @@
         <a href="#" class="small" style="color:var(--accent)">View All →</a>
     </div>
 
-    <div class="row g-3 g-md-4 mb-5">
+    <!-- <div class="row g-3 g-md-4 mb-5">
 
         @for(tournament of (dashboardData()?.activeTournaments??[]) ; track tournament.id){
 
@@ -119,6 +119,46 @@
                         Starts {{tournament.startDate}}</div>
                     <app-button variant="green" size="medium" routerLink="/login" customClass="w-100">View
                         Details</app-button>
+                </div>
+            </div>
+        </div>
+        }
+    </div> -->
+
+
+    <div class="row g-3 g-md-4 mb-5">
+        @for(tournament of (dashboardData()?.activeTournaments??[]) ; track tournament.id){
+        <div class="col-lg-4 col-md-6 d-flex">
+            <div class="bg-grey-dark rounded-4 green-border overflow-hidden w-100 d-flex flex-column">
+                <div style="height:180px;">
+                    <img [src]="tournament.imgUrl" style="width:100%;height:100%;object-fit:contain;" />
+                </div>
+                <div class="p-4 d-flex flex-column flex-grow-1">
+                    <div class="mb-3">
+                    </div>
+                    <h4 class="text-white fw-bold mb-2">
+                        {{tournament.name}}
+                    </h4>
+                    <div class="text-white-50 small mb-2">{{tournament.teamsEntered}}/{{tournament.maxTeams}} teams
+                        •
+                        Starts {{tournament.startDate}}</div>
+                    <div class="mb-4">
+
+                        <!-- <div class="d-flex justify-content-between mb-2 small">
+
+                            <span class="text-white-50">
+                                Current Stage
+                            </span>
+                            <span class="text-white">Semi Finals</span>
+                        </div>
+                        <div class="d-flex justify-content-between small">
+                            <span class="text-white-50">Matches Played</span><span class="text-white">18</span>
+                        </div> -->
+                    </div>
+                    <div class="mt-auto">
+                        <app-button variant="green" size="medium" routerLink="#" customClass="w-100">View
+                            Details</app-button>
+                    </div>
                 </div>
             </div>
         </div>

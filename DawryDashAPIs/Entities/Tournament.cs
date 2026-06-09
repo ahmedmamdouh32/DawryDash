@@ -12,6 +12,8 @@ namespace DawryDashAPIs.Entities
 
         [MaxLength(300)]
         public string? Description { set; get; }
+
+        public int? prize { set; get; }
         
         [MaxLength(200)]
         public string? ImgUrl { set; get; }
@@ -22,13 +24,15 @@ namespace DawryDashAPIs.Entities
         [MaxLength(200)]
         public string? Address { set; get; }
         public int? Duration { set; get; } //duration by day
-        public int MathcDurationMinutes { set; get; } = 15;
+        public int MatchDurationMinutes { set; get; } = 15;
         public EventStatus Status { set; get; } = EventStatus.Preparing;
 
 
         public int MaxTeams { set; get; }
         public int TeamsEntered { set; get; } = 0;
 
+        public string CreatorId { set; get; }
+        public virtual ApplicationUser Creator { set; get; }
         public virtual ICollection<Match> Matches { set; get; } = new List<Match>();
         public virtual ICollection<TournamentTeam> TournamentTeams { get; set; }
     }

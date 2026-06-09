@@ -65,6 +65,7 @@ namespace DawryDashAPIs
             builder.Services.AddScoped<GenericRepo<Team>>();
             builder.Services.AddScoped<GenericRepo<Match>>();
             builder.Services.AddScoped<UserTeamRepo>();
+            builder.Services.AddScoped<TournamentTeamRepo>();
             builder.Services.AddScoped<GenericRepo<Tournament>>();
             builder.Services.AddScoped<ITournanemtService, TournamentService>();
             builder.Services.AddScoped<IUserService, UserService>();
