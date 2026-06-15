@@ -182,6 +182,12 @@ namespace DawryDashAPIs.Services.UserService
             );
             return result.ToList();
         }
-       
+
+        public ApplicationUser GetUserById(string userId)
+        {
+            var result = userManager.Users.FirstOrDefault(u => u.Id == userId);
+            return result;
+        }
+
     }
 }

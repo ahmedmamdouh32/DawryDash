@@ -18,6 +18,8 @@ export class Button {
 
   @Input() size: 'small' | 'medium' | 'large' = 'medium';
 
+  @Input() disabled: boolean = false;
+
   @Input() customClass: string = '';
 
   @Output() btnClick = new EventEmitter<void>();

@@ -22,6 +22,12 @@ namespace DawryDashAPIs.Repositories
             return _dbContext.Set<TEntity>().Find(id);
         }
 
+
+        public IQueryable<TEntity> GetEntity()
+        {
+            return _dbContext.Set<TEntity>();
+        }
+
         public void Add(TEntity obj)
         {
             _dbContext.Set<TEntity>().Add(obj);

@@ -5,7 +5,9 @@ using DawryDashAPIs.DTOs.TournamentDTOs;
 using DawryDashAPIs.Entities;
 using DawryDashAPIs.Repositories;
 using DawryDashAPIs.Services.TeamsServices;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace DawryDashAPIs.Services.TournamentService
 {
@@ -14,9 +16,11 @@ namespace DawryDashAPIs.Services.TournamentService
         GenericRepo<Tournament> tournamentRepo;
         TournamentTeamRepo tournamentTeamRepo;
         UserTeamRepo userTeamRepo;
+        UserManager<ApplicationUser> userManager;
         IMapper map;
-        public TournamentService(GenericRepo<Tournament> _tournamentRepo, IMapper _map, UserTeamRepo _userTeamRepo,TournamentTeamRepo _tournamentTeamRepo) 
+        public TournamentService(UserManager<ApplicationUser> _userManager,GenericRepo<Tournament> _tournamentRepo, IMapper _map, UserTeamRepo _userTeamRepo,TournamentTeamRepo _tournamentTeamRepo) 
         {
+            userManager = _userManager;
             tournamentRepo = _tournamentRepo;
             userTeamRepo = _userTeamRepo;
             tournamentTeamRepo = _tournamentTeamRepo;
@@ -25,10 +29,15 @@ namespace DawryDashAPIs.Services.TournamentService
 
         public DisplayTournamentDTO GetById(int id)
         {
-            Tournament tournament = tournamentRepo.GetById(id);
+            //Tournament tournament = tournamentRepo.GetById(id);
+            var tournament = tournamentRepo.GetEntity().Include(e => e.Creator).FirstOrDefault(e => e.Id == id);
             if (tournament != null)
             {
                 return map.Map<DisplayTournamentDTO>(tournament);
+                //var creator = userManager.FindByIdAsync(result.CreatorId).Result;
+                //result.CreatorFullname = creator.FullName;
+                //result.CreatorImgUrl = creator.ImgUrl;
+                //return result;
             }
             return null;
         }

@@ -31,5 +31,8 @@ export class TeamService {
     return this.http.put(`${this.baseUrl}/updateMembers/${teamId}`, membersData);
   }
 
+  GetUserTeams(userId: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/GetUserTeams/${userId}`);
+  }
 
 }

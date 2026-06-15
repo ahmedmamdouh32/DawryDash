@@ -40,7 +40,13 @@ namespace DawryDashAPIs.Mapping
 
             //Tournament Mapping
             CreateMap<AddTournamentDTO, Tournament>();
-            CreateMap<Tournament, DisplayTournamentDTO>();
+            CreateMap<Tournament, DisplayTournamentDTO>()
+                .ForMember(
+                    dest => dest.CreatorFullname,
+                    opt => opt.MapFrom(src => src.Creator.FullName))
+                .ForMember(
+                    dest => dest.CreatorImgUrl,
+                    opt => opt.MapFrom(src =>src.Creator.ImgUrl));
             CreateMap<Tournament, TournamentCardDTO>()
                 .ForMember(
                     dest => dest.startDate,

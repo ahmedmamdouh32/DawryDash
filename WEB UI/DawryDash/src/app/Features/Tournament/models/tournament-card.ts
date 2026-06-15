@@ -1,5 +1,5 @@
 export interface TournamentCard {
-    id: number,
+    id: string,
     status: string,
     name: string,
     startDate: string,

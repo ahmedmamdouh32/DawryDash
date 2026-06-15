@@ -290,6 +290,55 @@
         }
       }
     },
+    "/api/Team/GetUserTeams/{userId}": {
+      "get": {
+        "tags": [
+          "Team"
+        ],
+        "summary": "Return User Teams",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DisplayTeamDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DisplayTeamDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DisplayTeamDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Team/DetailsForMembers/{teamId}": {
       "get": {
         "tags": [
@@ -604,7 +653,7 @@
         "tags": [
           "Tournament"
         ],
-        "summary": "Get tournaents user has joined",
+        "summary": "Get tournaments user has joined",
         "parameters": [
           {
             "name": "userId",

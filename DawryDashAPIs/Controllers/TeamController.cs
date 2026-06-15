@@ -5,6 +5,7 @@ using DawryDashAPIs.Entities;
 using DawryDashAPIs.Services.TeamService;
 using DawryDashAPIs.Services.TeamsServices;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DawryDashAPIs.Controllers
@@ -26,6 +27,15 @@ namespace DawryDashAPIs.Controllers
         public ActionResult<List<DisplayTeamDTO>> GetAll()
         {
             var teams = teamService.GetAll();
+            return Ok(teams);
+        }
+
+
+        [HttpGet("GetUserTeams/{userId}")]
+        [EndpointSummary("Return User Teams")]
+        public ActionResult<List<DisplayTeamDTO>> GetUserTeams(string userId)
+        {
+            var teams = map.Map<List<TeamCardDTO>>(teamService.getTeamsByUserId(userId));
             return Ok(teams);
         }
 

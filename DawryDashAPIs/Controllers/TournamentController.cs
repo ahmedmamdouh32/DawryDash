@@ -56,7 +56,6 @@ namespace DawryDashAPIs.Controllers
         }
 
 
-
         [EndpointSummary("Get tournaments created by user")]
         [HttpGet("Creator")]
         public IActionResult GetCreatorTournaments(string userId)
@@ -66,15 +65,12 @@ namespace DawryDashAPIs.Controllers
         }
 
 
-        [EndpointSummary("Get tournaents user has joined")]
+        [EndpointSummary("Get tournaments user has joined")]
         [HttpGet("User")]
         public IActionResult GetUserTournaments(string userId)
         {
             var tournaments = tournamentService.UserJoinedTournaments(userId);
             return tournaments == null ? NotFound() : Ok(tournaments);
         }
-
-
-
     }
 }

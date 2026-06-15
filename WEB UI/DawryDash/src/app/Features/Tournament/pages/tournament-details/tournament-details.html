@@ -1,0 +1,182 @@
+<div class="p-md-4 main-content">
+    <div class="container-fluid px-0">
+        <!-- HERO -->
+        <div class="rounded-4 p-4 mb-4"
+            style="background:linear-gradient(to right,var(--bg-to-green),var(--color-function-light));">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <div class="d-flex align-items-center gap-4">
+
+                        <app-avatar [src]="tournament()?.imgUrl ?? 'tournament.png'" [size]="160"></app-avatar>
+
+                        <div>
+                            <h1 class="text-white fw-bold mb-2">
+                                {{ tournament()?.name }}
+                            </h1>
+                            <div class="d-flex flex-wrap gap-3">
+                                <span class="live-badge">
+                                    {{ tournament()?.status }}
+                                </span>
+                                <span class="text-white-50">
+                                    {{ tournament()?.teamsEntered }}/{{ tournament()?.maxTeams }} Teams
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+                    <app-button variant="green" size="medium" customClass="fw-semibold"
+                        (click)="openTeamSelectionModal()">
+                        Join Tournament
+                    </app-button>
+                </div>
+            </div>
+        </div>
+        <!-- OVERVIEW -->
+        <div class="bg-grey-dark rounded-4 p-4 green-border mb-4">
+            <div class="d-flex align-items-center gap-3 mb-3">
+                <i class="fa-solid fa-circle-info fs-4" style="color:#89e900"></i>
+                <h3 class="text-white fw-bold mb-0">
+                    Tournament Overview
+                </h3>
+            </div>
+            <p class="text-white-50 lh-lg mb-0">
+                {{ tournament()?.description }}
+            </p>
+        </div>
+
+        <!-- DETAILS + PROGRESS -->
+        <div class="row g-4 mb-4">
+            <div class="col-lg-8">
+                <div class="bg-grey-dark rounded-4 p-4 green-border h-100">
+                    <h3 class="text-white fw-bold mb-4">
+                        Tournament Details
+                    </h3>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="info-item">
+                                <div class="label text-white-50 mb-1">
+                                    Start Date
+                                </div>
+                                <div class="value text-white fw-semibold fs-5">
+                                    {{ tournament()?.startDate ?? 'Not set yet'}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-item">
+                                <div class="label text-white-50 mb-1">Match Duration</div>
+                                <div class="value text-white fw-semibold fs-5">
+                                    {{ tournament()?.matchDurationMinutes }} Minutes
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-item">
+                                <div class="label text-white-50 mb-1">Prize Pool</div>
+                                <div class="value text-white fw-semibold fs-5">
+                                    ${{ tournament()?.prize }}
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="info-item">
+
+                                <div class="label text-white-50 mb-1">
+                                    Location
+                                </div>
+
+                                <div class="value text-white fw-semibold fs-5">
+                                    {{ tournament()?.address }}
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4">
+
+                <div class="bg-grey-dark rounded-4 p-4 green-border h-100">
+
+                    <h3 class="text-white fw-bold mb-4">
+                        Progress
+                    </h3>
+
+                    <div class="mb-4">
+
+                        <div class="d-flex justify-content-between mb-2">
+
+                            <span class="text-white-50">
+                                Registration
+                            </span>
+
+                            <span class="text-white fw-semibold">
+                                {{ tournament()?.teamsEntered }}/{{ tournament()?.maxTeams }}
+                            </span>
+
+                        </div>
+                        <div class="progress"
+                            style="height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px;">
+                            <div class="progress-bar" role="progressbar"
+                                [style.width]="((tournament()?.teamsEntered || 0) / (tournament()?.maxTeams || 1) * 100) + '%'"
+                                style="background-color: #89e900; border-radius: 4px;"></div>
+                        </div>
+                    </div>
+
+                    <div class="small text-white-50 mb-2">Current Stage</div>
+
+                    <div class="text-white fw-semibold mb-4">
+                        Registration Open
+                    </div>
+
+                    <div class="small text-white-50 mb-2">
+                        Tournament Format
+                    </div>
+
+                    <div class="text-white fw-semibold">
+                        Knockout
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ORGANIZER -->
+        <div class="bg-grey-dark rounded-4 p-4 green-border mb-4">
+            <h3 class="text-white fw-bold mb-4">Tournament Organizer</h3>
+
+            <div class="d-flex align-items-center gap-3">
+                <div class="d-flex align-items-center gap-3">
+                    <app-avatar [src]="tournament()?.creatorImgUrl ?? 'user.png'" [size]="60"></app-avatar>
+                </div>
+
+                <div>
+
+                    <h5 class="text-white fw-semibold mb-1">
+                        {{ tournament()?.creatorFullname }}
+                    </h5>
+
+                    <div class="text-white-50">
+
+                        Created on {{ tournament()?.creationDate | date:'mediumDate' }}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

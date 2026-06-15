@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DashboardHomeResponse } from '../../dashboard/models/dashboard-home-response';
 import { TournamentCard } from '../models/tournament-card';
+import { TournamentDetailsDTO } from '../models/tournament-details-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -23,13 +24,17 @@ export class TournamentService {
     });
   }
 
-    getUserTournaments(userId: string): Observable<any> {
+  getUserTournaments(userId: string): Observable<any> {
     return this.http.get<TournamentCard>(`${this.baseUrl}/user`, {
       params: { userId: userId }
     });
   }
 
-
-
-
+  getTournamentDetails(tournamentId: string): Observable<any> {
+    return this.http.get<TournamentDetailsDTO>(`${this.baseUrl}/${tournamentId}`);
+  }
 }
+
+
+
+

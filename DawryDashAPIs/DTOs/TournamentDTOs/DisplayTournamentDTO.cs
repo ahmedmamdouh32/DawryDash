@@ -28,5 +28,10 @@ namespace DawryDashAPIs.DTOs.TournamentDTOs
         public int MaxTeams { set; get; }
 
         public int TeamsEntered { set; get; }
+        public string CreatorId { set; get; }
+
+        public string CreatorFullname { set; get; }
+        public string CreatorImgUrl { set; get; }
+        public int? prize { set; get; }
     }
 }

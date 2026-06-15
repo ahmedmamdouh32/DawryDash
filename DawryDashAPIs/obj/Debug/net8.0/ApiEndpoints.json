@@ -241,6 +241,33 @@
   },
   {
     "ContainingType": "DawryDashAPIs.Controllers.TeamController",
+    "Method": "GetUserTeams",
+    "RelativePath": "api/Team/GetUserTeams/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[DawryDashAPIs.DTOs.TeamDTOs.DisplayTeamDTO, DawryDashAPIs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "Summary": "Return User Teams"
+  },
+  {
+    "ContainingType": "DawryDashAPIs.Controllers.TeamController",
     "Method": "AddTeamMembers",
     "RelativePath": "api/Team/updateMembers/{teamId}",
     "HttpMethod": "PUT",
@@ -371,7 +398,7 @@
       }
     ],
     "ReturnTypes": [],
-    "Summary": "Get tournaents user has joined"
+    "Summary": "Get tournaments user has joined"
   },
   {
     "ContainingType": "DawryDashAPIs.Controllers.UserController",
