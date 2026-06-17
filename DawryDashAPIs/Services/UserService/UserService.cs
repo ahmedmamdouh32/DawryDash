@@ -166,6 +166,7 @@ namespace DawryDashAPIs.Services.UserService
             {
                 Success = false,
                 Message = "Invalid Email or Password",
+                Data = user
             };
         }
 
@@ -189,5 +190,105 @@ namespace DawryDashAPIs.Services.UserService
             return result;
         }
 
+
+
+        public async Task<ServiceResult<ApplicationUser>> ChangePassword(ChangePasswordDTO dto)
+        {
+            ApplicationUser? user = await userManager.FindByEmailAsync(dto.email);
+            if(user != null)
+            {
+                var result = await userManager.ChangePasswordAsync(user, dto.password, dto.newPassword);
+                if (result.Succeeded)
+                {
+                    return new ServiceResult<ApplicationUser>
+                    {
+                        Success = true,
+                        Message = "password changed successfully"
+                    };
+                }
+                else
+                {
+                    return new ServiceResult<ApplicationUser>
+                    {
+                        Success = false,
+                        Message = $"{result.Errors.First().Description}"
+                    };
+                }
+            }
+            return new ServiceResult<ApplicationUser>
+            {
+                Success = false,
+                Message = "Invalid Credentials"
+            };
+        }
+
+
+        public async Task<ServiceResult<UserCardDTO>> UpdateUser(UpdateUserDTO dto)
+        {
+            ApplicationUser? user = await userManager.FindByEmailAsync(dto.email);
+            if (user != null)
+            {
+                var uniqueUsernameResult = await userManager.FindByNameAsync(dto.userName);
+                if(uniqueUsernameResult != null && uniqueUsernameResult.Email != dto.email) 
+                {
+                    return new ServiceResult<UserCardDTO>
+                    {
+                        Success = false,
+                        Message = "username already taken"
+                    };
+                }
+                else
+                {
+                    user.FullName = dto.fullName;
+                    user.UserName = dto.userName;
+                    //adding image logic
+                    string? imagePath = null;
+
+                    if (dto.Image != null)
+                    {
+                        string fileName =
+                            Guid.NewGuid().ToString() +
+                            Path.GetExtension(dto.Image.FileName);
+
+                        string folder = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot/images/users");
+
+                        string fullPath = Path.Combine(folder, fileName);
+
+                        using (var stream = new FileStream(fullPath, FileMode.Create))
+                        {
+                            await dto.Image.CopyToAsync(stream);
+                        }
+
+                        imagePath = "/images/users/" + fileName;
+                        user.ImgUrl = "https://localhost:7042/" + imagePath;
+                    }
+
+
+                    var result = await userManager.UpdateAsync(user);
+                    if (result.Succeeded)
+                    {
+                        return new ServiceResult<UserCardDTO>
+                        {
+                            Success = true,
+                            Message = "Data updated successfully",
+                            Data = map.Map<UserCardDTO>(user)
+                        };
+                    }
+                    else
+                    {
+                        return new ServiceResult<UserCardDTO>
+                        {
+                            Success = false,
+                            Message = "An error happened while updating data"
+                        };
+                    }
+                }
+            }
+            return new ServiceResult<UserCardDTO>
+            {
+                Success = false,
+                Message = "user not found"
+            };
+        }
     }
 }

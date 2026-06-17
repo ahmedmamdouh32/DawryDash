@@ -3,8 +3,9 @@
     style="width: 260px; z-index: 1000;">
     <div class="p-3 border-bottom-side">
         <div class="d-flex align-items-center gap-3">
-            <img src="https://ui-avatars.com/api/?name=Ahmed+Hassan&background=89e900&color=222222&size=128"
-                class="rounded-circle border border-success border-2" width="48" height="48">
+            <app-avatar [border]=true [size]=50 src="{{imgUrl}}">
+
+            </app-avatar>
             <div>
                 <div class="text-white fw-semibold">{{fullName}}</div>
                 <div class="text-white-50" style="font-size: 12px;">{{userName}}</div>
@@ -15,47 +16,37 @@
     <nav class="flex-grow-1 p-3">
         <div class="d-flex flex-column gap-2">
             <!-- Dashboard Link -->
-            <a routerLink="home" 
-               (click)="setActiveRoute('home')"
-               [class.green-anchor]="isActive('home')"
-               [class.grey-anchor]="!isActive('home')"
-               class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 text-decoration-none">
+            <a routerLink="home" (click)="setActiveRoute('home')" [class.green-anchor]="isActive('home')"
+                [class.grey-anchor]="!isActive('home')"
+                class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 text-decoration-none">
                 Dashboard
             </a>
-            
+
             <!-- Tournaments Link -->
-            <a routerLink="tournaments" 
-               (click)="setActiveRoute('tournaments')"
-               [class.green-anchor]="isActive('tournaments')"
-               [class.grey-anchor]="!isActive('tournaments')"
-               class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 text-decoration-none">
+            <a routerLink="tournaments" (click)="setActiveRoute('tournaments')"
+                [class.green-anchor]="isActive('tournaments')" [class.grey-anchor]="!isActive('tournaments')"
+                class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 text-decoration-none">
                 Tournaments
             </a>
-            
+
             <!-- Teams Link -->
-            <a routerLink="teams" 
-               (click)="setActiveRoute('teams')"
-               [class.green-anchor]="isActive('teams')"
-               [class.grey-anchor]="!isActive('teams')"
-               class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 text-decoration-none">
+            <a routerLink="teams" (click)="setActiveRoute('teams')" [class.green-anchor]="isActive('teams')"
+                [class.grey-anchor]="!isActive('teams')"
+                class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 text-decoration-none">
                 Teams
             </a>
-            
+
             <!-- Matches Link -->
-            <a routerLink="matches" 
-               (click)="setActiveRoute('matches')"
-               [class.green-anchor]="isActive('matches')"
-               [class.grey-anchor]="!isActive('matches')"
-               class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 text-decoration-none">
+            <a routerLink="matches" (click)="setActiveRoute('matches')" [class.green-anchor]="isActive('matches')"
+                [class.grey-anchor]="!isActive('matches')"
+                class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 text-decoration-none">
                 Matches
             </a>
-            
+
             <!-- Settings Link -->
-            <a routerLink="settings" 
-               (click)="setActiveRoute('settings')"
-               [class.green-anchor]="isActive('settings')"
-               [class.grey-anchor]="!isActive('settings')"
-               class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 text-decoration-none">
+            <a routerLink="settings" (click)="setActiveRoute('settings')" [class.green-anchor]="isActive('settings')"
+                [class.grey-anchor]="!isActive('settings')"
+                class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 text-decoration-none">
                 Settings
             </a>
         </div>

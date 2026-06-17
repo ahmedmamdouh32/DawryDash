@@ -12,6 +12,7 @@ import { MyTeams } from './Features/team/pages/my-teams/my-teams';
 import { CreateTournament } from './Features/Tournament/pages/create-tournament/create-tournament';
 import { Tournaments } from './Features/Tournament/pages/tournaments/tournaments';
 import { TournamentDetails } from './Features/Tournament/pages/tournament-details/tournament-details';
+import { Settings } from './Features/user/pages/settings/settings';
 
 export const routes: Routes = [
     {
@@ -70,6 +71,9 @@ export const routes: Routes = [
                 },
                 {
                     path: 'tournaments/:id', component: TournamentDetails
+                },
+                {
+                    path: 'settings', component: Settings
                 }
             ]
     }, // Empty path

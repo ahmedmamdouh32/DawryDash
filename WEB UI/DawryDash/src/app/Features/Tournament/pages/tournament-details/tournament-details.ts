@@ -45,7 +45,8 @@ export class TournamentDetails {
   loadTournamentData(tournamentId: any) {
     // const tournamentId: string = this.route.snapshot.paramMap.get('id')!;
     this.tournamentService.getTournamentDetails(tournamentId).subscribe({
-      next: (res) => {
+      next: (res : TournamentDetailsDTO) => {
+        res.startDate = res.startDate.split('T')[0];
         this.tournament.set(res);
       },
       error: (err) => {

@@ -1,0 +1,259 @@
+<div class="p-md-4 main-content">
+    <div class="container-fluid px-0">
+
+        <!-- Page Header -->
+        <div class="rounded-4 p-4 mb-4"
+            style="background:linear-gradient(to right, var(--bg-to-green), var(--color-function-light));">
+            <h1 class="text-white fw-bold fs-2 mb-2">Settings</h1>
+            <p class="text-white-50 mb-0 fs-6">Manage your profile, security, and notification preferences</p>
+        </div>
+
+        <!-- Success/Error Messages -->
+        @if (showSuccess()) {
+        <div class="bg-success bg-opacity-20 rounded-4 p-3 mb-4 green-border">
+            <div class="d-flex align-items-center gap-2">
+                <i class="fa-solid fa-check-circle text-success"></i>
+                <span class="text-white">{{ successMessage() }}</span>
+            </div>
+        </div>
+        }
+
+        @if (showError()) {
+        <div class="bg-danger bg-opacity-20 rounded-4 p-3 mb-4 green-border">
+            <div class="d-flex align-items-center gap-2">
+                <i class="fa-solid fa-exclamation-circle text-danger"></i>
+                <span class="text-white">{{ errorMessage() }}</span>
+            </div>
+        </div>
+        }
+
+        <div class="row g-4">
+
+            <!-- Profile Section -->
+            <div class="col-lg-6">
+                <div class="bg-grey-dark rounded-4 p-4 green-border">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <div class="d-flex align-items-center gap-3">
+                            <i class="fa-regular fa-user fs-4" style="color: #89e900;"></i>
+                            <h3 class="text-white fw-bold mb-0">Profile Information</h3>
+                        </div>
+                        @if (!isEditingProfile()) {
+                        <app-button variant="gray" size="small" (click)="toggleEditProfile()">
+                            <i class="fa-regular fa-pen-to-square me-1"></i> Edit
+                        </app-button>
+                        }
+                    </div>
+
+                    <!-- Profile Display -->
+                    @if (!isEditingProfile()) {
+                    <div class="d-flex align-items-center gap-4">
+                        <app-avatar [src]="profile().imgUrl!" [size]="80" [border]="true"></app-avatar>
+                        <div>
+                            <h4 class="text-white fw-bold mb-1">{{ profile().fullName }}</h4>
+                            <p class="text-white-50 small mb-1">{{ profile().email }}</p>
+                            <p class="text-white-50 small mb-0">{{ profile().username }}</p>
+                        </div>
+                    </div>
+                    }
+
+                    <!-- Edit Profile Form -->
+                    @if (isEditingProfile()) {
+                    <form (ngSubmit)="saveProfile()">
+                        <div class="text-center mb-4">
+                            <div class="position-relative d-inline-block">
+                                <app-avatar [src]="profile().imgUrl!" [size]="100" [border]="true"></app-avatar>
+                                <button type="button" class="btn-edit-image" (click)="triggerFileInput()">
+                                    <i class="fa-solid fa-camera"></i>
+                                </button>
+                            </div>
+                            <input type="file" id="profileImageInput" (change)="onImageSelected($event)"
+                                accept="image/*" style="display: none;">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="text-white-50 small fw-semibold mb-1 d-block">Full Name</label>
+                            <input type="text" class="form-control custom-input" [(ngModel)]="profile().fullName"
+                                name="fullName" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="text-white-50 small fw-semibold mb-1 d-block">Username</label>
+                            <input type="text" class="form-control custom-input" [(ngModel)]="profile().username"
+                                name="username">
+                        </div>
+
+
+                        <div class="d-flex gap-3">
+                            <app-button variant="green" size="medium" type="submit" customClass="w-100"
+                                [disabled]="isSaving()">
+                                @if (isSaving()) {
+                                <i class="fa-solid fa-spinner fa-spin me-2"></i> Saving...
+                                } @else {
+                                Save Changes
+                                }
+                            </app-button>
+                            <app-button variant="gray" size="medium" (click)="toggleEditProfile()"
+                                customClass="w-100">Cancel</app-button>
+                        </div>
+                    </form>
+                    }
+                </div>
+            </div>
+
+            <!-- Security Section -->
+            <div class="col-lg-6">
+                <div class="bg-grey-dark rounded-4 p-4 green-border">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <div class="d-flex align-items-center gap-3">
+                            <i class="fa-solid fa-lock fs-4" style="color: #89e900;"></i>
+                            <h3 class="text-white fw-bold mb-0">Security</h3>
+                        </div>
+                        @if (!isChangingPassword()) {
+                        <app-button variant="gray" size="small" (click)="toggleChangePassword()">
+                            <i class="fa-regular fa-pen-to-square me-1"></i> Change
+                        </app-button>
+                        }
+                    </div>
+
+                    <!-- Change Password -->
+                    @if (!isChangingPassword()) {
+                    <div class="d-flex align-items-center gap-3 bg-white-04 rounded-3 p-3">
+                        <i class="fa-solid fa-key text-success fs-4"></i>
+                        <div>
+                            <h5 class="text-white fw-semibold mb-1">Password</h5>
+                            <p class="text-white-50 small mb-0">••••••••••</p>
+                        </div>
+                    </div>
+                    }
+
+                    @if (isChangingPassword()) {
+                    <form (ngSubmit)="changePassword()">
+                        <div class="mb-3">
+                            <label class="text-white-50 small fw-semibold mb-1 d-block">Current Password</label>
+                            <input type="password" class="form-control custom-input"
+                                [(ngModel)]="passwordData.currentPassword" name="currentPassword" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="text-white-50 small fw-semibold mb-1 d-block">New Password</label>
+                            <input type="password" class="form-control custom-input"
+                                [(ngModel)]="passwordData.newPassword" name="newPassword" required minlength="6">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="text-white-50 small fw-semibold mb-1 d-block">Confirm Password</label>
+                            <input type="password" class="form-control custom-input"
+                                [(ngModel)]="passwordData.confirmPassword" name="confirmPassword" required>
+                        </div>
+
+                        <div class="d-flex gap-3">
+                            <app-button variant="green" size="medium" type="submit" customClass="w-100"
+                                [disabled]="isSavingPassword()">
+                                @if (isSavingPassword()) {
+                                <i class="fa-solid fa-spinner fa-spin me-2"></i> Changing...
+                                } @else {
+                                Change Password
+                                }
+                            </app-button>
+                            <app-button variant="gray" size="medium" (click)="toggleChangePassword()"
+                                customClass="w-100">Cancel</app-button>
+                        </div>
+                    </form>
+                    }
+                </div>
+            </div>
+
+            <!-- Notification Preferences -->
+            <div class="col-lg-12">
+                <div class="bg-grey-dark rounded-4 p-4 green-border">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <div class="d-flex align-items-center gap-3">
+                            <i class="fa-regular fa-bell fs-4" style="color: #89e900;"></i>
+                            <h3 class="text-white fw-bold mb-0">Notification Preferences</h3>
+                        </div>
+                        <app-button variant="gray" size="small" (click)="saveNotificationPreferences()"
+                            [disabled]="isSaving()">
+                            @if (isSaving()) {
+                            <i class="fa-solid fa-spinner fa-spin me-1"></i> Saving...
+                            } @else {
+                            <i class="fa-regular fa-floppy-disk me-1"></i> Save Preferences
+                            }
+                        </app-button>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="bg-white-04 rounded-3 p-3 d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h6 class="text-white fw-semibold mb-1">Tournament Updates</h6>
+                                    <p class="text-white-50 small mb-0">New tournaments and updates near you</p>
+                                </div>
+                                <div class="form-check form-switch mb-0">
+                                    <input class="form-check-input" type="checkbox"
+                                        [checked]="notificationPreferences().tournamentUpdates"
+                                        (change)="toggleNotification('tournamentUpdates')" style="cursor: pointer;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="bg-white-04 rounded-3 p-3 d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h6 class="text-white fw-semibold mb-1">Match Results</h6>
+                                    <p class="text-white-50 small mb-0">Live scores and match results</p>
+                                </div>
+                                <div class="form-check form-switch mb-0">
+                                    <input class="form-check-input" type="checkbox"
+                                        [checked]="notificationPreferences().matchResults"
+                                        (change)="toggleNotification('matchResults')" style="cursor: pointer;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="bg-white-04 rounded-3 p-3 d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h6 class="text-white fw-semibold mb-1">Team Invites</h6>
+                                    <p class="text-white-50 small mb-0">Invitations to join teams</p>
+                                </div>
+                                <div class="form-check form-switch mb-0">
+                                    <input class="form-check-input" type="checkbox"
+                                        [checked]="notificationPreferences().teamInvites"
+                                        (change)="toggleNotification('teamInvites')" style="cursor: pointer;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="bg-white-04 rounded-3 p-3 d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h6 class="text-white fw-semibold mb-1">News & Announcements</h6>
+                                    <p class="text-white-50 small mb-0">Platform news and announcements</p>
+                                </div>
+                                <div class="form-check form-switch mb-0">
+                                    <input class="form-check-input" type="checkbox"
+                                        [checked]="notificationPreferences().newsAndAnnouncements"
+                                        (change)="toggleNotification('newsAndAnnouncements')" style="cursor: pointer;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="bg-white-04 rounded-3 p-3 d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h6 class="text-white fw-semibold mb-1">Promotional Emails</h6>
+                                    <p class="text-white-50 small mb-0">Special offers and promotions</p>
+                                </div>
+                                <div class="form-check form-switch mb-0">
+                                    <input class="form-check-input" type="checkbox"
+                                        [checked]="notificationPreferences().promotionalEmails"
+                                        (change)="toggleNotification('promotionalEmails')" style="cursor: pointer;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

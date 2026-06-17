@@ -130,6 +130,8 @@ namespace DawryDashAPIs.Services.TeamsServices
             return true;
         }
 
+
+        //to update team info (name, img)
         public bool Update(UpdateTeamDTO teamDTO, int id)
         {
             Team team = repo.GetById(id);
@@ -153,6 +155,12 @@ namespace DawryDashAPIs.Services.TeamsServices
             var existingMembers = userTeamRepo.GetTeamUsers(teamId).ToList();
 
             Dictionary<string, AddTeamMemberDTO> newMembersDict = newMembers.ToDictionary(x => x.id);
+
+
+            //update members count 
+            var team = repo.GetById(teamId);
+            team.MembersCount = newMembers.Count;
+
 
             foreach (TeamUser existingMember in existingMembers)
             {

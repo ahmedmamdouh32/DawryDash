@@ -62,6 +62,7 @@ export class Login {
             localStorage.setItem('imgUrl', res.imgUrl);
             localStorage.setItem('userId', res.userId);
             localStorage.setItem('userName', res.userName);
+            localStorage.setItem('email', body.email);
 
             // this.authState.setUser(res); //storing user data in a service to be called later
             this.router.navigate(['/dashboard']);

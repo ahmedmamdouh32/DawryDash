@@ -4,7 +4,7 @@ export interface TournamentDetailsDTO {
     description: string;
     imgUrl: string;
     creationDate: Date;
-    startDate: Date;
+    startDate: string;
     address: string;
     duration: number;
     matchDurationMinutes: number;

@@ -105,5 +105,36 @@ namespace DawryDashAPIs.Controllers
             List<UserCardDTO> result = userService.GetUsersByName(name);
             return Ok(result);
         }
+
+
+        [HttpPost("ChangePassword")]
+        public async Task<IActionResult> ChangePassword(ChangePasswordDTO dto)
+        {
+            var result = await userService.ChangePassword(dto);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return NotFound(result);
+            }
+        }
+
+
+        [HttpPost("UpdateUser")]
+        public async Task<IActionResult> UpdateUser([FromForm]UpdateUserDTO dto)
+        {
+            var result = await userService.UpdateUser(dto);
+
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return NotFound(result);
+            }
+        }
     }
 }

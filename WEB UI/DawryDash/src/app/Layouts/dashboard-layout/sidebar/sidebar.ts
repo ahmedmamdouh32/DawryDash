@@ -1,15 +1,17 @@
 import { Component, inject, signal } from '@angular/core';
 import { NavigationEnd, Router, RouterLink } from "@angular/router";
+import { Avatar } from '../../../Components/avatar/avatar';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [RouterLink],
+  imports: [RouterLink, Avatar],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.css',
 })
 export class Sidebar {
   userName = localStorage.getItem('userName');
   fullName = localStorage.getItem('fullName');
+  imgUrl = localStorage.getItem('imgUrl') === 'null' ? 'user.png' : localStorage.getItem('imgUrl')
 
   activeRoute: string = 'home';
 

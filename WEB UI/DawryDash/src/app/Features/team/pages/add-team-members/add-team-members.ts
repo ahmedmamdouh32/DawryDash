@@ -277,7 +277,7 @@ export class AddTeamMembers {
   // Remove member from squad
   removeMember(index: number) {
     const memberToRemove = this.squadMembers()[index];
-
+    this.clearSelection();
     this.squadMembers.update(current => current.filter((_, i) => i !== index));
 
     // If we're editing the removed member, clear selection

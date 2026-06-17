@@ -103,3 +103,23 @@ textarea::placeholder {
     border-top-color: black;
     border-top-style: solid;
 }
+
+
+
+@media (max-width: 767.98px) {
+
+    .main-content {
+        padding-top: 66px;
+        margin-left: 12px;
+        margin-right: 12px;
+    }
+
+}
+
+@media (min-width: 768px) {
+
+    .main-content {
+        margin-left: 260px;
+    }
+
+}
