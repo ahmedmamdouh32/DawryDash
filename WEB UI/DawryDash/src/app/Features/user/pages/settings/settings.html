@@ -63,7 +63,9 @@
                             <div class="position-relative d-inline-block">
                                 <app-avatar [src]="profile().imgUrl!" [size]="100" [border]="true"></app-avatar>
                                 <button type="button" class="btn-edit-image" (click)="triggerFileInput()">
-                                    <i class="fa-solid fa-camera"></i>
+                                    <i class="fa-solid fa-camera">
+                                        <img style="width: 100%;" src="pen.png" alt="pen">
+                                    </i>
                                 </button>
                             </div>
                             <input type="file" id="profileImageInput" (change)="onImageSelected($event)"

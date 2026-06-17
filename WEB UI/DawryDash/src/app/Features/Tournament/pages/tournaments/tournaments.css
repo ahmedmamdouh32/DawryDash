@@ -80,3 +80,138 @@
     }
 
 }
+
+
+
+/* Filter Button */
+.filter-input-btn {
+    background: rgba(137, 233, 0, 0.2);
+    border: 1px solid rgba(137, 233, 0, 0.3);
+    color: #89e900;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.filter-input-btn:hover {
+    background: rgba(137, 233, 0, 0.3);
+    
+    
+}
+
+.filter-input-btn.active {
+    background: rgba(137, 233, 0, 0.4);
+    border-color: #89e900;
+}
+
+/* Checkbox Group */
+.filter-checkbox-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    /* padding: 10px 0; */
+    animation: slideDown 0.3s ease;
+}
+
+.filter-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    font-size: 14px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+    position: relative;
+    user-select: none;
+}
+
+.filter-checkbox:hover {
+    background: rgba(137, 233, 0, 0.1);
+    border-color: rgba(137, 233, 0, 0.3);
+}
+
+.filter-checkbox input[type="checkbox"] {
+    display: none;
+}
+
+.filter-checkbox .checkmark {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    display: inline-block;
+    position: relative;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.filter-checkbox input:checked + .checkmark {
+    background: #89e900;
+    border-color: #89e900;
+}
+
+.filter-checkbox input:checked + .checkmark::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #1a1a2e;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.filter-checkbox input:checked ~ span:last-child {
+    color: #89e900;
+}
+
+.filter-checkbox:has(input:checked) {
+    background: rgba(137, 233, 0, 0.15);
+    border-color: #89e900;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Show selected filters count badge */
+.filter-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #89e900;
+    color: #1a1a2e;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 991.98px) {
+    .filter-checkbox-group {
+        justify-content: flex-start;
+    }
+}

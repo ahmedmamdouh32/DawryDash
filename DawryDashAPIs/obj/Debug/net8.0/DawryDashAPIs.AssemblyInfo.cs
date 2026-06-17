@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DawryDashAPIs")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c6a626a13288c09d28ce88f95a1e48d247c10163")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ae65568c7409772a5220acf1618b50bb9cfc7ce8")]
 [assembly: System.Reflection.AssemblyProductAttribute("DawryDashAPIs")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DawryDashAPIs")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

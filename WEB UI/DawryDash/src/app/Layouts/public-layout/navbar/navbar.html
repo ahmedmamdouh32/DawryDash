@@ -1,37 +1,39 @@
-<nav class="navbar navbar-expand-md py-3 px-4 border-bottom border-success border-opacity-25 navbarStyle">
+<nav class="navbar navbar-expand-md py-3 px-lg-4 border-bottom border-success border-opacity-25 navbarStyle">
     <div class="container-fluid">
         <!-- Logo + brand -->
         <div class="d-flex align-items-center gap-3">
-
-            <!-- <span class="fw-bold fs-4 text-white">Dawry Dash</span> -->
-            <!-- <img src="BrandImage.png" style="width: 160px;"> -->
             <a routerLink="/" class="text-decoration-none">
-
                 <img src="BrandImage.png" style="width: 160px;">
-
             </a>
         </div>
 
         <!-- toggler for mobile -->
         <button class="navbar-toggler bg-white bg-opacity-10 border border-success border-opacity-25" type="button"
-            data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false"
+            (click)="toggleNavbar()" aria-controls="mainNavbar" [attr.aria-expanded]="isNavbarOpen"
             aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <!-- navbar links and buttons -->
-        <div class="collapse navbar-collapse" id="mainNavbar">
+        <div class="collapse navbar-collapse" id="mainNavbar" #navbarCollapse [class.show]="isNavbarOpen">
             <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-4">
-                <li class="nav-item"><a class="nav-link" href="#">Features</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" (click)="closeNavbar()">Features</a>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="#">Tournaments</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" (click)="closeNavbar()">Tournaments</a>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="#">Pricing</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" (click)="closeNavbar()">Pricing</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" (click)="closeNavbar()">About</a>
+                </li>
             </ul>
             <div class="d-flex gap-3">
-                <app-button variant="gray" size="medium" routerLink="/login">Login</app-button>
-                <app-button variant="green" size="medium" routerLink="/signup">SignUp</app-button>
+                <app-button variant="gray" size="medium" routerLink="/login" (click)="closeNavbar()">Login</app-button>
+                <app-button variant="green" size="medium" routerLink="/signup"
+                    (click)="closeNavbar()">SignUp</app-button>
             </div>
         </div>
     </div>

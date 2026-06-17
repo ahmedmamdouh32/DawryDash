@@ -2,7 +2,7 @@
     <!-- <div class="p-3"></div> -->
     <div class="text-center pt-4 pb-2">
 
-        <h2 class="text-white fw-bold" style="font-size: 42px;">
+        <h2 class="text-white fw-bold px-3" style="font-size: 42px;">
             Start Your Football Journey
         </h2>
 
@@ -44,9 +44,23 @@
                     }
 
                     <!-- password -->
-                    <label class="text-white-50 mt-3 mb-1" style="font-size: 16px;">Password</label>
-                    <input type="password" class="form-control text-white-50 bg-white-black green-border"
-                        placeholder="Enter Your Password" style="height:3rem;" formControlName="password">
+                    <!-- <label class="text-white-50 mt-3 mb-1" style="font-size: 16px;">Password</label>
+                    <input type="password" class=" form-control text-white-50 bg-white-black green-border"
+                        placeholder="Enter Your Password" style="height:3rem;" formControlName="password"> -->
+
+                    <div class="password-input-container">
+                        <label class="text-white-50 mt-3 mb-1" style="font-size: 16px;">Password</label>
+                        <div class="input-group">
+                            <input type="password"
+                                class="form-control text-white-50 bg-white-black green-border password-input"
+                                placeholder="Enter Your Password" style="height:3rem; padding-right: 45px;"
+                                formControlName="password" #passwordInput>
+                            <button type="button" class="password-toggle-btn" (click)="togglePasswordVisibility()">
+                                <img [src]="isPasswordVisible ? 'visible.png' : 'invisible.png'"
+                                    alt="Toggle Password Visibility" style="width:25px; height: 25px;">
+                            </button>
+                        </div>
+                    </div>
                     @if(password?.touched && password?.invalid){
 
                     @if(password?.errors?.['required']){
@@ -77,12 +91,12 @@
 
             <!-- or continue with -->
             <div class="my-3 d-flex justify-content-between align-items-center">
-                <div class="green-border-top col-4">
+                <div class="green-border-top col-3">
                 </div>
                 <div>
-                    <span class="text-white-50 col-3 m-0 p-0">or continue with</span>
+                    <span class="text-white-50 col-4 m-0 p-0">or continue with</span>
                 </div>
-                <div class="green-border-top col-4">
+                <div class="green-border-top col-3">
                 </div>
             </div>
             <div>

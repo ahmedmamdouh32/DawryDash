@@ -27,3 +27,49 @@
     border-top: 1px solid;
     border-color: color-mix(in oklab, #89e900 15%, transparent);
 }
+
+.password-input-container {
+    position: relative;
+    width: 100%;
+}
+
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-input {
+    width: 100%;
+    padding-right: 45px !important; /* Space for the button */
+}
+
+.password-toggle-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+}
+
+.password-toggle-btn:hover {
+    opacity: 0.8;
+}
+
+.password-toggle-btn:focus {
+    outline: none;
+}
+
+/* If you want to use emoji icons instead of images */
+.password-toggle-btn .eye-icon {
+    font-size: 20px;
+    line-height: 1;
+}

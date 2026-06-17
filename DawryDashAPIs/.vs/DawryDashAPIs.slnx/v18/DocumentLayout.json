@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\adminstrator\\Documents\\Dawry Dash\\DawryDashAPIs\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{8BD7F8E6-E06A-63E1-5C5E-3BDF7DA078BA}|DawryDashAPIs.csproj|c:\\users\\adminstrator\\documents\\dawry dash\\dawrydashapis\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{8BD7F8E6-E06A-63E1-5C5E-3BDF7DA078BA}|DawryDashAPIs.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{8BD7F8E6-E06A-63E1-5C5E-3BDF7DA078BA}|DawryDashAPIs.csproj|c:\\users\\adminstrator\\documents\\dawry dash\\dawrydashapis\\services\\userservice\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8BD7F8E6-E06A-63E1-5C5E-3BDF7DA078BA}|DawryDashAPIs.csproj|solutionrelative:services\\userservice\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -58,7 +62,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 247,
-          "SelectedChildIndex": 11,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -74,7 +78,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\adminstrator\\Documents\\Dawry Dash\\DawryDashAPIs\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\adminstrator\\Documents\\Dawry Dash\\DawryDashAPIs\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Properties\\launchSettings.json",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABkAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-17T20:01:15.503Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "MappingConfig.cs",
               "DocumentMoniker": "C:\\Users\\adminstrator\\Documents\\Dawry Dash\\DawryDashAPIs\\Mapping\\MappingConfig.cs",
               "RelativeDocumentMoniker": "Mapping\\MappingConfig.cs",
@@ -82,12 +99,11 @@
               "RelativeToolTip": "Mapping\\MappingConfig.cs",
               "ViewState": "AgIAADEAAAAAAAAAAAAQwD4AAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T21:55:18.171Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-16T21:55:18.171Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "UserCardDTO.cs",
               "DocumentMoniker": "C:\\Users\\adminstrator\\Documents\\Dawry Dash\\DawryDashAPIs\\DTOs\\UserDTOs\\UserCardDTO.cs",
               "RelativeDocumentMoniker": "DTOs\\UserDTOs\\UserCardDTO.cs",
@@ -95,12 +111,11 @@
               "RelativeToolTip": "DTOs\\UserDTOs\\UserCardDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T21:52:45.828Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-16T21:52:45.828Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "TournamentService.cs",
               "DocumentMoniker": "C:\\Users\\adminstrator\\Documents\\Dawry Dash\\DawryDashAPIs\\Services\\TournamentService\\TournamentService.cs",
               "RelativeDocumentMoniker": "Services\\TournamentService\\TournamentService.cs",
@@ -108,12 +123,11 @@
               "RelativeToolTip": "Services\\TournamentService\\TournamentService.cs",
               "ViewState": "AgIAADAAAAAAAAAAAAAlwDoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T20:48:19.412Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-16T20:48:19.412Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "AddTournamentDTO.cs",
               "DocumentMoniker": "C:\\Users\\adminstrator\\Documents\\Dawry Dash\\DawryDashAPIs\\DTOs\\TournamentDTOs\\AddTournamentDTO.cs",
               "RelativeDocumentMoniker": "DTOs\\TournamentDTOs\\AddTournamentDTO.cs",
@@ -121,12 +135,11 @@
               "RelativeToolTip": "DTOs\\TournamentDTOs\\AddTournamentDTO.cs",
               "ViewState": "AgIAABgAAAAAAAAAAAAowB4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T20:34:43.911Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-16T20:34:43.911Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "UpdateUserDTO.cs",
               "DocumentMoniker": "C:\\Users\\adminstrator\\Documents\\Dawry Dash\\DawryDashAPIs\\DTOs\\UserDTOs\\UpdateUserDTO.cs",
               "RelativeDocumentMoniker": "DTOs\\UserDTOs\\UpdateUserDTO.cs",
@@ -134,12 +147,11 @@
               "RelativeToolTip": "DTOs\\UserDTOs\\UpdateUserDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T20:33:44.009Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-16T20:33:44.009Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "AddUserDTO.cs",
               "DocumentMoniker": "C:\\Users\\adminstrator\\Documents\\Dawry Dash\\DawryDashAPIs\\DTOs\\UserDTOs\\AddUserDTO.cs",
               "RelativeDocumentMoniker": "DTOs\\UserDTOs\\AddUserDTO.cs",
@@ -147,12 +159,11 @@
               "RelativeToolTip": "DTOs\\UserDTOs\\AddUserDTO.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAAwA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T20:16:28.973Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-16T20:16:28.973Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "ChangePasswordDTO.cs",
               "DocumentMoniker": "C:\\Users\\adminstrator\\Documents\\Dawry Dash\\DawryDashAPIs\\DTOs\\UserDTOs\\ChangePasswordDTO.cs",
               "RelativeDocumentMoniker": "DTOs\\UserDTOs\\ChangePasswordDTO.cs",
@@ -160,12 +171,11 @@
               "RelativeToolTip": "DTOs\\UserDTOs\\ChangePasswordDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T18:30:58.731Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-16T18:30:58.731Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "IUserService.cs",
               "DocumentMoniker": "C:\\Users\\adminstrator\\Documents\\Dawry Dash\\DawryDashAPIs\\Services\\UserService\\IUserService.cs",
               "RelativeDocumentMoniker": "Services\\UserService\\IUserService.cs",
@@ -173,25 +183,24 @@
               "RelativeToolTip": "Services\\UserService\\IUserService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T18:19:33.195Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-16T18:19:33.195Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "UserService.cs",
               "DocumentMoniker": "C:\\Users\\adminstrator\\Documents\\Dawry Dash\\DawryDashAPIs\\Services\\UserService\\UserService.cs",
               "RelativeDocumentMoniker": "Services\\UserService\\UserService.cs",
               "ToolTip": "C:\\Users\\adminstrator\\Documents\\Dawry Dash\\DawryDashAPIs\\Services\\UserService\\UserService.cs",
               "RelativeToolTip": "Services\\UserService\\UserService.cs",
-              "ViewState": "AgIAAPEAAAAAAAAAAAAAwPsAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAO4AAAAAAAAAAAAQwAYBAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-16T14:25:50.766Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "UserController.cs",
               "DocumentMoniker": "C:\\Users\\adminstrator\\Documents\\Dawry Dash\\DawryDashAPIs\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Controllers\\UserController.cs",
@@ -199,12 +208,11 @@
               "RelativeToolTip": "Controllers\\UserController.cs",
               "ViewState": "AgIAAGwAAAAAAAAAAAD4v4kAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T14:22:18.516Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-16T14:22:18.516Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "TeamService.cs",
               "DocumentMoniker": "C:\\Users\\adminstrator\\Documents\\Dawry Dash\\DawryDashAPIs\\Services\\TeamService\\TeamService.cs",
               "RelativeDocumentMoniker": "Services\\TeamService\\TeamService.cs",
@@ -212,12 +220,11 @@
               "RelativeToolTip": "Services\\TeamService\\TeamService.cs",
               "ViewState": "AgIAAIcAAAAAAAAAAAAAAJoAAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T13:22:17.494Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-16T13:22:17.494Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "GenericRepo.cs",
               "DocumentMoniker": "C:\\Users\\adminstrator\\Documents\\Dawry Dash\\DawryDashAPIs\\Repositories\\GenericRepo.cs",
               "RelativeDocumentMoniker": "Repositories\\GenericRepo.cs",
@@ -225,8 +232,7 @@
               "RelativeToolTip": "Repositories\\GenericRepo.cs",
               "ViewState": "AgIAABsAAAAAAAAAAAAowBkAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-15T15:41:18.647Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-15T15:41:18.647Z"
             }
           ]
         },

@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, ElementRef, inject, signal, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Button } from '../../../../Components/button/button';
@@ -17,6 +17,20 @@ export class Signup {
 
   signupErrorMessage = signal<string>('');
 
+  @ViewChild('passwordInput') passwordInput!: ElementRef;
+  @ViewChild('confirmPasswordInput') confirmPasswordInput!: ElementRef;
+  isPasswordVisible: boolean = false;
+
+  togglePasswordVisibility() {
+    this.isPasswordVisible = !this.isPasswordVisible;
+    const passwordInputElement = this.passwordInput.nativeElement;
+    passwordInputElement.type = this.isPasswordVisible ? 'text' : 'password';
+
+    const confirmPasswordInputElement = this.confirmPasswordInput.nativeElement;
+    confirmPasswordInputElement.type = this.isPasswordVisible ? 'text' : 'password';
+
+
+  }
 
   userForm = new FormGroup({
     fullname: new FormControl('',

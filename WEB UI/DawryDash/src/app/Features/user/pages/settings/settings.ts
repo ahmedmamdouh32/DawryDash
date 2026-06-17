@@ -80,6 +80,7 @@ export class Settings {
     this.isEditingProfile.update(value => !value);
     this.showSuccess.set(false);
     this.showError.set(false);
+    this.profile().imgUrl = localStorage.getItem('imgUrl');
   }
 
   saveProfile() {

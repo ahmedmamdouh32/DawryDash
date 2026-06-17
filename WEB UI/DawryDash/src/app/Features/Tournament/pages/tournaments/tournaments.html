@@ -6,15 +6,20 @@
         <div class="rounded-4 p-4 mb-4 d-flex justify-content-between align-items-center"
             style="background :linear-gradient(to right, var(--bg-to-green), var(--color-function-light))">
             <div>
-                <h1 class="text-white fw-bold fs-2 fs-md-1 mb-2">Your Tournament Hub</h1>
-                <p class="text-white-50 mb-0 fs-6">
-                    Manage competitions, track matches, and keep your teams competing.
+                <h1 class="text-white fw-bold fs-2 fs-md-1 mb-2">Manage your Tournaments</h1>
+                <p class="text-white-50 mb-0 fs-6 d-none d-md-inline">
+                    Track matches, Manage competitions and keep your teams competing.
                 </p>
             </div>
-            <div>
+            <div class="d-md-inline d-none">
                 <app-button variant="gray" size="medium" routerLink="/dashboard/tournaments/create-tournament"
                     customClass="fw-semibold">Create Tournament</app-button>
             </div>
+            <div class="d-md-none">
+                <app-button variant="gray" size="small" routerLink="/dashboard/tournaments/create-tournament"
+                    customClass="fw-semibold">Create Tournament</app-button>
+            </div>
+
 
         </div>
 
@@ -23,11 +28,10 @@
 
         <!-- SEARCH + FILTERS -->
 
-        <div class="bg-grey-dark rounded-4 p-3 p-md-4 mb-4 green-border">
+        <!-- <div class="bg-grey-dark rounded-4 p-3 p-md-4 mb-4 green-border">
 
             <div class="row g-3 align-items-center">
 
-                <!-- SEARCH -->
 
                 <div class="col-lg-6">
 
@@ -43,7 +47,6 @@
 
                 </div>
 
-                <!-- FILTERS -->
 
                 <div class="col-lg-6">
 
@@ -75,7 +78,63 @@
 
             </div>
 
+        </div> -->
+
+        <!-- SEARCH + FILTERS -->
+        <div class="bg-grey-dark rounded-4 p-3 p-md-4 mb-4 green-border">
+            <div class="row g-3 align-items-center">
+
+                <div class="col-lg-6">
+                    <div class="position-relative">
+                        <i
+                            class="fa-solid fa-magnifying-glass position-absolute top-50 start-0 translate-middle-y ms-3 text-white-50">
+                        </i>
+                        <input type="text" class="form-control custom-input ps-5" placeholder="Search tournaments..." />
+
+                        <app-button size="small" variant="gray"
+                            customClass="position-absolute top-50 end-0 translate-middle-y me-2 filter-input-btn ">
+                            <img src="search.png" style="width: 18px; height: 18px; object-fit: contain;">
+                        </app-button>
+                    </div>
+                </div>
+
+                <div class="col-6 d-lg-flex d-none">
+                    <div class="d-flex align-items-center col-12 justify-content-end">
+                        <div *ngIf="isFilterOpen">
+                            <div class="filter-checkbox-group ">
+                                <label class="filter-checkbox" *ngFor="let filter of filters">
+                                    <input type="checkbox" [value]="filter.value" (change)="onFilterChange($event)"
+                                        [checked]="isFilterSelected(filter.value)">
+                                    <span class="checkmark"></span>
+                                    {{ filter.label }}
+                                </label>
+                            </div>
+                        </div>
+                        <button class="filter-input-btn ms-2" (click)="isFilterOpen = !isFilterOpen"
+                            [class.active]="isFilterOpen">
+                            <img style="width: 100%;" src="filter.png" alt="filter icon">
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <div class="d-flex  col-12 justify-content-end d-lg-none">
+            <div *ngIf="isFilterOpen">
+                <div class="filter-checkbox-group">
+                    <label class="filter-checkbox" *ngFor="let filter of filters">
+                        <input type="checkbox" [value]="filter.value" (change)="onFilterChange($event)"
+                            [checked]="isFilterSelected(filter.value)">
+                        <span class="checkmark"></span>
+                        {{ filter.label }}
+                    </label>
+                </div>
+            </div>
+            <button class="filter-input-btn ms-2" (click)="isFilterOpen = !isFilterOpen" [class.active]="isFilterOpen">
+                <img style="width: 100%;" src="filter.png" alt="filter icon">
+            </button>
+        </div>
+
         <br>
         <!-- MY TOURNAMENTS -->
         <div class="d-flex justify-content-between align-items-center mt-3 mb-4">

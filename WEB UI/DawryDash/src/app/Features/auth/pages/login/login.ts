@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, ElementRef, inject, signal, ViewChild, viewChild } from '@angular/core';
 import { Button } from '../../../../Components/button/button';
 import { Router, RouterLink } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -18,6 +18,17 @@ export class Login {
   authService = inject(Auth);
   router = inject(Router);
   loginErrorMessage = signal<string>('');
+
+
+  @ViewChild('passwordInput') passwordInput!: ElementRef;
+  isPasswordVisible: boolean = false;
+
+  togglePasswordVisibility() {
+    this.isPasswordVisible = !this.isPasswordVisible;
+    const input = this.passwordInput.nativeElement;
+    input.type = this.isPasswordVisible ? 'text' : 'password';
+  }
+
 
   loginForm = new FormGroup({
     email: new FormControl('',
@@ -72,6 +83,9 @@ export class Login {
           },
 
           error: (err) => {
+            console.log(err);
+
+            alert(JSON.stringify(err));
             if (err.status === 400) {
               console.log(err.error)
               if (err.error?.errors) {

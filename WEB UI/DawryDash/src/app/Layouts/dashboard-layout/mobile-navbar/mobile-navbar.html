@@ -1,5 +1,5 @@
 <!-- Mobile Navbar (visible only on mobile) -->
-<nav class="navbar navbar-dark bg-dark border-bottom border-success border-opacity-25 d-md-none fixed-top">
+<!-- <nav class="navbar navbar-dark bg-dark border-bottom border-success border-opacity-25 d-md-none fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand d-flex align-items-center gap-2" href="#">
             <span class="fw-bold text-white">Dawry Dash</span>
@@ -7,5 +7,29 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
             <span class="navbar-toggler-icon"></span>
         </button>
+    </div>
+</nav> -->
+
+
+<nav
+    class="navbar navbar-expand-md py-3 px-2 border-bottom border-success border-opacity-25 fixed-top d-md-none navbarStyle">
+    <div class="container-fluid">
+        <!-- Logo + brand -->
+        <div class="d-flex align-items-center gap-3">
+
+            <!-- <span class="fw-bold fs-4 text-white">Dawry Dash</span> -->
+            <!-- <img src="BrandImage.png" style="width: 160px;"> -->
+            <a routerLink="/" class="text-decoration-none">
+                <img src="BrandImage.png" style="width: 160px;">
+            </a>
+        </div>
+
+        <!-- toggler for mobile -->
+        <button class="navbar-toggler bg-white bg-opacity-10 border border-success border-opacity-25" type="button"
+            data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar" aria-controls="mainNavbar" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
     </div>
 </nav>

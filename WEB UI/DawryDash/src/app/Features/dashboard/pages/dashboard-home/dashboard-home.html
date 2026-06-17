@@ -30,13 +30,13 @@
         <!-- <span class="badge rounded-pill px-3 py-2">3 Teams</span> -->
     </div>
 
-    <div class="row g-3 g-md-4 mb-5 ">
+    <div class="row g-3 g-md-4 mb-5">
 
 
 
         @for (team of (dashboardData()?.latestTeams ?? []); track team.id) {
 
-        <div class="col-lg-3 col-md-6 mb-4 d-flex">
+        <div class="col-lg-4 col-md-6 mb-4 d-flex">
 
             <div class="bg-grey-dark rounded-4 p-4 green-border w-100 d-flex flex-column">
 

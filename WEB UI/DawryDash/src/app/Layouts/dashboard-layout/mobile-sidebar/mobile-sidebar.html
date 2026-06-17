@@ -1,5 +1,4 @@
-<!-- Mobile Offcanvas Sidebar -->
-<div class="offcanvas offcanvas-start bg-dark" tabindex="-1" id="mobileSidebar">
+<!-- <div class="offcanvas offcanvas-start bg-dark" tabindex="-1" id="mobileSidebar">
     <div class="offcanvas-header border-bottom border-success border-opacity-25">
         <h5 class="offcanvas-title text-white">Menu</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
@@ -37,6 +36,77 @@
                 Help & Support
             </a>
             <a href="#" class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 text-white-50 text-decoration-none">
+                Logout
+            </a>
+        </div>
+    </div>
+</div> -->
+
+
+<div class="offcanvas offcanvas-start bg-grey-dark" tabindex="-1" id="mobileSidebar" style="width: 260px;">
+    <div class="offcanvas-header border-bottom-side p-3 bg-grey-dark">
+        <div class="d-flex align-items-center gap-3 bg-grey-dark">
+            <a routerLink="home" (click)="setActiveRoute('home'); " data-bs-dismiss="offcanvas">
+                <app-avatar [border]=true [size]=48 src="{{imgUrl}}"></app-avatar>
+            </a>
+            <div>
+                <div class="text-white fw-semibold">{{fullName}}</div>
+                <div class="text-white-50" style="font-size: 12px;">{{userName}}</div>
+            </div>
+        </div>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+    </div>
+
+    <div class="offcanvas-body p-0 d-flex flex-column bg-grey-dark">
+        <nav class="flex-grow-1 p-3">
+            <div class="d-flex flex-column gap-2">
+                <!-- Dashboard Link -->
+                <a routerLink="home" (click)="setActiveRoute('home'); " [class.green-anchor]="isActive('home')"
+                    [class.grey-anchor]="!isActive('home')"
+                    class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 text-decoration-none"
+                    data-bs-dismiss="offcanvas">
+                    Dashboard
+                </a>
+
+                <!-- Tournaments Link -->
+                <a routerLink="tournaments" (click)="setActiveRoute('tournaments'); "
+                    [class.green-anchor]="isActive('tournaments')" [class.grey-anchor]="!isActive('tournaments')"
+                    class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 text-decoration-none"
+                    data-bs-dismiss="offcanvas">
+                    Tournaments
+                </a>
+
+                <!-- Teams Link -->
+                <a routerLink="teams" (click)="setActiveRoute('teams'); " [class.green-anchor]="isActive('teams')"
+                    [class.grey-anchor]="!isActive('teams')"
+                    class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 text-decoration-none"
+                    data-bs-dismiss="offcanvas">
+                    Teams
+                </a>
+
+                <!-- Matches Link -->
+                <a routerLink="matches" (click)="setActiveRoute('matches'); " [class.green-anchor]="isActive('matches')"
+                    [class.grey-anchor]="!isActive('matches')"
+                    class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 text-decoration-none"
+                    data-bs-dismiss="offcanvas">
+                    Matches
+                </a>
+
+                <!-- Settings Link -->
+                <a routerLink="settings" (click)="setActiveRoute('settings'); "
+                    [class.green-anchor]="isActive('settings')" [class.grey-anchor]="!isActive('settings')"
+                    class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 text-decoration-none"
+                    data-bs-dismiss="offcanvas">
+                    Settings
+                </a>
+            </div>
+        </nav>
+
+        <div class="p-3 border-top-side">
+            <a href="#" class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 grey-anchor text-decoration-none">
+                Help & Support
+            </a>
+            <a href="#" class="d-flex align-items-center gap-3 px-3 py-2 rounded-3 grey-anchor text-decoration-none">
                 Logout
             </a>
         </div>

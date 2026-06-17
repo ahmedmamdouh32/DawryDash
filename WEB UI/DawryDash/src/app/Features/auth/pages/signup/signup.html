@@ -71,8 +71,15 @@
 
                     <!-- password -->
                     <label class="text-white-50 mt-3 mb-1" style="font-size: 16px;">Password</label>
-                    <input type="password" class="form-control text-white-50 bg-white-black green-border"
-                        placeholder="Enter Your Password" style="height:3rem;" formControlName="password">
+                    <div class="input-group">
+                        <input type="password" class="form-control text-white-50 bg-white-black green-border"
+                            placeholder="Enter Your Password" style="height:3rem;" formControlName="password"
+                            #passwordInput>
+                        <button type="button" class="password-toggle-btn" (click)="togglePasswordVisibility()">
+                            <img [src]="isPasswordVisible ? 'visible.png' : 'invisible.png'"
+                                alt="Toggle Password Visibility" style="width:25px; height: 25px;">
+                        </button>
+                    </div>
                     @if(password?.touched && password?.invalid){
 
                     @if(password?.errors?.['required']){
@@ -94,7 +101,8 @@
                     <!-- confirm password -->
                     <label class="text-white-50 mt-3 mb-1" style="font-size: 16px;">Confirm Password</label>
                     <input type="password" class="form-control text-white-50 bg-white-black green-border"
-                        placeholder="Confirm Your Password" style="height:3rem;" formControlName="confirmPassword">
+                        placeholder="Confirm Your Password" style="height:3rem;" formControlName="confirmPassword"
+                        #confirmPasswordInput>
                     @if(confirmPassword?.touched && confirmPassword?.invalid){
 
                     @if(password?.errors?.['required']){
@@ -144,7 +152,7 @@
             </div>
 
             <div class="d-flex justify-content-center my-3">
-                <span class="text-white-50">Already have an account?<a routerLink="/signup" class="ms-2"
+                <span class="text-white-50">Already have an account?<a routerLink="/login" class="ms-2"
                         style="font-weight: bold; color: var(--accent);">Sign In</a> </span>
             </div>
         </div>

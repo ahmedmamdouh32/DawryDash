@@ -11,7 +11,7 @@ import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
 export class Auth {
   private http = inject(HttpClient);
   private baseUrl = 'https://localhost:7042/api/User';
-
+  // private baseUrl = 'http://192.168.1.5:5122/api/User';
 
   // fetchData() {
   //   this.http.get(this.baseUrl + '/Pmessage/13', { timeout: 3000, observe: 'response', params: { number: 13 }, responseType: 'text' })
@@ -33,5 +33,5 @@ export class Auth {
     return this.http.post(`${this.baseUrl}/Login`, loginDTO);
   }
 
-  
+
 }
