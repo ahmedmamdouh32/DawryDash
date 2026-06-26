@@ -1,9 +1,11 @@
-import { Component, ElementRef, inject, signal, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, signal, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Button } from '../../../../Components/button/button';
 import { Auth } from '../../services/auth';
 import { RegisterDTO } from '../../models/register-request';
+import { environment } from '../../../../../environments/environment';
+import { LoginResponse } from '../../models/login-response';
 
 @Component({
   selector: 'app-signup',
@@ -11,9 +13,57 @@ import { RegisterDTO } from '../../models/register-request';
   templateUrl: './signup.html',
   styleUrl: './signup.css',
 })
-export class Signup {
+export class Signup implements AfterViewInit {
 
   authService = inject(Auth);
+  router = inject(Router);
+
+  @ViewChild('googleButton', { static: true })
+  googleButton!: ElementRef;
+
+  ngAfterViewInit() {
+
+    google.accounts.id.initialize({
+      client_id: environment.googleClientId,
+      callback: (response: any) => this.handleGoogleResponse(response)
+    });
+
+    const width = this.googleButton.nativeElement.parentElement.offsetWidth;
+
+    google.accounts.id.renderButton(
+      this.googleButton.nativeElement,
+      {
+        theme: 'outline',
+        size: 'large',
+        width
+      }
+    );
+
+  }
+
+  handleGoogleResponse(response: any) {
+    console.log(response.credential);
+    const body = {
+      idToken: response.credential
+    };
+    //write your logic here
+    this.authService.LoginWithGoogle(body).subscribe({
+      next: (res: LoginResponse) => {
+        localStorage.setItem('token', res.token);
+        localStorage.setItem('fullName', res.fullName);
+        localStorage.setItem('imgUrl', res.imgUrl);
+        localStorage.setItem('userId', res.userId);
+        localStorage.setItem('userName', res.userName);
+        localStorage.setItem('email', res.email);
+        this.router.navigate(['/dashboard']);
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    }
+    )
+  }
+
 
   signupErrorMessage = signal<string>('');
 

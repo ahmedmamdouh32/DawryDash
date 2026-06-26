@@ -101,3 +101,13 @@ input::placeholder {
 .password-toggle-btn:focus {
     outline: none;
 }
+
+.google-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 100;
+
+    opacity: 0;
+
+    overflow: hidden;
+}

@@ -1,5 +1,6 @@
 ﻿using DawryDashAPIs.DTOs.UserDTOs;
 using DawryDashAPIs.Services.UserService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -23,14 +24,14 @@ namespace DawryDashAPIs.Controllers
         }
 
         [HttpPost("Register")]
-        public IActionResult Register(AddUserDTO DTO)
+        public async Task<IActionResult> Register(AddUserDTO DTO)
         {
             if (DTO == null)
                 return BadRequest();
 
             if (ModelState.IsValid)
             {
-                var result =  userService.Register(DTO);
+                var result =  await userService.Register(DTO);
                 if (result.Success)
                 {
                     return Ok(new { success = result.Success, message = result.Message });
@@ -44,7 +45,6 @@ namespace DawryDashAPIs.Controllers
             {
                 return BadRequest(ModelState);
             }
-
         }
 
 
@@ -56,22 +56,7 @@ namespace DawryDashAPIs.Controllers
                 var result = userService.AuthenticateUser(DTO);
                 if (result.Success)
                 {
-                    List<Claim> userClaims = new();
-                    userClaims.Add(new Claim("fullname", result.Data.FullName));
-                    userClaims.Add(new Claim("imgUrl", result.Data.ImgUrl ?? "not found"));
-
-                    //secret key generation
-                    string key = "this is a secret key whose length should be greater than 256/8";
-                    var secretKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key));
-                    var signCredits = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
-
-                    //token generation
-                    var token = new JwtSecurityToken(
-                        claims: userClaims,
-                        expires: DateTime.Now.AddMonths(1),
-                        signingCredentials: signCredits
-                        );
-                    var encodedToken = new JwtSecurityTokenHandler().WriteToken(token);
+                    string encodedToken = userService.GenerateJwtToken(result.Data);
                     return Ok(
                         new
                         {
@@ -98,6 +83,23 @@ namespace DawryDashAPIs.Controllers
                 return BadRequest(ModelState);
             }
         }
+
+
+
+        [EndpointSummary("Login with Google")]
+        [HttpPost("google-login")]
+        public async Task<IActionResult> GoogleLogin( GoogleLoginDTO dto)
+        {
+            var result = await userService.GoogleLogin(dto);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            return Ok(result.Data);
+        }
+
+
+
 
         [HttpGet("GetUsersByName/{name}")]
         public IActionResult GetUsersByName(string name)

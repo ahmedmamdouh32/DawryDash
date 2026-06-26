@@ -71,6 +71,7 @@ namespace DawryDashAPIs
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddAutoMapper(op => op.AddProfile<MappingConfig>());
 
+            var google = builder.Configuration.GetSection("Authentication:Google");
 
             builder.Services.AddAuthentication(
             op =>
@@ -91,6 +92,12 @@ namespace DawryDashAPIs
                     };
                 }
             );
+            //.AddGoogle(options => {
+            //    options.ClientId = google["ClientId"]!;
+            //    options.ClientSecret = google["ClientSecret"]!;
+            //    options.CallbackPath = "/signing-google";
+            //    }
+            //);
            
 
             var app = builder.Build();

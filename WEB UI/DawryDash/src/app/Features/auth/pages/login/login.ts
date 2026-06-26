@@ -5,6 +5,8 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { LoginDTO } from '../../models/login-dto';
 import { Auth } from '../../services/auth';
 import { LoginResponse } from '../../models/login-response';
+import { environment } from '../../../../../environments/environment';
+import { AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,73 @@ import { LoginResponse } from '../../models/login-response';
   styleUrl: './login.css',
 })
 
-export class Login {
+export class Login implements AfterViewInit {
+
+
+  @ViewChild('googleButton', { static: true })
+  googleButton!: ElementRef;
+
+  ngAfterViewInit() {
+
+    google.accounts.id.initialize({
+      client_id: environment.googleClientId,
+      callback: (response: any) => this.handleGoogleResponse(response)
+    });
+    const width = this.googleButton.nativeElement.parentElement.offsetWidth;
+    google.accounts.id.renderButton(
+      this.googleButton.nativeElement,
+      {
+        theme: 'outline',
+        size: 'large',
+        width: width
+      }
+    );
+  }
+
+  handleGoogleResponse(response: any) {
+    // console.log(response);
+    console.log(response.credential);
+    const body = {
+      idToken: response.credential
+    };
+    //write your logic here
+    this.authService.LoginWithGoogle(body).subscribe({
+      next: (res: LoginResponse) => {
+        localStorage.setItem('token', res.token);
+        localStorage.setItem('fullName', res.fullName);
+        localStorage.setItem('imgUrl', res.imgUrl);
+        localStorage.setItem('userId', res.userId);
+        localStorage.setItem('userName', res.userName);
+        localStorage.setItem('email', res.email);
+        this.router.navigate(['/dashboard']);
+      },
+
+      error: (err) => {
+        console.log(err);
+
+        alert(JSON.stringify(err));
+        if (err.status === 400) {
+          console.log(err.error)
+          if (err.error?.errors) {
+            const validationErrors = err.error.errors;
+            Object.keys(validationErrors).forEach(key => {
+              const control = this.loginForm.get(key);
+              if (control) {
+                control.setErrors({
+                  serverError: validationErrors[key][0]
+                });
+              }
+            });
+          }
+          else if (err.error?.success === false) {
+            this.loginErrorMessage.set(err.error?.message)
+          }
+        }
+      }
+    }
+    )
+  }
+
 
   authService = inject(Auth);
   router = inject(Router);
@@ -108,4 +176,7 @@ export class Login {
       )
     }
   }
+
+
+
 }

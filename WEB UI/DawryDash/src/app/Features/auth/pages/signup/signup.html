@@ -132,23 +132,34 @@
             </div>
 
             <div class="row justify-content-between">
-                <div class="col col-6">
+
+                <!-- Google -->
+                <div class="col-6">
+                    <div class="position-relative">
+
+                        <app-button variant="gray" customClass="my-2 w-100">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img src="google-colored.png" style="width:24px;" class="mx-2">
+                                <span class="fw-bold"></span>
+                            </div>
+                        </app-button>
+
+                        <!-- Invisible Google Button -->
+                        <div #googleButton class="google-overlay"></div>
+
+                    </div>
+                </div>
+
+                <!-- Facebook -->
+                <div class="col-6">
                     <app-button variant="gray" customClass="my-2 w-100">
-                        <div>
-                            <img src="google-colored.png" style="width: 24px;" class="mx-2">
-                            <span style="font-weight: bold;"></span>
+                        <div class="d-flex justify-content-center align-items-center">
+                            <img src="facebook-blue.png" style="width:24px;" class="mx-2">
+                            <span class="fw-bold"></span>
                         </div>
                     </app-button>
                 </div>
 
-                <div class="col col-6">
-                    <app-button variant="gray" customClass="my-2 w-100">
-                        <div>
-                            <img src="facebook-blue.png" style="width: 24px;" class="mx-2">
-                            <span style="font-weight: bold;"></span>
-                        </div>
-                    </app-button>
-                </div>
             </div>
 
             <div class="d-flex justify-content-center my-3">

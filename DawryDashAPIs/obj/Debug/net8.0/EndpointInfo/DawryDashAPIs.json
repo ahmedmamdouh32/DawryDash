@@ -732,6 +732,38 @@
         }
       }
     },
+    "/api/User/google-login": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Login with Google",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GoogleLoginDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GoogleLoginDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GoogleLoginDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/User/GetUsersByName/{name}": {
       "get": {
         "tags": [
@@ -903,6 +935,10 @@
           "password": {
             "minLength": 1,
             "type": "string"
+          },
+          "imgUrl": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -945,6 +981,19 @@
           "imgUrl": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GoogleLoginDTO": {
+        "required": [
+          "idToken"
+        ],
+        "type": "object",
+        "properties": {
+          "idToken": {
+            "minLength": 1,
+            "type": "string"
           }
         },
         "additionalProperties": false

@@ -22,5 +22,8 @@ namespace DawryDashAPIs.DTOs.UserDTOs
 
         [Required]
         public string password { set; get; }
+
+
+        public string? ImgUrl { set; get; } //made just for external login to gete user image
     }
 }

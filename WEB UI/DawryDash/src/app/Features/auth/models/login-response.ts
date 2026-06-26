@@ -3,5 +3,7 @@ export interface LoginResponse {
     userId: string,
     fullName: string,
     imgUrl: string,
-    userName: string
+    userName: string,
+    email: string
 }
+

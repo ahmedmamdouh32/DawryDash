@@ -2,10 +2,12 @@
 using DawryDashAPIs.DTOs.UserDTOs;
 using DawryDashAPIs.Entities;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Google.Apis.Auth;
 
 namespace DawryDashAPIs.Services.UserService
 {
@@ -67,7 +69,7 @@ namespace DawryDashAPIs.Services.UserService
         //        };
         //    }
         //}
-        public ServiceResult<ApplicationUser> Register(AddUserDTO DTO)
+        public async Task<ServiceResult<ApplicationUser>> Register(AddUserDTO DTO)
         {
             ApplicationUser user = map.Map<ApplicationUser>(DTO);
 
@@ -85,7 +87,13 @@ namespace DawryDashAPIs.Services.UserService
 
                 user.UserName = $"{baseUserName}_{suffix}";
 
-                result = userManager.CreateAsync(user, DTO.password).Result;
+                if (!string.IsNullOrEmpty(DTO.password)) { 
+                    result = await userManager.CreateAsync(user, DTO.password);
+                }
+                else
+                {
+                    result = await userManager.CreateAsync(user);
+                }
 
                 // success
                 if (result.Succeeded)
@@ -121,7 +129,7 @@ namespace DawryDashAPIs.Services.UserService
             }
 
             // add default role
-            var roleResult = userManager.AddToRoleAsync(user, "user").Result;
+            var roleResult = await userManager.AddToRoleAsync(user, "user");
 
             if (!roleResult.Succeeded)
             {
@@ -289,6 +297,109 @@ namespace DawryDashAPIs.Services.UserService
                 Success = false,
                 Message = "user not found"
             };
+        }
+
+        public string GenerateJwtToken(ApplicationUser user)
+        {
+            //generating claims for token
+            List<Claim> userClaims = new();
+            userClaims.Add(new Claim("fullname", user.FullName));
+            userClaims.Add(new Claim("imgUrl", user.ImgUrl ?? "not found"));
+
+            //secret key generation
+            string key = "this is a secret key whose length should be greater than 256/8";
+            var secretKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key));
+            var signCredits = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+
+            //token generation
+            var token = new JwtSecurityToken(
+                claims: userClaims,
+                expires: DateTime.Now.AddMonths(1),
+                signingCredentials: signCredits
+                );
+            var encodedToken = new JwtSecurityTokenHandler().WriteToken(token);
+            return encodedToken;
+        }
+
+
+        public async Task<ServiceResult<AuthResponseDTO>> GoogleLogin(GoogleLoginDTO dto)
+        {
+            try
+            {
+                var payload = await GoogleJsonWebSignature.ValidateAsync(dto.IdToken);
+                if (payload.EmailVerified)
+                {
+                    string userEmail = payload.Email;
+                    var userData = await userManager.FindByEmailAsync(userEmail);
+                    if(userData != null)
+                    {
+                        string jwtToken = GenerateJwtToken(userData);
+                        return new ServiceResult<AuthResponseDTO>
+                        {
+                            Success = true,
+                            Data = new AuthResponseDTO
+                            {
+                                email = userEmail,
+                                fullName = userData.FullName,
+                                imgUrl = userData.ImgUrl,
+                                userId = userData.Id,
+                                userName = userData.UserName,
+                                token = jwtToken
+                            }
+                        };
+                    }
+                    else
+                    {
+                        AddUserDTO addUserDto = new()
+                        {
+                            email = payload.Email,
+                            fullname = payload.Name,
+                            ImgUrl = payload.Picture
+                        };
+                        var result = await Register(addUserDto);
+                        if (result.Success)
+                        {
+                            string jwtToken = GenerateJwtToken(result.Data);
+
+                            return new ServiceResult<AuthResponseDTO>
+                            {
+                                Success = true,
+                                Data = new AuthResponseDTO
+                                {
+                                    email = payload.Email,
+                                    fullName = result.Data.FullName,
+                                    imgUrl = result.Data.ImgUrl,
+                                    userId = result.Data.Id,
+                                    userName = result.Data.UserName,
+                                    token = jwtToken
+                                }
+                            };
+                        }
+                        else
+                        {
+                            return new ServiceResult<AuthResponseDTO>
+                            {
+                                Success = false,
+                                Message = "Error in registering user"
+                            };
+                        }
+                    }
+                }
+               
+                return new ServiceResult<AuthResponseDTO>
+                {
+                    Success = false,
+                    Message="Invalid Google token"
+                };
+            }
+            catch
+            {
+                return new ServiceResult<AuthResponseDTO>
+                {
+                    Success = false,
+                    Message = "Invalid Google token"
+                };
+            }
         }
     }
 }

@@ -148,3 +148,10 @@ C:\Users\adminstrator\Documents\Dawry Dash\DawryDashAPIs\bin\Debug\net8.0\System
 C:\Users\adminstrator\Documents\Dawry Dash\DawryDashAPIs\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\adminstrator\Documents\Dawry Dash\DawryDashAPIs\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Users\adminstrator\Documents\Dawry Dash\DawryDashAPIs\bin\Debug\net8.0\DawryDashAPIs.staticwebassets.runtime.json
+C:\Users\adminstrator\Documents\Dawry Dash\DawryDashAPIs\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.Google.dll
+C:\Users\adminstrator\Documents\Dawry Dash\DawryDashAPIs\bin\Debug\net8.0\Google.Apis.dll
+C:\Users\adminstrator\Documents\Dawry Dash\DawryDashAPIs\bin\Debug\net8.0\Google.Apis.Auth.dll
+C:\Users\adminstrator\Documents\Dawry Dash\DawryDashAPIs\bin\Debug\net8.0\Google.Apis.Core.dll
+C:\Users\adminstrator\Documents\Dawry Dash\DawryDashAPIs\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\adminstrator\Documents\Dawry Dash\DawryDashAPIs\bin\Debug\net8.0\System.Management.dll
+C:\Users\adminstrator\Documents\Dawry Dash\DawryDashAPIs\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Management.dll

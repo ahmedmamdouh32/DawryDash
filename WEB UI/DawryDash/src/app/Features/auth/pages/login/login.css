@@ -73,3 +73,15 @@
     font-size: 20px;
     line-height: 1;
 }
+
+.social-login-container {
+    width: 100%;
+}
+
+.google-overlay {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    z-index: 10;
+    cursor: pointer;
+}

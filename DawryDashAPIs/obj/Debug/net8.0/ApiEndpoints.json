@@ -434,6 +434,23 @@
   },
   {
     "ContainingType": "DawryDashAPIs.Controllers.UserController",
+    "Method": "GoogleLogin",
+    "RelativePath": "api/User/google-login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "DawryDashAPIs.DTOs.UserDTOs.GoogleLoginDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [],
+    "Summary": "Login with Google"
+  },
+  {
+    "ContainingType": "DawryDashAPIs.Controllers.UserController",
     "Method": "Login",
     "RelativePath": "api/User/Login",
     "HttpMethod": "POST",
