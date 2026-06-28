@@ -1,8 +1,8 @@
-# ⚽ Dawry Dash
+<p align="center"> <img src="WEB UI/DawryDash/public/BrandLogo.png" width="180"></p>
 
-A modern football tournament management platform that streamlines the entire tournament lifecycle—from team registration to match organization and tournament progression.
+<h1 align="center">Dawry Dash</h1>
 
-Built with **ASP.NET Core Web API**, **Angular**, and **SQL Server**, Dawry Dash provides a secure and scalable solution for tournament organizers, team captains, and players.
+<p align="center"> A modern football tournament management platform that streamlines the entire tournament lifecycle—from team registration to match organization and tournament progression. </p>
 
 ---
 
