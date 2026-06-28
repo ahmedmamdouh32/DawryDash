@@ -370,3 +370,14 @@ select.player-position-select::-webkit-listbox option {
     color: var(--accent);
     min-width: 36px;
 }
+
+.actions {
+    margin-left: auto;
+}
+
+@media (max-width: 576px) {
+    .actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}

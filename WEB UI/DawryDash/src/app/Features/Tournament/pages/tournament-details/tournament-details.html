@@ -6,9 +6,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-8">
                     <div class="d-flex align-items-center gap-4">
-
                         <app-avatar [src]="tournament()?.imgUrl ?? 'tournament.png'" [size]="160"></app-avatar>
-
                         <div>
                             <h1 class="text-white fw-bold mb-2">
                                 {{ tournament()?.name }}
@@ -26,7 +24,7 @@
                 </div>
                 <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
                     <app-button variant="green" size="medium" customClass="fw-semibold"
-                        (click)="openTeamSelectionModal()">
+                        (btnClick)="openTeamSelectionModal()">
                         Join Tournament
                     </app-button>
                 </div>
@@ -35,7 +33,6 @@
         <!-- OVERVIEW -->
         <div class="bg-grey-dark rounded-4 p-4 green-border mb-4">
             <div class="d-flex align-items-center gap-3 mb-3">
-                <!-- <i class="fa-solid fa-circle-info fs-4" style="color:#89e900"></i> -->
                 <h3 class="text-white fw-bold mb-0">
                     Tournament Overview
                 </h3>
@@ -77,53 +74,35 @@
                                 <div class="value text-white fw-semibold fs-5">
                                     ${{ tournament()?.prize }}
                                 </div>
-
                             </div>
-
                         </div>
-
                         <div class="col-md-6">
-
                             <div class="info-item">
-
                                 <div class="label text-white-50 mb-1">
                                     Location
                                 </div>
-
                                 <div class="value text-white fw-semibold fs-5">
                                     {{ tournament()?.address }}
                                 </div>
-
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
 
             <div class="col-lg-4">
-
                 <div class="bg-grey-dark rounded-4 p-4 green-border h-100">
-
                     <h3 class="text-white fw-bold mb-4">
                         Progress
                     </h3>
-
                     <div class="mb-4">
-
                         <div class="d-flex justify-content-between mb-2">
-
                             <span class="text-white-50">
                                 Registration
                             </span>
-
                             <span class="text-white fw-semibold">
                                 {{ tournament()?.teamsEntered }}/{{ tournament()?.maxTeams }}
                             </span>
-
                         </div>
                         <div class="progress"
                             style="height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px;">
@@ -132,17 +111,13 @@
                                 style="background-color: #89e900; border-radius: 4px;"></div>
                         </div>
                     </div>
-
                     <div class="small text-white-50 mb-2">Current Stage</div>
-
                     <div class="text-white fw-semibold mb-4">
                         Registration Open
                     </div>
-
                     <div class="small text-white-50 mb-2">
                         Tournament Format
                     </div>
-
                     <div class="text-white fw-semibold">
                         Knockout
                     </div>
@@ -153,30 +128,94 @@
         <!-- ORGANIZER -->
         <div class="bg-grey-dark rounded-4 p-4 green-border mb-4">
             <h3 class="text-white fw-bold mb-4">Tournament Organizer</h3>
-
             <div class="d-flex align-items-center gap-3">
-                <div class="d-flex align-items-center gap-3">
-                    <app-avatar [src]="tournament()?.creatorImgUrl ?? 'user.png'" [size]="60"></app-avatar>
-                </div>
-
+                <app-avatar [src]="tournament()?.creatorImgUrl ?? 'user.png'" [size]="60"></app-avatar>
                 <div>
-
                     <h5 class="text-white fw-semibold mb-1">
                         {{ tournament()?.creatorFullname }}
                     </h5>
-
                     <div class="text-white-50">
-
                         Created on {{ tournament()?.creationDate | date:'mediumDate' }}
-
                     </div>
-
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+<!-- Team Selection Modal -->
+<div class="modal fade" id="teamSelectionModal" tabindex="-1" aria-hidden="true" >
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content bg-grey-dark green-border">
+            <!-- Modal Header -->
+            <div class="modal-header border-bottom border-success border-opacity-25 p-4" style="background-color: var(--bg);">
+                <div class="d-flex align-items-center gap-3">
+                    <i class="fa-solid fa-users-plus fs-4" style="color: #89e900;"></i>
+                    <h5 class="modal-title text-white fw-bold">Select Your Team</h5>
+                </div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
             </div>
 
+            <!-- Modal Body -->
+            <div class="modal-body p-4">
+                <p class="text-white-50 mb-4">
+                    <i class="fa-regular fa-circle-info me-2" style="color: #89e900;"></i>
+                    Choose which team you want to join this tournament:
+                </p>
+
+                <!-- Teams List -->
+                @if (userTeams && userTeams.length > 0) {
+                <div class="row g-3">
+                    @for (team of userTeams; track team.id) {
+                    <div class="col-md-6">
+                        <div class="team-select-card" [class.selected]="selectedTeamId === team.id"
+                            (click)="selectTeam(team.id)">
+                            <div class="d-flex align-items-center gap-3">
+                                <app-avatar [src]="team.imgUrl ?? 'group.png'" [size]="50"></app-avatar>
+                                <div class="flex-grow-1">
+                                    <h6 class="text-white fw-semibold mb-0">{{ team.name }}</h6>
+                                    <span class="text-white-50 small">{{ team.teamAbbreviation }}</span>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input custom-radio"
+                                        [checked]="selectedTeamId === team.id" (change)="selectTeam(team.id)">
+                                </div>
+                            </div>
+                            <div class="team-select-stats mt-2 pt-2 border-top border-success border-opacity-10">
+                                <div class="d-flex justify-content-between small">
+                                    <span class="text-white-50">Members</span>
+                                    <span class="text-white">{{ team.membersCount || 0 }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                </div>
+                } @else {
+                <div class="bg-grey-dark rounded-4 p-5 text-center">
+                    <i class="fa-solid fa-users-slash fs-1 mb-3" style="color: rgba(137,233,0,0.3);"></i>
+                    <p class="text-white-50 mb-3">You don't have any teams yet</p>
+                    <app-button variant="green" size="medium" routerLink="/dashboard/create-team">
+                        <i class="fa-solid fa-plus me-2"></i>Create a Team
+                    </app-button>
+                </div>
+                }
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer border-top border-success border-opacity-25 p-4" style="background-color: var(--bg);">
+                <div class="d-flex justify-content-end gap-3 w-100">
+                    <app-button variant="gray" size="medium" data-bs-dismiss="modal" customClass="px-4">
+                        Cancel
+                    </app-button>
+                    <app-button variant="green" size="medium"
+                        [customClass]="!selectedTeamId ? 'opacity-50 cursor-not-allowed' : ''"
+                        [disabled]="!selectedTeamId" (btnClick)="joinTournament()">
+                        <i class="fa-solid fa-check me-2"></i>Confirm Join
+                    </app-button>
+                </div>
+            </div>
         </div>
-
     </div>
-
 </div>

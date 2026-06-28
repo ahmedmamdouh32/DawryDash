@@ -62,8 +62,7 @@
               "RelativeToolTip": "DTOs\\UserDTOs\\UserCardDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-25T23:34:28.781Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-25T23:34:28.781Z"
             },
             {
               "$type": "Document",
@@ -75,8 +74,7 @@
               "RelativeToolTip": "DTOs\\UserDTOs\\AddUserDTO.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAAAwBgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-25T20:16:15.385Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-25T20:16:15.385Z"
             },
             {
               "$type": "Document",
@@ -88,8 +86,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAHAAAAAAAAAAAAAQwF0AAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-25T20:00:14.801Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-25T20:00:14.801Z"
             },
             {
               "$type": "Document",
@@ -101,8 +98,7 @@
               "RelativeToolTip": "Services\\UserService\\IUserService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAcAAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-25T19:56:32.32Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-25T19:56:32.32Z"
             },
             {
               "$type": "Document",
@@ -114,8 +110,7 @@
               "RelativeToolTip": "DTOs\\UserDTOs\\AuthResponseDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-25T19:41:19.542Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-25T19:41:19.542Z"
             },
             {
               "$type": "Document",
@@ -125,7 +120,7 @@
               "RelativeDocumentMoniker": "Controllers\\UserController.cs",
               "ToolTip": "C:\\Users\\adminstrator\\Documents\\Dawry Dash\\DawryDashAPIs\\Controllers\\UserController.cs",
               "RelativeToolTip": "Controllers\\UserController.cs",
-              "ViewState": "AgIAAFAAAAAAAAAAAAAUwFoAAAA1AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-25T19:33:58.627Z",
               "EditorCaption": ""
@@ -140,8 +135,7 @@
               "RelativeToolTip": "Services\\UserService\\UserService.cs",
               "ViewState": "AgIAACQBAAAAAAAAAAAqwCwBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T14:25:50.766Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-16T14:25:50.766Z"
             }
           ]
         },

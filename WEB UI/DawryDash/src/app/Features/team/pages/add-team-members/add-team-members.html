@@ -143,29 +143,25 @@
 
                     <div class="squad-members-list p-3 d-flex flex-column gap-3">
                         @for (member of squadMembers(); track member.userId; let i = $index) {
-                        <div class="member-item rounded-3 p-3 d-flex align-items-center gap-3"
+                        <div class="member-item rounded-3 p-3 d-flex flex-wrap align-items-center gap-3"
                             [class.active]="editingMemberId() === member.userId" (click)="onCardClickFromSquad(member)">
-                            <!-- <img [src]="member.imgUrl || 'user.png'"
-                                class="rounded-circle border border-success border-2"
-                                style="width: 54px; height: 54px; object-fit: cover;"> -->
 
-                            <app-avatar [src]="member.imgUrl || 'user.png'" [size]="60"></app-avatar>
+                            <app-avatar class="flex-shrink-0" [src]="member.imgUrl || 'user.png'" [size]="60">
+                            </app-avatar>
 
                             <div class="flex-grow-1">
                                 <h4 class="text-white mb-1 fs-6">{{ member.fullname }}</h4>
                                 <p class="text-white-50 mb-0 small">{{ member.position }}</p>
                             </div>
 
-
-                            <div class="d-flex align-items-center justify-content-cente">
+                            <div class="actions d-flex align-items-center justify-content-center">
                                 <div class="shirt-number me-3">
                                     {{ member.tshirtNumber }}
                                 </div>
-
-
                                 <app-button size="small" customClass="bg-danger text-white"
-                                    (btnClick)="removeMember(i)">X</app-button>
-
+                                    (btnClick)="removeMember(i)">
+                                    X
+                                </app-button>
                             </div>
 
                         </div>

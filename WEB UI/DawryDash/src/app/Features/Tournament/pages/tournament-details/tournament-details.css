@@ -123,4 +123,101 @@
 
 }
 
+/* Team Selection Card Styles */
+.team-select-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 2px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
 
+.team-select-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(137, 233, 0, 0.3);
+    transform: translateY(-2px);
+}
+
+.team-select-card.selected {
+    background: rgba(137, 233, 0, 0.08);
+    border-color: #89e900;
+    box-shadow: 0 0 20px rgba(137, 233, 0, 0.1);
+}
+
+.team-select-card.selected .team-select-stats {
+    border-top-color: rgba(137, 233, 0, 0.2) !important;
+}
+
+/* Custom Radio Button */
+.custom-radio {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50% !important;
+    transition: all 0.2s ease;
+}
+
+.custom-radio:checked {
+    background-color: #89e900 !important;
+    border-color: #89e900 !important;
+    box-shadow: 0 0 10px rgba(137, 233, 0, 0.3);
+}
+
+.custom-radio:focus {
+    box-shadow: 0 0 0 0.2rem rgba(137, 233, 0, 0.25);
+}
+
+/* Modal Animations */
+.modal-content {
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Scrollbar for teams list */
+.modal-body {
+    max-height: 60vh;
+    overflow-y: auto;
+    background-color: var(--bg);
+}
+
+.modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+    background: rgba(137, 233, 0, 0.3);
+    border-radius: 10px;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+    background: #89e900;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .team-select-card {
+        padding: 12px;
+    }
+    
+    .team-select-card .d-flex {
+        flex-wrap: wrap;
+    }
+}

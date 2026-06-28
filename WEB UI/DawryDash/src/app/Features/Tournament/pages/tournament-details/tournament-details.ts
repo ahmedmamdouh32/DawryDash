@@ -5,7 +5,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as bootstrap from 'bootstrap';
 import { Button } from '../../../../Components/button/button';
 import { TeamService } from '../../../team/services/team-service';
-import { concatWith } from 'rxjs';
 import { UserTeams } from '../../../team/models/user-teams';
 import { TournamentService } from '../../services/tournament-service';
 import { TournamentDetailsDTO } from '../../models/tournament-details-dto';
@@ -13,7 +12,7 @@ import { TeamDetailsForMembers } from '../../../team/models/team-details-for-mem
 import { Avatar } from '../../../../Components/avatar/avatar';
 @Component({
   selector: 'app-tournament-details',
-  imports: [CommonModule, FormsModule, Button,Avatar],
+  imports: [CommonModule, FormsModule, Button, Avatar],
   templateUrl: './tournament-details.html',
   styleUrl: './tournament-details.css',
 })
@@ -27,6 +26,7 @@ export class TournamentDetails {
 
   participatingTeams: any[] = [];
   userTeams: UserTeams[] = [];
+
   selectedTeamId: string | null = null;
 
   constructor(
@@ -45,7 +45,7 @@ export class TournamentDetails {
   loadTournamentData(tournamentId: any) {
     // const tournamentId: string = this.route.snapshot.paramMap.get('id')!;
     this.tournamentService.getTournamentDetails(tournamentId).subscribe({
-      next: (res : TournamentDetailsDTO) => {
+      next: (res: TournamentDetailsDTO) => {
         res.startDate = res.startDate.split('T')[0];
         this.tournament.set(res);
       },
@@ -73,9 +73,9 @@ export class TournamentDetails {
   }
 
   openTeamSelectionModal() {
-    if (this.isTeamAlreadyJoined()) {
-      return;
-    }
+    // if (this.isTeamAlreadyJoined()) {
+    //   return;
+    // }
     const modalElement = document.getElementById('teamSelectionModal');
     if (modalElement) {
       const modal = new bootstrap.Modal(modalElement);
@@ -104,12 +104,12 @@ export class TournamentDetails {
     }
   }
 
-  isTeamAlreadyJoined(): boolean {
-    // Check if any of user's teams already joined
-    return this.participatingTeams.some(team =>
-      this.userTeams.some(userTeam => userTeam.id === team.id)
-    );
-  }
+  // isTeamAlreadyJoined(): boolean {
+  //   // Check if any of user's teams already joined
+  //   return this.participatingTeams.some(team =>
+  //     this.userTeams.some(userTeam => userTeam.id === team.id)
+  //   );
+  // }
 
 
 
