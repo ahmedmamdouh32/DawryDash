@@ -11,3 +11,12 @@ wwwroot\images\users\4ce2bf9e-4cf8-4669-bd46-5bae96b01c97.png
 wwwroot\images\users\f0e3bbab-0dc4-4b67-9b51-ef026f497ea7.png
 wwwroot\images\users\d0e2159f-39d1-4195-b133-64d47b0da586.png
 wwwroot\images\users\142c296f-ed0e-4186-b732-58334af35942.png
+wwwroot\images\teams\9e165037-5e6a-4158-aac1-d4c6a639a766.png
+wwwroot\images\teams\900c845a-e483-4409-87e3-23daa29870bb.png
+wwwroot\images\teams\88990817-b18c-4aec-8f54-673d7aac4ea4.png
+wwwroot\images\teams\992965b2-d8b2-4ce8-a407-f69c843945e8.png
+wwwroot\images\users\ad953bde-7fd3-47f1-b109-12ee92ce2cec.png
+wwwroot\images\users\46202658-6871-421e-808b-b97141d207b3.jfif
+wwwroot\images\tournaments\d14441d3-963f-4d7d-a664-e2301b790ef6.png
+wwwroot\images\teams\369eed96-7e15-44fd-a584-e89382bc5926.png
+wwwroot\images\users\7fd4b095-e8e3-47b8-8766-b6892231304c.png
